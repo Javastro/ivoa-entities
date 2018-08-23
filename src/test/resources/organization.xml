@@ -1,0 +1,66 @@
+<ri:Resource created="2000-01-01T09:00:00" status="active"
+   updated="2000-01-01T09:00:00" xmlns:ri="http://www.ivoa.net/xml/RegistryInterface/v1.0"
+   xmlns:vr="http://www.ivoa.net/xml/VOResource/v1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.ivoa.net/xml/RegistryInterface/v1.0 http://www.ivoa.net/xml/RegistryInterface/v1.0   
+                       http://www.ivoa.net/xml/VOResource/v1.0    http://www.ivoa.net/xml/VOResource/v1.0"
+   xsi:type="vr:Organisation"
+>
+   <title>International Virtual Observatory Alliance</title>
+   <shortName>IVOA</shortName>
+   <identifier>ivo://ivoa.net/IVOA</identifier>
+   <curation>
+      <publisher>International Virtual Observatory Alliance</publisher>
+      <creator>
+         <name>VO community</name>
+         <logo>http://www.ivoa.net/icons/ivoa_logo_small.jpg</logo>
+      </creator>
+      <contributor>Armenian Virtual Observatory</contributor>
+      <contributor>AstroGrid</contributor>
+      <contributor>Astrophysical Virtual Observatory</contributor>
+      <contributor>Australian Virtual Observatory</contributor>
+      <contributor>Canadian Virtual Observatory</contributor>
+      <contributor>China Virtual Observatory</contributor>
+      <contributor>DRACO: Italian Virtual Observatory</contributor>
+      <contributor>European Virtual Observatory</contributor>
+      <contributor>German Astrophysical Virtual Observatory
+      </contributor>
+      <contributor>Hungarian Virtual Observatory</contributor>
+      <contributor>Japanese Virtual Observatory</contributor>
+      <contributor>Korean Virtual Observatory</contributor>
+      <contributor>Russian Virtual Observatory</contributor>
+      <contributor>US National Virtual Observatory</contributor>
+      <contributor>Spanish Virtual Observatory</contributor>
+      <contributor>Virtual Observatory India</contributor>
+      <contributor>VO-France</contributor>
+      <date>2002-06-01</date>
+      <contact>
+         <name>IVOA Executive Committee</name>
+         <email>ivoa@ivoa.net</email>
+      </contact>
+      <contact>
+         <name>IVOA Community</name>
+         <email>interop@ivoa.net</email>
+      </contact>
+   </curation>
+   <content>
+      <subject>standards</subject>
+      <subject>virtual observatory</subject>
+      <description> The International Virtual Observatory Alliance
+         (IVOA) was formed in June 2002 with a mission to facilitate the
+         international coordination and collaboration necessary for the
+         development and deployment of the tools, systems and
+         organizational structures necessary to enable the international
+         utilization of astronomical archives as an integrated and
+         interoperating virtual observatory. By January 2005, the IVOA
+         has grown to include 15 funded VO projects from Australia,
+         Canada, China, Europe, France, Germany, Hungary, India, Italy,
+         Japan, Korea, Russia, Spain, the United Kingdom, and the United
+         States. This membership is now being expanded to include
+         representation from projects constructing and planning new
+         observatories and astronomical facilities, as well as emerging
+         astronomical communities that seek to benefit from the global
+         availability of VO facilities and technologies.</description>
+      <referenceURL>http://www.ivoa.net/</referenceURL>
+      <type> Organisation</type>
+   </content>
+</ri:Resource>

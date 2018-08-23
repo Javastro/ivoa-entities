@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>IVOA Objects</title>
+</head>
+<body>
+<h1>IVOA Objects</h1>
+<p>The classes within this library represent models of <i>metadata</i> within the IVOA. These metadata are mostly to be found in IVOA registries (e.g. the VOResource schema) and thus exclude most of the IVOA "data models" (e.g. The "Spectrum Data Model")</p>
+
+<a>The classes contain two bindings</a>
+<ul>
+<li>JAXB - for marshalling an unmarshalling to XML defined via the schema to be found at <a href="http://www.ivoa.net/xml/">http://www.ivoa.net/xml/</a></li>
+<li>JPA - for persisting the objects in a relational database.</li>
+</ul>
+<h2>Using the XML binding</h2>
+<p>There are some helper classes for using the xml binding in the {@link net.ivoa.jaxb} package - in particular the {@link net.ivoa.jaxb.IvoaJAXBContextFactory} sets up a JAXB context with all of the packages/schema included that are supported by the library. 
+In addition there are some static utility methods within {@link net.ivoa.jaxb.IvoaJAXBUtils} that can help with the boilerplate code needed with JAXB marshalling an unmarshalling so that unmarshalling can be as easy as</p>
+<pre>
+    VOResources resources = IvoaJAXBUtils.unmarshall(this.getClass().getResourceAsStream("/VOResource.xml"), VOResources.class);
+</pre>
+
+
+<h2>Persisting in a Relational Database</h2>
+<p>The helper classes for  persisting to a relational database are in the {@link net.ivoa.jpa} package. There is a {@link net.ivoa.jpa.ResourceJpaController} for storing and fetching {@link net.ivoa.resource.Resource} objects. If the default {@link javax.persistence.EntityManagerFactory} is not sufficient 
+(which is probably will not be apart from testing as it connects to a local database). then</p>
+
+
+@author Paul Harrison (pah@jb.man.ac.uk)
+</body>
+</html>

@@ -1,0 +1,62 @@
+<resource xsi:type="vstd:StandardKeyEnumeration" 
+             xmlns:vr="http://www.ivoa.net/xml/VOResource/v1.0"
+             xmlns:vstd="http://www.ivoa.net/xml/StandardsRegExt/v1.0" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             created="2001-12-31T12:00:00"
+             updated="2001-12-31T12:00:00" status="active"        
+             xsi:schemaLocation="http://www.ivoa.net/xml/VOResource/v1.0
+                              http://www.ivoa.net/xml/VOResource/v1.0
+                              http://www.ivoa.net/xml/StandardsRegExt/v1.0
+                              ../StandardsRegExt-v1.0.xsd">
+
+   <title>application languages</title>
+   <identifier>ivo://ivoa.net/std/application/languages</identifier>
+   <curation>
+      <publisher>IVOA</publisher>
+      <creator>
+         <name>IVOA</name>
+         <logo>http://www.ivoa.net/icons/ivoa_logo_small.jpg</logo>
+      </creator>
+      <date role="representative">2006-07-17</date>
+      <version>1.0</version>
+      <contact>
+         <name>IVOA Grid and Web Services WG</name>
+         <email>grid@ivoa.net</email>
+      </contact>
+   </curation>
+   <content>
+      <subject>IVOA Standard: registry</subject>
+      <description>
+         This resource defines keys for commonly used computer languages.
+      </description>
+      <referenceURL>http://www.ivoa.net/twiki/bin/view/IVOA/IvoaResReg</referenceURL>
+   </content>
+   <key>
+      <name>C</name>
+      <description>The C programming language</description>
+   </key>
+   <key>
+      <name>CPP</name>
+      <description>The C++ programming language</description>
+   </key>
+   <key>
+      <name>CSharp</name>
+      <description>The C# programming language</description>
+   </key>
+   <key>
+      <name>FORTRAN</name>
+      <description>The FORTRAN programming language</description>
+   </key>
+   <key>
+      <name>Java</name>
+      <description>The Java programming language</description>
+   </key>
+   <key>
+      <name>Perl</name>
+      <description>The Perl programming language</description>
+   </key>
+   <key>
+      <name>Python</name>
+      <description>The Python programming language</description>
+   </key>
+</resource>

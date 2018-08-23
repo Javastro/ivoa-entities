@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project>
+ <body>   
+    <breadcrumbs>
+       <item name="IVOA Objects " href="${astrogrid_doc_URL_root}/p/ivoa-objects/${project.version}/index.html"/>
+    </breadcrumbs>
+     <menu ref="reports"></menu>
+     <menu name="Download">
+        <item name="${project.packaging}" href="http://www.astrogrid.org/maven2/net/ivoa/${project.artifactId}/${project.version}/${project.build.finalName}.${project.packaging}"/>
+     </menu>
+  </body>
+</project>

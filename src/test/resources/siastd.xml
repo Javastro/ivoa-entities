@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xsi:type="vt:ServiceStandard" status="active"
+          created="2000-01-01T09:00:00" updated="2000-01-01T09:00:00"
+          xmlns:vr="http://www.ivoa.net/xml/VOResource/v1.0"
+          xmlns:vt="http://www.ivoa.net/xml/StandardsRegExt/v1.0" 
+          xmlns:vs="http://www.ivoa.net/xml/VODataService/v1.1" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.ivoa.net/xml/VOResource/v1.0
+                              http://www.ivoa.net/xml/VOResource/v1.0
+                              http://www.ivoa.net/xml/VODataService/v1.1
+                              http://www.ivoa.net/xml/VODataService/v1.1
+                              http://www.ivoa.net/xml/StandardsRegExt/v1.0
+                              ../StandardsRegExt-v1.0.xsd">
+
+    <title>Simple Image Access Protocol</title>
+    <shortName>SIA</shortName>
+    <identifier>ivo://ivoa.net/std/SIA</identifier>
+
+    <curation>
+      <publisher ivo-id="ivo://ivoa.net/IVOA">
+        International Virtual Observatory Alliance
+      </publisher>
+      <creator>
+        <name>Doug Tody</name>
+      </creator>
+      <creator>
+        <name>Ray Plante</name>
+      </creator>
+      <date>2004-05-24</date>
+      <contact>
+        <name>Data Access Layer Working Group</name>
+	<email>dal@ivoa.net</email>
+      </contact>
+    </curation>
+
+    <content>
+      <subject>software standard</subject>
+      <subject>virtual observatory</subject>
+      <description>
+        The Simple Image Access Protocol is a protocol for retrieving
+        image data from a variety of astronomical image repositories
+        through a uniform interface. The interface is meant to be
+        reasonably simple to implement by service providers. A query
+        defining a rectangular region on the sky is used to query for
+        candidate images. The service returns a list of candidate
+        images formatted as a VOTable. For each candidate image an
+        access reference URL may be used to retrieve the image. Images
+        may be returned in a variety of formats including FITS and
+        various graphics formats. Referenced images are often computed
+        on the fly, e.g., as cutouts from larger images. 
+      </description>
+      <referenceURL>
+         http://www.ivoa.net/Documents/latest/SIA.html
+      </referenceURL>
+      <type>Other</type>
+      <contentLevel>Research</contentLevel>
+    </content>
+
+    <endorsedVersion status="wd">1.0</endorsedVersion>
+
+    <interface xsi:type="vs:ParamHTTP" role="std" version="1.0">
+       <accessURL use="base">http://sample.org/cgi-bin/sia</accessURL>
+       <queryType>GET</queryType>
+       <resultType>text/xml+votable</resultType>
+
+       <!-- 
+         -  These are the standard input parameters defined in the 
+         -  SIA spec
+         -->
+       <param use="required">
+         <name>POS</name>
+         <description>
+            Search Position in the form "ra,dec" where ra and dec are given 
+            in decimal degrees in the ICRS coordinate system.
+         </description>
+         <unit>degrees</unit>
+         <dataType arraysize="2">real</dataType>
+       </param>
+       <param use="required">
+         <name>SIZE</name>
+         <description>
+            Size of search region in the RA and Dec. directions in decimal 
+            degrees.
+         </description>
+         <unit>degrees</unit>
+         <dataType arraysize="2">real</dataType>
+       </param>
+       <param use="optional">
+         <name>FORMAT</name>
+         <description>Requested format of images.</description>
+         <dataType>string</dataType>
+       </param>
+       <param use="optional">
+         <name>INTERSECT</name>
+         <description>
+           Choice of intersection of matched images with the region of 
+           interest.
+         </description>
+         <dataType>string</dataType>
+       </param>
+       <param use="ignored">
+         <name>NAXIS</name>
+         <description>
+           The number of pixels desired along each axis
+         </description>
+         <dataType arraysize="2">integer</dataType>
+       </param>
+       <param use="ignored">
+         <name>CFRAME</name>
+         <description>
+           the coordinate frame to impose on the image.
+         </description>
+         <dataType>string</dataType>
+       </param>
+       <param use="ignored">
+         <name>EQUINOX</name>
+         <description>
+           the epoch of the mean equator and equinox for the specified 
+           coordinate system reference frame (CFRAME). coordinate frame to 
+           impose on the image.
+         </description>
+         <dataType>string</dataType>
+       </param>
+       <param use="ignored">
+         <name>CRPIX</name>
+         <description>
+           the pixel position to locate the reference position in the output
+           image.
+         </description>
+         <dataType arraysize="2">real</dataType>
+       </param>
+       <param use="ignored">
+         <name>CRVAL</name>
+         <description>
+           the world coordinates of the reference position in the output
+           image in decimal degrees
+         </description>
+         <dataType arraysize="2">real</dataType>
+       </param>
+       <param use="ignored">
+         <name>CDELT</name>
+         <description>
+           the scale of the output image in decimal degrees per pixel
+         </description>
+         <dataType arraysize="2">real</dataType>
+       </param>
+       <param use="ignored">
+         <name>ROTANG</name>
+         <description>
+           the rotation angle to put into the output image's coordinate system
+         </description>
+         <dataType arraysize="2">real</dataType>
+       </param>
+       <param use="ignored">
+         <name>PROJ</name>
+         <description>
+           the projection to impose in the construction of the output image
+         </description>
+         <dataType>string</dataType>
+       </param>
+       <param use="optional">
+         <name>VERB</name>
+         <description>
+           the level of verbosity in the output.
+         </description>
+         <dataType>string</dataType>
+       </param>
+    </interface>
+   
+</resource>

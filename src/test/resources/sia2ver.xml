@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xsi:type="vs:CatalogService" status="active"
+          created="2000-01-01T09:00:00" updated="2000-01-01T09:00:00"
+          xmlns:vr="http://www.ivoa.net/xml/VOResource/v1.0"
+          xmlns:vs="http://www.ivoa.net/xml/VODataService/v1.0"
+          xmlns:sia="http://www.ivoa.net/xml/SIA/v1.1"
+          xmlns:stc="http://www.ivoa.net/xml/STC/stc-v1.30.xsd" 
+          xmlns:xlink="http://www.w3.org/1999/xlink" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.ivoa.net/xml/VOResource/v1.0
+                              VOResource-v1.0.xsd
+                              http://www.ivoa.net/xml/VODataService/v1.0
+                              VODataService-v1.0.xsd
+                              http://www.ivoa.net/xml/SIA/v1.1
+                              SIA-v1.0.xsd
+                              http://www.ivoa.net/xml/STC/stc-v1.30.xsd
+                              stc-v1.30.xsd
+                              http://www.w3.org/1999/xlink xlink.xsd">
+
+    <title>NCSA Astronomy Digital Image Library Simple Image Access</title>
+    <shortName>ADIL</shortName>
+    <identifier>ivo://adil.ncsa/sia</identifier>
+
+    <curation>
+      <publisher ivo-id="ivo://adil.ncsa/adil">
+         NCSA Astronomy Digital Image Library (ADIL)
+      </publisher>
+      <creator>
+        <name>Ramon Williamson</name>
+        <logo>http://adil.ncsa.uiuc.edu/gifs/adilfooter.gif</logo>
+      </creator>
+      <contributor>Dr. Raymond Plante</contributor>
+      <date role="created">2003-01-01</date>
+      <contact>
+        <name>ADIL Librarian</name>
+	<email>adil@ncsa.uiuc.edu</email>
+      </contact>
+    </curation>
+
+    <content>
+      <subject>data repositories</subject>
+      <subject>digital libraries</subject>
+      <description>
+         This Simple Image Access Protocol implementation allows clients to 
+         progrommatically search for images in the ADIL that overlap with 
+         the given region.  
+      </description>
+      <referenceURL>http://adil.ncsa.uiuc.edu/</referenceURL>
+      <type>Archive</type>
+      <contentLevel>University</contentLevel>
+      <contentLevel>Research</contentLevel>
+      <contentLevel>Community College</contentLevel>
+
+      <relationship>
+         <relationshipType>  service-for  </relationshipType>
+         <relatedResource ivo-id="ivo://adil.ncsa/adil">
+            NCSA Astronomy Digital Image Library
+         </relatedResource>
+      </relationship>
+    </content>
+
+    <capability xsi:type="sia:SimpleImageAccess" 
+                standardID="ivo://ivoa.net/std/SIA">
+
+       <!-- This is for version 1.0 -->
+       <interface xsi:type="vs:ParamHTTP" role="std" version="1.0">
+          <accessURL>
+             http://adil.ncsa.uiuc.edu/cgi-bin/sia10?survey=f&amp;
+          </accessURL>
+       </interface>
+
+       <!-- This is for version 1.1 -->
+       <interface xsi:type="vs:ParamHTTP" role="std" version="1.1">
+          <accessURL>
+             http://adil.ncsa.uiuc.edu/cgi-bin/sia11?survey=f&amp;
+          </accessURL>
+       </interface>
+
+       <imageServiceType>Pointed</imageServiceType>
+       <maxQueryRegionSize>
+          <long>360.0</long>
+          <lat>180.0</lat>
+       </maxQueryRegionSize>
+       <maxImageExtent>
+          <long>360.0</long>
+          <lat>180.0</lat>
+       </maxImageExtent>
+       <maxImageSize>
+          <long>5000</long>
+          <lat>5000</lat>
+       </maxImageSize>
+       <maxFileSize>100000000</maxFileSize>
+       <maxRecords>5000</maxRecords>
+    </capability>
+
+    <coverage>
+       <stc:STCResourceProfile
+            xmlns="http://www.ivoa.net/xml/STC/stc-v1.30.xsd">
+
+          <AstroCoordSystem xlink:type="simple"
+                            xlink:href="ivo://STClib/CoordSys#UTC-FK5-TOPO" 
+                            id="UTC-FK5-TOPO"/> 
+
+          <AstroCoordArea coord_system_id="UTC-FK5-TOPO">
+             <AllSky/>
+          </AstroCoordArea>
+
+       </stc:STCResourceProfile>
+
+       <waveband>Radio</waveband>
+       <waveband>Millimeter</waveband>
+       <waveband>Infrared</waveband>
+       <waveband>Optical</waveband>
+       <waveband>UV</waveband>
+    </coverage>
+
+</resource>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:VOResources xmlns:p="http://www.ivoa.net/xml/RegistryInterface/v1.0"
+   xmlns:vstd="http://www.ivoa.net/xml/StandardsRegExt/v1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.ivoa.net/xml/RegistryInterface/v1.0 http://www.ivoa.net/xml/RegistryInterface/v1.0
+      http://www.ivoa.net/xml/StandardsRegExt/v1.0 /Users/pharriso/Work/ag/src/contracts/src/schema/vo-resource-types/VOStandard/v1.0/VOStandard.xsd 
+      http://www.ivoa.net/xml/VOResource/v1.0 http://www.ivoa.net/xml/VOResource/v1.0 
+        "
+   from="1" more="false" numberReturned="3"
+>
+   <p:Resource xsi:type="vstd:StandardKeyEnumeration"
+      created="2001-12-31T12:00:00" updated="2001-12-31T12:00:00"
+      status="active"
+   >
+      <title>application languages</title>
+      <identifier>ivo://net.ivoa.application/languages</identifier>
+      <curation>
+         <publisher>IVOA</publisher>
+         <creator>
+            <name>IVOA</name>
+            <logo>http://www.ivoa.net/icons/ivoa_logo_small.jpg</logo>
+         </creator>
+         <date role="representative">2006-07-17</date>
+         <version>1.0</version>
+         <contact>
+            <name>IVOA Grid Registry WG</name>
+            <email>registry@ivoa.net</email>
+         </contact>
+      </curation>
+      <content>
+         <subject>standard language identifiers</subject>
+         <description>These language identifiers are to be used in
+            the value of the va:ProgrammingLanguage type</description>
+         <referenceURL>
+            http://www.ivoa.net/twiki/bin/view/IVOA/IvoaResReg</referenceURL>
+      </content>
+      <key>
+         <name>C</name>
+         <description>The C programming language</description>
+      </key>
+      <key>
+         <name>CPP</name>
+         <description>The C++ programming language</description>
+      </key>
+      <key>
+         <name>CSharp</name>
+         <description>The C# programming language</description>
+      </key>
+      <key>
+         <name>FORTRAN</name>
+         <description>The FORTRAN programming language</description>
+      </key>
+      <key>
+         <name>Java</name>
+         <description>The Java programming language</description>
+      </key>
+      <key>
+         <name>Perl</name>
+         <description>The Perl programming language</description>
+      </key>
+      <key>
+         <name>Python</name>
+         <description>The Python programming language</description>
+      </key>
+   </p:Resource>
+   <p:Resource xsi:type="vstd:StandardKeyEnumeration"
+      created="2001-12-31T12:00:00" updated="2001-12-31T12:00:00"
+      status="active"
+   >
+      <title>application data formats</title>
+      <identifier>ivo://net.ivoa.application/formats</identifier>
+      <curation>
+         <publisher>IVOA</publisher>
+         <creator>
+            <name>IVOA</name>
+            <logo>http://www.ivoa.net/icons/ivoa_logo_small.jpg</logo>
+         </creator>
+         <date role="representative">2006-07-17</date>
+         <version>1.0</version>
+         <contact>
+            <name>IVOA Grid Registry WG</name>
+            <email>registry@ivoa.net</email>
+         </contact>
+      </curation>
+      <content>
+         <subject>standard language identifiers</subject>
+         <description>These data format identifiers are to be used in
+            the value of the va:DataFormat type</description>
+         <referenceURL>
+            http://www.ivoa.net/twiki/bin/view/IVOA/IvoaResReg</referenceURL>
+      </content>
+      <key>
+         <name>FITS</name>
+         <description>The FITS data format</description>
+      </key>
+      <key>
+         <name>HDF</name>
+         <description>The HDF data format</description>
+      </key>
+      <key>
+         <name>VOTable</name>
+         <description>The FITS data format</description>
+      </key>
+   </p:Resource>
+   <p:Resource xsi:type="vstd:StandardKeyEnumeration"
+      created="2001-12-31T12:00:00" updated="2001-12-31T12:00:00"
+      status="active"
+   >
+      <title>application execution environments</title>
+      <identifier>ivo://net.ivoa.application/platforms</identifier>
+      <curation>
+         <publisher>IVOA</publisher>
+         <creator>
+            <name>IVOA</name>
+            <logo>http://www.ivoa.net/icons/ivoa_logo_small.jpg</logo>
+         </creator>
+         <date role="representative">2006-07-17</date>
+         <version>1.0</version>
+         <contact>
+            <name>IVOA Grid Registry WG</name>
+            <email>registry@ivoa.net</email>
+         </contact>
+      </curation>
+      <content>
+         <subject>standard execution environment identifiers</subject>
+         <description>These execution environment identifiers are
+            to be used in the value of the va:Platform type</description>
+         <referenceURL>
+            http://www.ivoa.net/twiki/bin/view/IVOA/IvoaResReg</referenceURL>
+      </content>
+      <key>
+         <name>Unix</name>
+         <description>One of the Unix/Linux operating systems</description>
+      </key>
+      <key>
+         <name>Windows</name>
+         <description>One of the Microsoft Windows operating systems</description>
+      </key>
+      <key>
+         <name>JavaWebStart</name>
+         <description>Downloadable and executable via the
+            Java Web Start technology</description>
+      </key>
+      <key>
+         <name>JavaApplet</name>
+         <description>Downloadable and executable via the
+            Java Applet technology</description>
+      </key>
+      <key>
+         <name>Perl</name>
+         <description>A script or module that executes under Perl</description>
+      </key>
+      <key>
+         <name>Python</name>
+         <description>A script or module that executes under Python</description>
+      </key>
+      <key>
+         <name>IRAF</name>
+         <description>A script or module that executes under IRAF</description>
+      </key>
+      <key>
+         <name>PyRaf</name>
+         <description>A script or module that executes under PyRaf</description>
+      </key>
+      <key>
+         <name>IDL</name>
+         <description>A script or module that executes under IDL</description>
+      </key>
+   </p:Resource>
+</p:VOResources>

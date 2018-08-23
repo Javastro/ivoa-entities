@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+>
+   <modelVersion>4.0.0</modelVersion>
+   <artifactId>ivoa-entities</artifactId>
+   <name>IVOA objects</name>
+   <version>0.1-SNAPSHOT</version>
+   <description>JAXB annotated objects for IVOA schema related mainly to the registry</description>
+   <parent>
+      <artifactId>javastro-suite</artifactId>
+      <groupId>org.javastro</groupId>
+      <version>0.1</version>
+      <relativePath>../mavenbase/</relativePath>
+   </parent>
+   <packaging>jar</packaging>
+   <dependencies>
+       <dependency> 
+         <groupId>org.javastro</groupId>
+         <artifactId>ivoa-schema</artifactId> 
+         <version>1.0-SNAPSHOT</version> 
+      </dependency>
+      <dependency>
+         <groupId>com.sun.xml.bind</groupId>
+         <artifactId>jaxb-xjc</artifactId>
+         <scope>runtime</scope><!-- make sure that this dependency is not transitive -->
+      </dependency>     
+      <dependency>
+         <groupId>javax.xml.bind</groupId>
+         <artifactId>jaxb-api</artifactId>
+         <scope>runtime</scope><!-- make sure that this dependency is not transitive -->
+      </dependency>
+      <dependency>
+         <groupId>com.sun.xml.bind</groupId>
+         <artifactId>jaxb-impl</artifactId>
+         <scope>runtime</scope><!-- make sure that this dependency is not transitive -->
+      </dependency>
+      <dependency>
+         <groupId>com.sun.xml.bind</groupId>
+         <artifactId>jaxb-core</artifactId>
+         <scope>runtime</scope><!-- make sure that this dependency is not transitive -->
+      </dependency>
+      <dependency>
+         <groupId>org.eclipse.persistence</groupId>
+         <artifactId>javax.persistence</artifactId>
+         <version>2.0.3</version>
+      </dependency>
+      <!-- eclipselink -->
+      <dependency>
+         <groupId>javax.annotation</groupId>
+         <artifactId>jsr250-api</artifactId>
+         <version>1.0</version>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>javax.transaction</groupId>
+         <artifactId>jta</artifactId>
+         <version>1.1</version>
+         <scope>runtime</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.eclipse.persistence</groupId>
+         <artifactId>eclipselink</artifactId>
+      </dependency>
+      <!--provided scope needed for compile annotation processing done so 
+         that it does not get included in shaded jar - the annotation processing is 
+         not done properly by eclipse - needs to be done manually outside with a maven 
+         run -->
+      <!-- get rid of metamodel for now - more trouble than it is worth because 
+         of https://bugs.eclipse.org/bugs/show_bug.cgi?id=415027 -->
+      <!-- <dependency> -->
+      <!-- <groupId>org.eclipse.persistence</groupId> -->
+      <!-- <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId> -->
+      <!-- <scope>provided</scope> -->
+      <!-- </dependency> -->
+      <dependency>
+         <groupId>net.sf.saxon</groupId>
+         <artifactId>Saxon-HE</artifactId>
+         <version>9.5.1-8</version>
+      </dependency>
+      <dependency>
+         <groupId>org.jvnet.jaxb2_commons</groupId>
+         <artifactId>jaxb2-basics-runtime</artifactId>
+      </dependency>
+   </dependencies>
+   <build>
+      <resources>
+         <resource>
+            <directory>src/main/resources</directory>
+            <includes>
+               <include>**/*.properties</include>
+               <include>**/*.xml</include>
+               <include>**/*.xsl</include>
+               <include>**/jaxb.index</include>
+            </includes>
+         </resource>
+      </resources>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+               <execution>
+                  <id>unpack-xsd-files</id>
+                  <phase>initialize</phase>
+                  <goals>
+                     <goal>unpack</goal>
+                  </goals>
+                  <configuration>
+                     <artifactItems>
+                        <artifactItem>
+                           <groupId>org.javastro</groupId>
+                           <artifactId>ivoa-schema</artifactId>
+                           <version>${ivoa.schema.version}</version>
+                           <type>jar</type>
+                        </artifactItem>
+                     </artifactItems>
+                     <includes>**/*.xsd</includes>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <groupId>org.jvnet.jaxb2.maven2</groupId>
+            <artifactId>maven-jaxb2-plugin</artifactId>
+            <configuration>
+               <strict>false</strict>
+               <debugMode>true</debugMode>
+               <verbose>true</verbose>
+               <extension>true</extension>
+               <forceRegenerate>false</forceRegenerate>
+               <episode>true</episode>
+               <specVersion>2.2</specVersion>
+               <target>2.2</target>
+               <bindingDirectory>${basedir}/build</bindingDirectory>
+               <generateDirectory>${project.build.directory}/generated-sources/xjc</generateDirectory>
+               <schemaDirectory>${project.build.directory}/dependency/schema/</schemaDirectory>
+               <packageLevelAnnotations>true</packageLevelAnnotations>
+               <markGenerated>true</markGenerated>
+               <noFileHeader>true</noFileHeader>
+               
+               
+               <vmArgs>
+                  <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
+               </vmArgs>
+            </configuration>
+            <executions>
+               <execution>
+                  <id>xjc</id>
+                  <phase>generate-sources</phase>
+                  <goals>
+                     <goal>generate</goal>
+                  </goals>
+                  <inherited>true</inherited>
+                  <configuration>
+                     <args>
+                        <arg>-Xxew</arg>
+                        <arg>-Xxew:plural</arg>
+                        <arg>-Xxew:control</arg>
+                        <arg>${basedir}/build/xew-control.txt</arg> - this possibly causes problems
+                        <arg>-Xvalue-constructor</arg>
+                        <arg>-XsimpleEquals</arg>
+                        <arg>-XsimpleHashCode</arg>
+                        <arg>-XtoString</arg>                        
+                        <arg>-Xvisitor</arg>
+                        <arg>-Xvisitor-package:org.javastro.ivoa.jaxb.visitor</arg>
+                        <arg>-Xvisitor-includeType</arg>
+                        <arg>-Xvisitor-noClasses</arg> <!--  the traverser class messes up with the Date Converter annotation  -->
+                        <arg>-Xcopyable</arg>
+                        <arg>-Xmergeable</arg>
+                        <arg>-XenumValue</arg>
+                        <arg>-Xfluent-api</arg>
+                        
+                        <arg>-Xnamespace-prefix</arg>
+<!--                         <arg>-Xjaxbindex</arg> this does not do nice stuff! -->
+                     
+                     </args>
+                     <schemaIncludes>
+                        <include>VOResource-v1.0.xsd</include>
+                        <include>VODataService-v1.1.xsd</include>
+                        <include>ConeSearch-v1.0.xsd</include>
+                        <include>SIA-v1.1.xsd</include>
+                        <include>VOApplication-1.0.xsd</include>
+                        <include>TAPRegExt-v1.0.xsd</include>
+                        <include>VOSIAvailability-v1.0.xsd</include>
+                        <include>OAI-PMH.xsd</include>
+                        <include>UWS-1.1.xsd</include>
+                        <include>RegistryInterface-v1.0.xsd</include>
+                        <include>VORegistry-v1.0.xsd</include>
+                        <include>vo-dml-v1.0.xsd</include>
+                        <include>StandardsRegExt-1.0.xsd</include>
+                        <include>SSA-v1.2.xsd</include>
+                        <include>xlink.xsd</include>                       
+                        <!-- <include>SLAP-v1.1.xsd</include> not in the autogenerate as enums cause conflicts with SSA -->
+                        
+                     </schemaIncludes>
+                     <bindingIncludes>
+                        <include>xjb-binding.xml</include>
+                     </bindingIncludes>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <groupId>de.empulse.eclipselink</groupId>
+            <artifactId>staticweave-maven-plugin</artifactId>
+            <version>1.0.0</version>
+            <executions>
+               <execution>
+                  <phase>process-classes</phase>
+                  <goals>
+                     <goal>weave</goal>
+                  </goals>
+                  <configuration>
+                     <logLevel>FINE</logLevel>
+                  </configuration>
+               </execution>
+            </executions>
+            <dependencies>
+               <dependency>
+                  <groupId>org.eclipse.persistence</groupId>
+                  <artifactId>org.eclipse.persistence.jpa</artifactId>
+                  <version>${eclipselink.version}</version>
+               </dependency>
+            </dependencies>
+         </plugin>
+      </plugins>
+      <pluginManagement>
+         <plugins>
+            <!--This plugin's configuration is used to store Eclipse m2e 
+               settings only. It has no influence on the Maven build itself. -->
+            <plugin>
+               <groupId>org.eclipse.m2e</groupId>
+               <artifactId>lifecycle-mapping</artifactId>
+               <version>1.0.0</version>
+               <configuration>
+                  <lifecycleMappingMetadata>
+                     <pluginExecutions>
+                        <pluginExecution>
+                           <pluginExecutionFilter>
+                              <groupId>de.empulse.eclipselink</groupId>
+                              <artifactId>staticweave-maven-plugin</artifactId>
+                              <versionRange>[1.0.0,)</versionRange>
+                              <goals>
+                                 <goal>weave</goal>
+                              </goals>
+                           </pluginExecutionFilter>
+                           <action>
+                              <ignore></ignore>
+                           </action>
+                        </pluginExecution>
+                     </pluginExecutions>
+                  </lifecycleMappingMetadata>
+               </configuration>
+            </plugin>
+         </plugins>
+      </pluginManagement>
+   </build>
+</project>

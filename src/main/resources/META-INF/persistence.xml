@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+    http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+    version="2.0"> 
+ 
+  
+   <persistence-unit name="org.javastro.ivoa.entities.regtap_pu" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>org.javastro.ivoa.entities.regtap.Capability</class>
+    <class>org.javastro.ivoa.entities.regtap.CapabilityPK</class>
+    <class>org.javastro.ivoa.entities.regtap.Date</class>
+    <class>org.javastro.ivoa.entities.regtap.DatePK</class>
+    <class>org.javastro.ivoa.entities.regtap.Interface</class>
+    <class>org.javastro.ivoa.entities.regtap.InterfacePK</class>
+    <class>org.javastro.ivoa.entities.regtap.IntfParam</class>
+    <class>org.javastro.ivoa.entities.regtap.IntfParamPK</class>
+    <class>org.javastro.ivoa.entities.regtap.Relationship</class>
+    <class>org.javastro.ivoa.entities.regtap.RelationshipPK</class>
+    <class>org.javastro.ivoa.entities.regtap.ResDetail</class>
+    <class>org.javastro.ivoa.entities.regtap.ResDetailPK</class>
+    <class>org.javastro.ivoa.entities.regtap.Resource</class>
+    <class>org.javastro.ivoa.entities.regtap.ResRole</class>
+    <class>org.javastro.ivoa.entities.regtap.ResSchema</class>
+    <class>org.javastro.ivoa.entities.regtap.ResRolePK</class>
+    <class>org.javastro.ivoa.entities.regtap.ResSchemaPK</class>
+    <class>org.javastro.ivoa.entities.regtap.ResTable</class>
+    <class>org.javastro.ivoa.entities.regtap.ResTablePK</class>
+    <class>org.javastro.ivoa.entities.regtap.Subject</class>
+    <class>org.javastro.ivoa.entities.regtap.SubjectPK</class>
+    <class>org.javastro.ivoa.entities.regtap.TableColumn</class>
+    <class>org.javastro.ivoa.entities.regtap.Validation</class>
+    <class>org.javastro.ivoa.entities.regtap.TableColumnPK</class>
+    <class>org.javastro.ivoa.entities.regtap.ValidationPK</class>
+    
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+      <property name="eclipselink.create-ddl-jdbc-file-name" value="create_regtap.sql"/>
+      <property name="eclipselink.drop-ddl-jdbc-file-name" value="drop_regtap.sql"/>
+      <property name="eclipselink.ddl-generation.output-mode" value="both"/> <!-- sql-script or both -->
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/rr"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+      <property name="eclipselink.logging.level" value="FINEST" />
+      <property name="eclipselink.target-database" value="MySQL"/>
+      <!-- try to stop DALI complaining about missing columns just because of case -->
+      <property name="eclipselink.jpa.uppercase-column-names" value="true"/>
+      <property name="eclipselink.jdbc.uppercase-column-names" value="false"/>
+      <property name="eclipselink.canonicalmodel.subpackage" value="mmregtap"/>
+      <property name="eclipselink.weaving" value="false"/>
+      
+    </properties>
+  </persistence-unit>
+  
+    <persistence-unit name="org.javastro.ivoa.entities_ivoa-objects" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+<!--   <class>org.javastro.ivoa.entities.xml.stc.stc_v1_30.StcMetadataType</class>
+    <class>org.javastro.ivoa.entities.xml.stc.stc_v1_30.StcDescriptionType</class>
+    <class>org.javastro.ivoa.entities.xml.stc.stc_v1_30.StcBaseType</class>
+    <class>org.javastro.ivoa.entities.xml.stc.stc_v1_30.AstroSTCDescriptionType</class>
+    <class>org.javastro.ivoa.entities.resource.tap.UserDefinedFunction</class>
+    <class>org.javastro.ivoa.entities.resource.tap.UploadMethod</class>
+    <class>org.javastro.ivoa.entities.resource.tap.TimeLimits</class>
+    <class>org.javastro.ivoa.entities.resource.tap.TableAccess</class>
+    <class>org.javastro.ivoa.entities.resource.tap.TAPCapRestriction</class>
+    <class>org.javastro.ivoa.entities.resource.tap.OutputFormat</class>
+    <class>org.javastro.ivoa.entities.resource.tap.Language</class>
+    <class>org.javastro.ivoa.entities.resource.tap.DataModelType</class>
+    <class>org.javastro.ivoa.entities.resource.tap.DataLimits</class>
+    <class>org.javastro.ivoa.entities.resource.tap.DataLimit</class> 
+    <class>org.javastro.ivoa.entities.resource.standard.StandardKeyEnumeration</class>
+    <class>org.javastro.ivoa.entities.resource.standard.StandardKey</class>
+    <class>org.javastro.ivoa.entities.resource.standard.Standard</class>
+    <class>org.javastro.ivoa.entities.resource.standard.ServiceStandard</class>
+    <class>org.javastro.ivoa.entities.resource.standard.EndorsedVersion</class>-->
+    <class>org.javastro.ivoa.entities.resource.sia.SkySize</class>
+    <class>org.javastro.ivoa.entities.resource.sia.SkyPos</class>
+    <class>org.javastro.ivoa.entities.resource.sia.SimpleImageAccess</class>
+    <class>org.javastro.ivoa.entities.resource.sia.SIACapRestriction</class>
+    <class>org.javastro.ivoa.entities.resource.sia.Query</class>
+    <class>org.javastro.ivoa.entities.resource.sia.ImageSize</class>
+      <!--  
+    <class>org.javastro.ivoa.entities.resource.registry.Search</class>
+    <class>org.javastro.ivoa.entities.resource.registry.Registry</class>
+    <class>org.javastro.ivoa.entities.resource.registry.RegCapRestriction</class>
+    <class>org.javastro.ivoa.entities.resource.registry.OAISOAP</class>
+    <class>org.javastro.ivoa.entities.resource.registry.OAIHTTP</class>
+    <class>org.javastro.ivoa.entities.resource.registry.Harvest</class>
+    <class>org.javastro.ivoa.entities.resource.registry.Authority</class>  --> 
+    <class>org.javastro.ivoa.entities.resource.dataservice.VOTableType</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.TableSet</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.TableSchema</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.TableParam</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.BaseParam</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.TableDataType</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.Table</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.TAPType</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.TAPDataType</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.StandardSTC</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.SimpleDataType</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.ServiceReference</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.ParamHTTP</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.InputParam</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.Format</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.ForeignKey</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.FKColumn</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.DataType</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.DataService</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.DataCollection</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.Coverage</class>
+    <class>org.javastro.ivoa.entities.resource.dataservice.CatalogService</class>
+<!--     <class>org.javastro.ivoa.entities.resource.dataservice.BaseParam</class>--> 
+    <class>org.javastro.ivoa.entities.resource.WebService</class>
+    <class>org.javastro.ivoa.entities.resource.WebBrowser</class>
+    <class>org.javastro.ivoa.entities.resource.Validation</class>
+    <class>org.javastro.ivoa.entities.resource.Source</class>
+    <class>org.javastro.ivoa.entities.resource.Service</class>
+    <class>org.javastro.ivoa.entities.resource.SecurityMethod</class>
+    <class>org.javastro.ivoa.entities.resource.AbstractResourceName</class>
+    <class>org.javastro.ivoa.entities.resource.AbstractIndependentResourceName</class>
+    <class>org.javastro.ivoa.entities.resource.ResourceNameSingle</class>
+    <class>org.javastro.ivoa.entities.resource.ResourceNameResource</class>
+    <class>org.javastro.ivoa.entities.resource.RelationShipResourceName</class>
+    <class>org.javastro.ivoa.entities.resource.FacilityName</class>
+    <class>org.javastro.ivoa.entities.resource.InstrumentName</class>
+    <class>org.javastro.ivoa.entities.resource.ContributorName</class>
+    <class>org.javastro.ivoa.entities.resource.Resource</class>
+    <class>org.javastro.ivoa.entities.resource.ResourceValidation</class>
+    <class>org.javastro.ivoa.entities.resource.Relationship</class>
+    <class>org.javastro.ivoa.entities.resource.Organisation</class>
+    <class>org.javastro.ivoa.entities.resource.Interface</class>
+    <class>org.javastro.ivoa.entities.resource.Date</class>
+    <class>org.javastro.ivoa.entities.resource.Curation</class>
+    <class>org.javastro.ivoa.entities.resource.Creator</class>
+    <class>org.javastro.ivoa.entities.resource.Content</class>
+    <class>org.javastro.ivoa.entities.resource.Contact</class>
+    <class>org.javastro.ivoa.entities.resource.Capability</class>
+    <class>org.javastro.ivoa.entities.resource.CapabilityValidation</class>
+    <class>org.javastro.ivoa.entities.resource.AbstractAccessURL</class>
+    <class>org.javastro.ivoa.entities.resource.DataAccessURL</class>
+    <class>org.javastro.ivoa.entities.resource.InterfaceAccessURL</class>
+    <class>org.javastro.ivoa.entities.resource.registry.Harvest</class>
+    <class>org.javastro.ivoa.entities.resource.standard.EndorsedVersion</class>
+    <class>org.javastro.ivoa.entities.resource.standard.StandardKeyEnumeration</class>
+    <class>org.javastro.ivoa.entities.resource.registry.OAIHTTP</class>
+    <class>org.javastro.ivoa.entities.resource.tap.TableAccess</class>
+    <class>org.javastro.ivoa.entities.xml.stc.stc_v1_30_prov.StcDescriptionType</class>
+    <class>org.javastro.ivoa.entities.resource.registry.Registry</class>
+    <class>org.javastro.ivoa.entities.resource.tap.DataLimit</class>
+    <class>org.javastro.ivoa.entities.resource.standard.StandardKey</class>
+    <class>org.javastro.ivoa.entities.resource.tap.Language</class>
+    <class>org.javastro.ivoa.entities.resource.registry.OAISOAP</class>
+    <class>org.javastro.ivoa.entities.resource.tap.TimeLimits</class>
+    <class>org.javastro.ivoa.entities.resource.registry.Authority</class>
+    <class>org.javastro.ivoa.entities.resource.tap.UserDefinedFunction</class>
+    <class>org.javastro.ivoa.entities.resource.tap.TAPCapRestriction</class>
+    <class>org.javastro.ivoa.entities.xml.stc.stc_v1_30_prov.StcMetadataType</class>
+    <class>org.javastro.ivoa.entities.resource.standard.ServiceStandard</class>
+    <class>org.javastro.ivoa.entities.resource.registry.Search</class>
+    <class>org.javastro.ivoa.entities.resource.tap.DataModelType</class>
+    <class>org.javastro.ivoa.entities.resource.tap.OutputFormat</class>
+    <class>org.javastro.ivoa.entities.resource.tap.UploadMethod</class>
+    <class>org.javastro.ivoa.entities.resource.registry.RegCapRestriction</class>
+    <class>org.javastro.ivoa.entities.resource.standard.Standard</class>
+    <class>org.javastro.ivoa.entities.xml.stc.stc_v1_30_prov.AstroSTCDescriptionType</class>
+    <class>org.javastro.ivoa.entities.resource.tap.DataLimits</class>
+    <class>org.javastro.ivoa.entities.xml.stc.stc_v1_30_prov.StcBaseType</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+      <property name="eclipselink.create-ddl-jdbc-file-name" value="create_registry.sql"/>
+      <property name="eclipselink.drop-ddl-jdbc-file-name" value="drop_registry.sql"/>
+      <property name="eclipselink.ddl-generation.output-mode" value="both"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/registry"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+      <property name="eclipselink.logging.level" value="FINEST" />
+      <property name="eclipselink.target-database" value="MySQL"/>
+      <!-- try to stop DALI complaining about missing columns just because of case -->
+      <property name="eclipselink.jpa.uppercase-column-names" value="true"/>
+      <property name="eclipselink.jdbc.uppercase-column-names" value="true"/>
+      <property name="eclipselink.canonicalmodel.subpackage" value="mmreg"/>
+      <property name="eclipselink.weaving" value="false"/>
+    </properties>
+  </persistence-unit>
+  
+</persistence>

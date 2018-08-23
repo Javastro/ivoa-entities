@@ -1,0 +1,2851 @@
+<ri:Resource created="2009-11-17T13:57:09" status="active"
+   updated="2010-02-16T12:07:13" xmlns:cea="http://www.ivoa.net/xml/CEA/v1.0rc1"
+   xmlns:ri="http://www.ivoa.net/xml/RegistryInterface/v1.0" xmlns:stc="http://www.ivoa.net/xml/STC/stc-v1.30.xsd"
+   xmlns:va="http://www.ivoa.net/xml/VOApplication/v1.0rc1" xmlns:vg="http://www.ivoa.net/xml/VORegistry/v1.0"
+   xmlns:vr="http://www.ivoa.net/xml/VOResource/v1.0" xmlns:vs="http://www.ivoa.net/xml/VODataService/v1.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.ivoa.net/xml/RegistryInterface/v1.0 http://software.astrogrid.org/schema/registry/RegistryInterface/v1.0/RegistryInterface.xsd http://www.ivoa.net/xml/VOResource/v1.0 http://software.astrogrid.org/schema/vo-resource-types/VOResource/v1.0/VOResource.xsd  http://www.ivoa.net/xml/VODataService/v1.0 http://software.astrogrid.org/schema/vo-resource-types/VODataService/v1.0/VODataService.xsd http://www.ivoa.net/xml/VOTable/v1.0 http://software.astrogrid.org/schema/vo-formats/VOTable/v1.0/VOTable.xsd http://www.ivoa.net/xml/ConeSearch/v1.0 http://software.astrogrid.org/schema/vo-resource-types/ConeSearch/v1.0/ConeSearch.xsd http://www.ivoa.net/xml/SIA/v1.1 http://software.astrogrid.org/schema/vo-resource-types/SIA/v1.1/SIA.xsd http://www.ivoa.net/xml/SSA/v0.4 http://software.astrogrid.org/schema/vo-resource-types/SSA/v0.4/SSA.xsd urn:astrogrid:schema:vo-resource-types:STAP:v1.0 http://software.astrogrid.org/schema/vo-resource-types/STAP/v1.0/STAP.xsd http://www.ivoa.net/xml/CEA/v1.0rc1 http://software.astrogrid.org/schema/vo-resource-types/CEAService/v1.0rc1/CEAService.xsd"
+   xsi:type="vs:CatalogService"
+>
+   <title>SuperCOSMOS Science Archive (SSA)</title>
+   <identifier>ivo://wfau.roe.ac.uk/ssa-dsa</identifier>
+   <curation>
+      <publisher ivo-id="ivo://wfau.roe.ac.uk">WFAU, Institute for Astronomy,
+         University of Edinburgh</publisher>
+      <creator>
+         <name>WFAU, Institute for Astronomy, University of Edinburgh</name>
+         <logo>http://wfaudata.roe.ac.uk/wfau.gif</logo>
+      </creator>
+      <date>2009-11-17</date>
+      <version>Version 1</version>
+      <contact>
+         <name>Mark Holliman</name>
+         <email>msh@roe.ac.uk</email>
+      </contact>
+   </curation>
+   <content>
+      <subject>Digitised photographic optical all-sky photometric
+         astrometric survey</subject>
+      <description>The SuperCOSMOS data held in the SSA primarily
+         originate from scans of Palomar and UK Schmidt blue, red and
+         near-IR southern sky surveys. The ESO Schmidt R (dec &lt;
+         -17.5) and Palomar POSS-I E (dec &gt; -17.5) surveys have also
+         been scanned and provide a 1st epoch red measurement. Further
+         details on the surveys, the scanning process and the raw
+         parameters extracted can be found on the further information
+         link. The SSA is housed in a relational database running on
+         Microsoft SQL Server 2000. Data are stored in tables which are
+         inter-linked via reference ID numbers. In addition to the
+         astronomical object catalogues these tables also contain
+         information on the plates that were scanned, survey field
+         centres and calibration coefficients. Most user science queries
+         will only need to access the SOURCE table or to a lesser extent
+         the DETECTION table.</description>
+      <referenceURL>http://surveys.roe.ac.uk/ssa</referenceURL>
+      <type>Catalog</type>
+      <contentLevel>Research</contentLevel>
+      <relationship>
+         <relationshipType>service-for</relationshipType>
+         <relatedResource>ivo://wfau.roe.ac.uk/ssa-dsa/ceaApplication</relatedResource>
+      </relationship>
+   </content>
+   <capability standardID="ivo://ivoa.net/std/ConeSearch"
+      xmlns:cap="urn:astrogrid:schema:Capabilities" xmlns:cs="http://www.ivoa.net/xml/ConeSearch/v1.0"
+      xsi:type="cs:ConeSearch"
+   >
+      <description>Detection table: cone search of detections from all
+         plate measurements in all bands</description>
+      <interface role="std" xsi:type="vs:ParamHTTP">
+         <accessURL use="base">http://wfaudata.roe.ac.uk/ssa-dsa/DirectCone?DSACAT=SSA&amp;DSATAB=Detection&amp;</accessURL>
+      </interface>
+      <maxSR>1.500000</maxSR>
+      <maxRecords>2000000</maxRecords>
+      <verbosity>false</verbosity>
+      <testQuery>
+         <ra>96.0</ra>
+         <dec>5.0</dec>
+         <sr>0.01</sr>
+      </testQuery>
+   </capability>
+   <capability standardID="ivo://ivoa.net/std/ConeSearch"
+      xmlns:cap="urn:astrogrid:schema:Capabilities" xmlns:cs="http://www.ivoa.net/xml/ConeSearch/v1.0"
+      xsi:type="cs:ConeSearch"
+   >
+      <description>Source table: cone search of single band merged
+         source catalog</description>
+      <interface role="std" xsi:type="vs:ParamHTTP">
+         <accessURL use="base">http://wfaudata.roe.ac.uk/ssa-dsa/DirectCone?DSACAT=SSA&amp;DSATAB=Source&amp;</accessURL>
+      </interface>
+      <maxSR>1.500000</maxSR>
+      <maxRecords>2000000</maxRecords>
+      <verbosity>false</verbosity>
+      <testQuery>
+         <ra>96.0</ra>
+         <dec>5.0</dec>
+         <sr>0.01</sr>
+      </testQuery>
+   </capability>
+   <capability standardID="ivo://ivoa.net/std/TAP" xmlns:cap="urn:astrogrid:schema:Capabilities"
+      xmlns:cs="http://www.ivoa.net/xml/ConeSearch/v1.0"
+   >
+      <interface xsi:type="vs:ParamHTTP">
+         <accessURL use="full">http://wfaudata.roe.ac.uk/ssa-dsa/TAP</accessURL>
+      </interface>
+   </capability>
+   <capability standardID="ivo://org.astrogrid/std/CEA/v1.0"
+      xmlns:cap="urn:astrogrid:schema:Capabilities" xmlns:cs="http://www.ivoa.net/xml/ConeSearch/v1.0"
+      xsi:type="cea:CeaCapability"
+   >
+      <description>Access to two applications: general ADQL query, and
+         asynchronous cone-search where relevant/enabled.</description>
+      <interface xsi:type="cea:CECInterface">
+         <accessURL use="full">http://wfaudata.roe.ac.uk/ssa-dsa/services/CommonExecutionConnectorService</accessURL>
+      </interface>
+      <managedApplications>
+         <ApplicationReference>ivo://wfau.roe.ac.uk/ssa-dsa/ceaApplication</ApplicationReference>
+      </managedApplications>
+   </capability>
+   <capability standardID="ivo://org.astrogrid/std/VOSI/v0.3#capabilities"
+      xmlns:cap="urn:astrogrid:schema:Capabilities" xmlns:cs="http://www.ivoa.net/xml/ConeSearch/v1.0"
+   >
+      <interface xsi:type="vs:ParamHTTP">
+         <accessURL use="full">http://wfaudata.roe.ac.uk/ssa-dsa/VOSI/capabilities</accessURL>
+         <queryType>GET</queryType>
+         <resultType>application/xml</resultType>
+      </interface>
+   </capability>
+   <capability standardID="ivo://ivoa.net/std/VOSI#capabilities"
+      xmlns:cap="urn:astrogrid:schema:Capabilities" xmlns:cs="http://www.ivoa.net/xml/ConeSearch/v1.0"
+   >
+      <interface xsi:type="vs:ParamHTTP">
+         <accessURL use="full">http://wfaudata.roe.ac.uk/ssa-dsa/VOSI/capabilities</accessURL>
+         <queryType>GET</queryType>
+         <resultType>application/xml</resultType>
+      </interface>
+   </capability>
+   <capability standardID="ivo://org.astrogrid/std/VOSI/v0.3#availability"
+      xmlns:cap="urn:astrogrid:schema:Capabilities" xmlns:cs="http://www.ivoa.net/xml/ConeSearch/v1.0"
+   >
+      <interface xsi:type="vs:ParamHTTP">
+         <accessURL use="full">http://wfaudata.roe.ac.uk/ssa-dsa/VOSI/availability</accessURL>
+         <queryType>GET</queryType>
+         <resultType>application/xml</resultType>
+      </interface>
+   </capability>
+   <capability standardID="ivo://ivoa.net/std/VOSI#availability"
+      xmlns:cap="urn:astrogrid:schema:Capabilities" xmlns:cs="http://www.ivoa.net/xml/ConeSearch/v1.0"
+   >
+      <interface xsi:type="vs:ParamHTTP">
+         <accessURL use="full">http://wfaudata.roe.ac.uk/ssa-dsa/VOSI/availability</accessURL>
+         <queryType>GET</queryType>
+         <resultType>application/xml</resultType>
+      </interface>
+   </capability>
+   <capability standardID="ivo://org.astrogrid/std/VOSI/v0.3#tables"
+      xmlns:cap="urn:astrogrid:schema:Capabilities" xmlns:cs="http://www.ivoa.net/xml/ConeSearch/v1.0"
+   >
+      <interface xsi:type="vs:ParamHTTP">
+         <accessURL use="full">http://wfaudata.roe.ac.uk/ssa-dsa/VOSI/tables</accessURL>
+         <queryType>GET</queryType>
+         <resultType>application/xml</resultType>
+      </interface>
+   </capability>
+   <capability standardID="ivo://org.astrogrid/std/VOSI/v0.3#ceaApplication"
+      xmlns:cap="urn:astrogrid:schema:Capabilities" xmlns:cs="http://www.ivoa.net/xml/ConeSearch/v1.0"
+   >
+      <interface xsi:type="vs:ParamHTTP">
+         <accessURL use="full">http://wfaudata.roe.ac.uk/ssa-dsa/VOSI/applications</accessURL>
+         <queryType>GET</queryType>
+         <resultType>application/xml</resultType>
+      </interface>
+   </capability>
+   <capability standardID="ivo://ivoa.net/std/Delegation"
+      xmlns:cap="urn:astrogrid:schema:Capabilities" xmlns:cs="http://www.ivoa.net/xml/ConeSearch/v1.0"
+   >
+      <interface role="std" xsi:type="vs:ParamHTTP">
+         <accessURL use="full">http://wfaudata.roe.ac.uk/ssa-dsa/delegations</accessURL>
+         <queryType>GET</queryType>
+         <resultType>application/xml</resultType>
+      </interface>
+   </capability>
+   <coverage>
+      <stc:STCResourceProfile
+         xmlns:stc="http://www.ivoa.net/xml/STC/stc-v1.30.xsd"
+      >
+         <stc:AstroCoordSystem id="wfau_roe_ac_uk_ssa_dsa_whatever"
+            xmlns:stc="http://www.ivoa.net/xml/STC/stc-v1.30.xsd" />
+         <stc:AstroCoordArea coord_system_id="wfau_roe_ac_uk_ssa_dsa_whatever"
+            xmlns:stc="http://www.ivoa.net/xml/STC/stc-v1.30.xsd"
+         >
+            <stc:AllSky xmlns:stc="http://www.ivoa.net/xml/STC/stc-v1.30.xsd" />
+         </stc:AstroCoordArea>
+      </stc:STCResourceProfile>
+      <waveband>Optical</waveband>
+   </coverage>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>FieldSystem</name>
+      <description />
+      <column>
+         <name>systemID</name>
+         <description>The system of survey fields used for the survey</description>
+         <ucd>ID_MAIN</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>name</name>
+         <description>The name of the system, eg. &quot;ESO/SRC&quot;,
+            &quot;POSS-I&quot; etc.</description>
+         <ucd>NOTE</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>centrePitch</name>
+         <description>The pitch of the field centres</description>
+         <unit>deg</unit>
+         <ucd>OBS_DIFF</ucd>
+         <dataType>float</dataType>
+      </column>
+   </table>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>Survey</name>
+      <description />
+      <column>
+         <name>surveyID</name>
+         <description>Unique survey identifier in the SSA</description>
+         <ucd>ID_SURVEY</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>surveyName</name>
+         <description>Survey name, eg. SERC-J/EJ</description>
+         <ucd>ID_CATALOG</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>systemID</name>
+         <description>The system of survey fields used for the survey</description>
+         <ucd>NOTE</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>fieldOfView</name>
+         <description>The nominal field of view of each survey plate</description>
+         <unit>deg</unit>
+         <ucd>INST_DET_SIZE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>decMin</name>
+         <description>Southern (Dec) limit of survey</description>
+         <unit>deg</unit>
+         <ucd>POS_EQ_DEC</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>decMax</name>
+         <description>Northern (Dec) limit of survey</description>
+         <unit>deg</unit>
+         <ucd>POS_EQ_DEC</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>numFields</name>
+         <description>No. of fields in the survey</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>telescope</name>
+         <description>UK, ESO or Palomar Oschin Schmidt</description>
+         <ucd>TEL_ID</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>telAperture</name>
+         <description>Telescope aperture</description>
+         <unit>metres</unit>
+         <ucd>TEL_SIZE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>telLong</name>
+         <description>Telescope longitude</description>
+         <unit>deg</unit>
+         <ucd>POS_EARTH_LON_MAIN</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>telLat</name>
+         <description>Telescope latitude</description>
+         <unit>degress</unit>
+         <ucd>POS_EARTH_LAT_MAIN</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>telHeight</name>
+         <description>Telescope altitude</description>
+         <unit>metres</unit>
+         <ucd>OBSTY_ALTITUDE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>plateScale</name>
+         <description>Nominal plate scale</description>
+         <unit>arcsec/mm</unit>
+         <ucd>INST_SCALE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>colour</name>
+         <description>Survey colour, eg. blue, red or near-infrared</description>
+         <ucd>OBS_BAND</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>waveMin</name>
+         <description>Approximate minimum wavelength</description>
+         <unit>nanometres</unit>
+         <ucd>INST_WAVELENGTH_VALUE</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>waveMax</name>
+         <description>Approximate maximum wavelength</description>
+         <unit>nanometres</unit>
+         <ucd>INST_WAVELENGTH_VALUE</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>waveEff</name>
+         <description>Approximate effective wavelength</description>
+         <unit>nanometres</unit>
+         <ucd>INST_WAVELENGTH_EFFECTIVE</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>magLimit</name>
+         <description>Nominal mag limit of survey, eg. 22.5 for Bj</description>
+         <ucd>PHOT_MAG_LIMIT</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>epochMin</name>
+         <description>Minimum epoch of observations</description>
+         <unit>year</unit>
+         <ucd>TIME_EPOCH</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>epochMax</name>
+         <description>Maximum epoch of observations</description>
+         <unit>year</unit>
+         <ucd>TIME_EPOCH</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>epTsys</name>
+         <description>Time system for epoch values in SurveyCatalog</description>
+         <ucd>NOTE</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>equinox</name>
+         <description>Equinox for positions in SurveyCatalog</description>
+         <unit>year</unit>
+         <ucd>TIME_EQUINOX</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>eqTsys</name>
+         <description>Time system for equinox in SurveyCatalog</description>
+         <ucd>NOTE</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>surveyRef</name>
+         <description>Literature reference for survey</description>
+         <ucd>REFER_CODE</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+   </table>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>Plate</name>
+      <description />
+      <column>
+         <name>plateID</name>
+         <description>Unique identifier of the plate: surveyID plus
+            field number combo</description>
+         <ucd>ID_PLATE</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>surveyID</name>
+         <description>Every plate comes from a survey</description>
+         <ucd>ID_SURVEY</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>fieldID</name>
+         <description>Unique survey field identifier</description>
+         <ucd>ID_FIELD</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>plateNum</name>
+         <description>Plate number assigned by observatory</description>
+         <ucd>ID_PLATE</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>dateMeas</name>
+         <description>Measurement date</description>
+         <unit>MM-DD-YYYY</unit>
+         <ucd>TIME_DATE</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>timeMeas</name>
+         <description>Measurement time (local), eg. 15:33:47</description>
+         <ucd>TIME_MISC</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>instrument</name>
+         <description>Name of scanning machine</description>
+         <ucd>INST_ID</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>softVersion</name>
+         <description>Software version, eg. /home/scosdev/v033</description>
+         <ucd>ID_VERSION</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>operator</name>
+         <description>Machine operator's username</description>
+         <ucd>ID_HUMAN</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>scanMaterial</name>
+         <description>Photographic medium, eg. Original glass, Copy
+            film, Copy glass</description>
+         <ucd>REMARKS</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>emulsion</name>
+         <description>Kodak emulsion type, eg. 103a-E, IIIa-J, IV-N</description>
+         <ucd>INST_PLATE_EMULSION</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>filterID</name>
+         <description>Filter identifier, eg. OG590, RG715, 2444...</description>
+         <ucd>INST_FILTER_CODE</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>filterComm</name>
+         <description>Filter type, eg. &quot;Schott glass&quot;,
+            &quot;Red plexiglass&quot;...</description>
+         <ucd>INST_FILTER_CODE</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>raPnt</name>
+         <description>Mean plate centre RA</description>
+         <unit>deg</unit>
+         <ucd>POS_EQ_RA_MAIN</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>decPnt</name>
+         <description>Mean plate centre Dec</description>
+         <unit>deg</unit>
+         <ucd>POS_EQ_DEC_MAIN</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>radecSys</name>
+         <description>Co-ordinate system of raPnt/decPnt, eg. FK4</description>
+         <ucd>POS_REFERENCE-SYSTEM</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>equinox</name>
+         <description>Equinox of raPnt and decPnt</description>
+         <unit>year</unit>
+         <ucd>TIME_EQUINOX</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>eqTsys</name>
+         <description>Time system of equinox, eg. BESSELIAN</description>
+         <ucd>NOTE</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>utDateObs</name>
+         <description>UT date of observation</description>
+         <unit>MM-DD-YYYY</unit>
+         <ucd>TIME_DATE</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>lstObs</name>
+         <description>Local sidefloat time at start of exposure, eg.
+            2336</description>
+         <unit>24-hour</unit>
+         <ucd>TIME_MISC</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>expLength</name>
+         <description>Exposure time</description>
+         <unit>minutes</unit>
+         <ucd>TIME_EXPTIME</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>epoch</name>
+         <description>Epoch of observation</description>
+         <unit>years</unit>
+         <ucd>TIME_EPOCH</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>domeTemp</name>
+         <description>Dome temp at observation</description>
+         <unit>Kelvin</unit>
+         <ucd>OBS_CONDITIONS</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>domePressure</name>
+         <description>Dome pressure at observation</description>
+         <unit>mBar</unit>
+         <ucd>OBS_CONDITIONS</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>domeHumid</name>
+         <description>Dome relative humidity at obsevation time</description>
+         <ucd>OBS_CONDITIONS</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>waveEffect</name>
+         <description>Effective wavelength</description>
+         <unit>Angstrom</unit>
+         <ucd>INST_WAVELENGTH_EFFECTIVE</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>tropl</name>
+         <description>Tropospheric lapse rate</description>
+         <unit>K/m</unit>
+         <ucd>MODEL_PARAM</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>mjd</name>
+         <description>Modified Julian Date at mid exposure</description>
+         <unit>Julian days</unit>
+         <ucd>TIME_DATE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>focusNX</name>
+         <description>No. of scan focus points in X</description>
+         <ucd>INST_PARAM</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>focusNY</name>
+         <description>No. of scan focus points in Y</description>
+         <ucd>INST_PARAM</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>calType</name>
+         <description>Intensity calibration wedge fit type, eg. SPLINE</description>
+         <ucd>INST_PARAM</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>stepWdg</name>
+         <description>Intensity calibration step-wedge type, eg. kpno</description>
+         <ucd>INST_PARAM</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>nSteps</name>
+         <description>No. of intensity calibration wedge steps</description>
+         <ucd>INST_PARAM</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>orientation</name>
+         <description>SuperCOSMOS plate orientation, eg. news</description>
+         <ucd>INST_PARAM</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>emulpos</name>
+         <description>SuperCOSMOS emulsion position, eg. up</description>
+         <ucd>INST_PARAM</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>sosp</name>
+         <description>SuperCOSMOS start of scan CCD pixel number</description>
+         <ucd>INST_PARAM</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>stepsize</name>
+         <description>SuperCOSMOS nominal pixel size</description>
+         <unit>microns</unit>
+         <ucd>INST_PIXSIZE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>scanlen</name>
+         <description>SuperCOSMOS CCD lane scan length</description>
+         <unit>pixels</unit>
+         <ucd>INST_PARAM</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>aXmin</name>
+         <description>SuperCOSMOS XMIN of measured area</description>
+         <unit>microns</unit>
+         <ucd>POS_PLATE_X</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>aXmax</name>
+         <description>SuperCOSMOS XMAX of measured area</description>
+         <unit>microns</unit>
+         <ucd>POS_PLATE_X</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>aYmin</name>
+         <description>SuperCOSMOS YMIN of measured area</description>
+         <unit>microns</unit>
+         <ucd>POS_PLATE_Y</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>aYmax</name>
+         <description>SuperCOSMOS YMAX of measured area</description>
+         <unit>microns</unit>
+         <ucd>POS_PLATE_Y</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>xPnt</name>
+         <description>Centre of scan area in X</description>
+         <unit>microns</unit>
+         <ucd>POS_PLATE_Y</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>yPnt</name>
+         <description>Centre of scan area in Y</description>
+         <unit>microns</unit>
+         <ucd>POS_PLATE_Y</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>areaCut</name>
+         <description>Minimum area of detected object</description>
+         <unit>pixels</unit>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>apParam</name>
+         <description>Afloat profile parameter</description>
+         <ucd>REDUCT_PARAM</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>dbParam</name>
+         <description>Deblending parameter</description>
+         <ucd>REDUCT_PARAM</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>dbAmin</name>
+         <description>Minimum area of parent image that can be deblended</description>
+         <unit>pixels</unit>
+         <ucd>REDUCT_PARAM</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>dbAmax</name>
+         <description>Maximum area of parent image that can be deblended</description>
+         <unit>pixels</unit>
+         <ucd>REDUCT_PARAM</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>dbAcut</name>
+         <description>Minimum area of deblended object detection</description>
+         <unit>pixels</unit>
+         <ucd>REDUCT_PARAM</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>dbLevel</name>
+         <description>No. of rethresholding levels for deblending</description>
+         <ucd>REDUCT_PARAM</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>skySquare</name>
+         <description>Blocksize (one side) of sky background</description>
+         <unit>pixels</unit>
+         <ucd>REDUCT_PARAM</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>skyDefn</name>
+         <description>Method of defining sky, eg. &quot;median&quot;</description>
+         <ucd>REDUCT_METHOD</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>skyFilter</name>
+         <description>Box filter weights for sky determination</description>
+         <ucd>REDUCT_PARAM</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>fThresh</name>
+         <description>Sky filtering parameter</description>
+         <ucd>REDUCT_PARAM</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>fSclen</name>
+         <description>Scale size for iterative filter application</description>
+         <ucd>REDUCT_PARAM</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>pCut</name>
+         <description>Threshold &quot;percentage cut&quot; for pixel
+            analysis</description>
+         <unit>percent</unit>
+         <ucd>STAT_%REJECT</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>starCat</name>
+         <description>Name of reference star catalogue used for
+            astrometric fit</description>
+         <ucd>ID_CATALOG</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>brightLim</name>
+         <description>Bright mag limit for selected astrometric refstars</description>
+         <ucd>PHOT_MAG_LIMIT</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>faintLim</name>
+         <description>Faint limit for selected refstars</description>
+         <ucd>PHOT_MAG_LIMIT</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>equinRef</name>
+         <description>Equinox of refstar positions</description>
+         <ucd>TIME_EQUINOX</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>tSysRef</name>
+         <description>Time system of equinox of refstar positions, eg.
+            JULIAN</description>
+         <ucd>NOTE</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>maxIter</name>
+         <description>Maximum no. of iterations for non-linear
+            astrometric fit</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>rCritIni</name>
+         <description>Initial matching tolerance for refstars</description>
+         <unit>microns</unit>
+         <ucd>REDUCT_PARAM</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>rCritAbs</name>
+         <description>Absolute object rejection criterion</description>
+         <unit>microns</unit>
+         <ucd>REDUCT_PARAM</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>rCritRel</name>
+         <description>Relative object rejection criterion</description>
+         <ucd>REDUCT_PARAM</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>rCritFin</name>
+         <description>Final residual tolerance</description>
+         <unit>sigma</unit>
+         <ucd>REDUCT_PARAM</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>distType</name>
+         <description>Radial distortion term in solution, eg. R/TAN(R)</description>
+         <ucd>MODEL_CORRECTION</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>scdGrid</name>
+         <description>Non-linear distortion mask filename</description>
+         <ucd>ID_FILE</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>raCol</name>
+         <description>Name of RA column in reference catalogue</description>
+         <ucd>REMARKS</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>decCol</name>
+         <description>Name of Dec column in reference catalogue</description>
+         <ucd>REMARKS</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>raPMCol</name>
+         <description>Name of RA proper motion column in reference
+            catalogue</description>
+         <ucd>REMARKS</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>decPMCol</name>
+         <description>Name of Dec proper motion column in reference
+            catalogue</description>
+         <ucd>REMARKS</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>plxCol</name>
+         <description>Name of parallax column in reference catalogue</description>
+         <ucd>REMARKS</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>rvCol</name>
+         <description>Name of radial velocity column in reference
+            catalogue</description>
+         <ucd>REMARKS</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>magCol</name>
+         <description>Name of magnitude column in reference catalogue</description>
+         <ucd>REMARKS</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>cEquinox</name>
+         <description>Catalogue equinox</description>
+         <unit>year</unit>
+         <ucd>TIME_EQUINOX</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>cEqTSys</name>
+         <description>Catalogue equinox time system, eg. JULIAN</description>
+         <ucd>NOTE</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>cEpoch</name>
+         <description>Catalogue epoch</description>
+         <unit>year</unit>
+         <ucd>TIME_EPOCH</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>cEpTSys</name>
+         <description>Catalogue epoch time system, eg. JULIAN</description>
+         <ucd>NOTE</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>starsInit</name>
+         <description>No. of refstars in initial astrometric solution</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>starsSelec</name>
+         <description>No. of refstars initially selected</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>starsUsed</name>
+         <description>No. of refstars in final astrometric solution</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>coeffs1</name>
+         <description>1st coefficient of astrometric fit for XY to obs.
+            xi,eta</description>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>coeffs2</name>
+         <description>2nd coefficient of astrometric fit for XY to obs.
+            xi,eta</description>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>coeffs3</name>
+         <description>3rd coefficient of astrometric fit for XY to obs.
+            xi,eta</description>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>coeffs4</name>
+         <description>4th coefficient of astrometric fit for XY to obs.
+            xi,eta</description>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>coeffs5</name>
+         <description>5th coefficient of astrometric fit for XY to obs.
+            xi,eta</description>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>coeffs6</name>
+         <description>6th coefficient of astrometric fit for XY to obs.
+            xi,eta</description>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>cubicDist</name>
+         <description>Cubic coefficient of radial distortion</description>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>obsRaPnt</name>
+         <description>Observed plate centre RA</description>
+         <unit>rad</unit>
+         <ucd>POS_EQ_RA_MAIN</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>obsDecPnt</name>
+         <description>Observed plate centre Dec</description>
+         <unit>rad</unit>
+         <ucd>POS_EQ_DEC_MAIN</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>shiftPnt</name>
+         <description>Shift of from nominal to fitted plate centre</description>
+         <unit>rad</unit>
+         <ucd>POS_OFFSET</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>areaMin</name>
+         <description>Minimum object area in IAM file</description>
+         <unit>pixels</unit>
+         <ucd>EXTENSION_AREA</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>areaMax</name>
+         <description>Maximum object area in IAM file</description>
+         <unit>pixels</unit>
+         <ucd>EXTENSION_AREA</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>magMin</name>
+         <description>Minimum instrumental mag in IAM file</description>
+         <ucd>PHOT_MAG_LIMIT</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>magMax</name>
+         <description>Maximum instrumental mag in IAM file</description>
+         <ucd>PHOT_MAG_LIMIT</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>ellipMin</name>
+         <description>Minimum object ellipticity in IAM file</description>
+         <ucd>PHYS_ELLIPTICITY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>ellipMax</name>
+         <description>Maximum object ellipticity in IAM file</description>
+         <ucd>PHYS_ELLIPTICITY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>ellipMode</name>
+         <description>Modal object ellipticity in IAM file</description>
+         <ucd>PHYS_ELLIPTICITY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>orientMode</name>
+         <description>Modal orientation in IAM file</description>
+         <unit>deg</unit>
+         <ucd>POS_POS-ANG</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>ellipMed</name>
+         <description>Median ellipticity in IAM file</description>
+         <ucd>PHYS_ELLIPTICITY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>orientMed</name>
+         <description>Median orientation in IAM file</description>
+         <unit>deg</unit>
+         <ucd>POS_POS-ANG</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>ellipMean</name>
+         <description>Mean object ellipticity in IAM file</description>
+         <ucd>PHYS_ELLIPTICITY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>orientMean</name>
+         <description>Mean orientation in IAM file</description>
+         <unit>deg</unit>
+         <ucd>POS_POS-ANG</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>objNum</name>
+         <description>No. of objects detected on plate</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>nParents</name>
+         <description>No. of parent objects detected on plate</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane1Count</name>
+         <description>No. of objects in lane 1 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane2Count</name>
+         <description>No. of objects in lane 2 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane3Count</name>
+         <description>No. of objects in lane 3 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane4Count</name>
+         <description>No. of objects in lane 4 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane5Count</name>
+         <description>No. of objects in lane 5 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane6Count</name>
+         <description>No. of objects in lane 6 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane7Count</name>
+         <description>No. of objects in lane 7 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane8Count</name>
+         <description>No. of objects in lane 8 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane9Count</name>
+         <description>No. of objects in lane 9 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane10Count</name>
+         <description>No. of objects in lane 10 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane11Count</name>
+         <description>No. of objects in lane 11 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane12Count</name>
+         <description>No. of objects in lane 12 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane13Count</name>
+         <description>No. of objects in lane 13 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane14Count</name>
+         <description>No. of objects in lane 14 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane15Count</name>
+         <description>No. of objects in lane 15 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane16Count</name>
+         <description>No. of objects in lane 16 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane17Count</name>
+         <description>No. of objects in lane 17 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane18Count</name>
+         <description>No. of objects in lane 18 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane19Count</name>
+         <description>No. of objects in lane 19 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane20Count</name>
+         <description>No. of objects in lane 20 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane21Count</name>
+         <description>No. of objects in lane 21 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane22Count</name>
+         <description>No. of objects in lane 22 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane23Count</name>
+         <description>No. of objects in lane 23 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane24Count</name>
+         <description>No. of objects in lane 24 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane25Count</name>
+         <description>No. of objects in lane 25 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane26Count</name>
+         <description>No. of objects in lane 26 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane27Count</name>
+         <description>No. of objects in lane 27 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane28Count</name>
+         <description>No. of objects in lane 28 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane29Count</name>
+         <description>No. of objects in lane 29 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>lane30Count</name>
+         <description>No. of objects in lane 30 of plate scan</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>astResidX</name>
+         <description>Residual of astrometric fit in X</description>
+         <unit>arcsec</unit>
+         <ucd>FIT_RESIDUAL</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>astResidY</name>
+         <description>Residual of astrometric fit in Y</description>
+         <unit>arcsec</unit>
+         <ucd>FIT_RESIDUAL</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>nCalCoeffs</name>
+         <description>No. of photometric calibration coefficients</description>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>CalXK</name>
+         <description>Stationary point in profile cal. curve</description>
+         <unit>inst. profile mag</unit>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>gradient</name>
+         <description>Gradient of linear portion of profile cal. curve</description>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>getCal1</name>
+         <description>1st profile calibration polynomial coefficient</description>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>getCal2</name>
+         <description>2nd profile calibration polynomial coefficient</description>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>getCal3</name>
+         <description>3rd profile calibration polynomial coefficient</description>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>getCal4</name>
+         <description>4th profile calibration polynomial coefficient</description>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>getCal5</name>
+         <description>5th profile calibration polynomial coefficient</description>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>getCal6</name>
+         <description>6th profile calibration polynomial coefficient</description>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>ffZp</name>
+         <description>Field-to-field zeropoint</description>
+         <unit>mag</unit>
+         <ucd>PHOT_ZPT</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>galZp</name>
+         <description>Zeropoint of galaxy instrumental scale</description>
+         <unit>mag</unit>
+         <ucd>PHOT_ZPT</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>galGrad</name>
+         <description>Gradient of galaxy instrumental mag scale</description>
+         <unit>mags per instrumental mag</unit>
+         <ucd>FIT_PARAM_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>directory</name>
+         <description>Name of directory in flat-file system of source
+            data.</description>
+         <ucd>ID_FILE</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+   </table>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>Detection</name>
+      <description />
+      <column>
+         <name>objID</name>
+         <description>Unique object identification number</description>
+         <ucd>ID_MAIN</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>surveyID</name>
+         <description>The survey that collected the data</description>
+         <ucd>ID_SURVEY</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>plateID</name>
+         <description>Plate ID of the plate that this detection came
+            from</description>
+         <ucd>ID_PLATE</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>parentID</name>
+         <description>objID of parent object, = objID for
+            parent/undeblended (ie. not child) object</description>
+         <ucd>ID_PARENT</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>sourceID</name>
+         <description>objID for corresponding merged record in Source</description>
+         <ucd>ID_ASSOCIATED</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>recNum</name>
+         <description>The record number in the original IAM file</description>
+         <ucd>RECORD</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>ra</name>
+         <description>Celestial Right Ascension</description>
+         <unit>deg</unit>
+         <ucd>POS_EQ_RA_MAIN</ucd>
+         <dataType>double</dataType>
+      </column>
+      <column>
+         <name>dec</name>
+         <description>Celestial Declination</description>
+         <unit>deg</unit>
+         <ucd>POS_EQ_DEC_MAIN</ucd>
+         <dataType>double</dataType>
+      </column>
+      <column>
+         <name>htmId</name>
+         <description>Hierarchical Triangular Mesh (20-deep) of centroid</description>
+         <ucd>POS_GENERAL</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>cx</name>
+         <description>Cartesian x of unit (ra,dec) vector on celestial
+            sphere</description>
+         <ucd>POS_EQ_X</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>cy</name>
+         <description>Cartesian y of unit (ra,dec) vector on celestial
+            sphere</description>
+         <ucd>POS_EQ_Y</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>cz</name>
+         <description>Cartesian z of unit (ra,dec) vector on celestial
+            sphere</description>
+         <ucd>POS_EQ_Z</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>xmin</name>
+         <description>Leftmost extent of image on plate</description>
+         <unit>microns</unit>
+         <ucd>POS_PLATE_X</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>xmax</name>
+         <description>Rightmost extent of image on plate</description>
+         <unit>microns</unit>
+         <ucd>POS_PLATE_X</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>ymin</name>
+         <description>Bottommost extent of image on plate</description>
+         <unit>microns</unit>
+         <ucd>POS_PLATE_Y</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>ymax</name>
+         <description>Topmost extent of image on plate</description>
+         <unit>microns</unit>
+         <ucd>POS_PLATE_Y</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>area</name>
+         <description>Area within detection isophote</description>
+         <unit>pixels</unit>
+         <ucd>EXTENSION_AREA</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>ipeak</name>
+         <description>Intensity of brightest pixel above sky</description>
+         <unit>instrumental units</unit>
+         <ucd>PHOT_INTENSITY_MISC</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>cosmag</name>
+         <description>Isophotal magnitude</description>
+         <unit>instrumental units</unit>
+         <ucd>PHOT_PHG_MAG</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>isky</name>
+         <description>Estimate of sky intensity at (xCen, yCen)</description>
+         <ucd>PHOT_SB_SKY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>xCen</name>
+         <description>Intensity-weighted X-centroid of image</description>
+         <unit>microns</unit>
+         <ucd>POS_PLATE_X</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>yCen</name>
+         <description>Intensity-weighted Y-centroid of image</description>
+         <unit>microns</unit>
+         <ucd>POS_PLATE_Y</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>aU</name>
+         <description>Semi-major axis of unweighted fitted ellipse</description>
+         <unit>microns</unit>
+         <ucd>EXTENSION_RAD</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>bU</name>
+         <description>Semi-minor axis of unweighted fitted ellipse</description>
+         <unit>microns</unit>
+         <ucd>EXTENSION_SMIN</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>thetaU</name>
+         <description>Position angle (wrt x-axis) of unweighted fitted
+            ellipse</description>
+         <unit>deg</unit>
+         <ucd>POS_POS-ANG</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>aI</name>
+         <description>Semi-major axis of intensity-weighted fitted
+            ellip.</description>
+         <unit>microns</unit>
+         <ucd>EXTENSION_RAD</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>bI</name>
+         <description>Semi-minor axis of intensity-weighted fitted
+            ellip.</description>
+         <unit>microns</unit>
+         <ucd>EXTENSION_SMIN</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>thetaI</name>
+         <description>Position angle (wrt x-axis) of intensity-weighted
+            fitted ellipse</description>
+         <unit>deg</unit>
+         <ucd>POS_POS-ANG</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>class</name>
+         <description>Classification flag</description>
+         <ucd>CLASS_OBJECT</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>pa</name>
+         <description>Celestial position angle (E of N)</description>
+         <unit>deg</unit>
+         <ucd>POS_POS-ANG</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>ap1</name>
+         <description>Area above 1st afloat profile threshold</description>
+         <unit>pixels</unit>
+         <ucd>EXTENSION_AREA</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>ap2</name>
+         <description>Area above 2nd afloat profile threshold</description>
+         <unit>pixels</unit>
+         <ucd>EXTENSION_AREA</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>ap3</name>
+         <description>Area above 3rd afloat profile threshold</description>
+         <unit>pixels</unit>
+         <ucd>EXTENSION_AREA</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>ap4</name>
+         <description>Area above 4th afloat profile threshold</description>
+         <unit>pixels</unit>
+         <ucd>EXTENSION_AREA</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>ap5</name>
+         <description>Area above 5th afloat profile threshold</description>
+         <unit>pixels</unit>
+         <ucd>EXTENSION_AREA</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>ap6</name>
+         <description>Area above 6th afloat profile threshold</description>
+         <unit>pixels</unit>
+         <ucd>EXTENSION_AREA</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>ap7</name>
+         <description>Area above 7th afloat profile threshold</description>
+         <unit>pixels</unit>
+         <ucd>EXTENSION_AREA</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>ap8</name>
+         <description>Area above 8th afloat profile threshold</description>
+         <unit>pixels</unit>
+         <ucd>EXTENSION_AREA</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>blend</name>
+         <description>Deblend flag: -n=parent of n children; +n = nth
+            child of a parent</description>
+         <ucd>CODE_MULT_INDEX</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>quality</name>
+         <description>Bitwise quality flag</description>
+         <ucd>CODE_QUALITY</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>prfStat</name>
+         <description>Profile statistic</description>
+         <unit>N(0,1)</unit>
+         <ucd>CLASS_STAR_GALAXY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>prfMag</name>
+         <description>Profile magnitude</description>
+         <unit>instrumental units</unit>
+         <ucd>PHOT_PHG_MAG</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>gMag</name>
+         <description>Magnitude calculated on assumption object is
+            galaxy</description>
+         <unit>mag</unit>
+         <ucd>MODEL_MAG_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sMag</name>
+         <description>Magnitude calculated on assumption object is star</description>
+         <unit>mag</unit>
+         <ucd>MODEL_MAG_VALUE</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>SSAfield</name>
+         <description>SSS field number (ESO/SRC system) that this
+            detection falls in.</description>
+         <ucd>ID_FIELD</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>seam</name>
+         <description>Seam index: = zero or SSAfield for seamless
+            selection</description>
+         <ucd>ID_FIELD</ucd>
+         <dataType>int</dataType>
+      </column>
+   </table>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>JunkDetection</name>
+      <description />
+      <column>
+         <name>objID</name>
+         <description>Unique object identification number from Detection</description>
+         <ucd>ID_MAIN</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>junkSource</name>
+         <description>Source of junk: 1=satellite track; 2=diffraction
+            spike; 3=bright stellar halo</description>
+         <ucd>CLASS_CODE</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>invSGDens</name>
+         <description>Local inverse star/galaxy density</description>
+         <ucd>PHYS_DENSITY_SURFACE</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>trackAngle</name>
+         <description>Angle of track or diffraction spike</description>
+         <unit>deg</unit>
+         <ucd>POS_POS-ANG</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>brightObjID</name>
+         <description>The Detection.objID of the artifact-inducing
+            bright star</description>
+         <ucd>ID_ASSOCIATED</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>haloRadius</name>
+         <description>Vertical half-major axis of halo ellipse</description>
+         <unit>arcsec</unit>
+         <ucd>EXTENSION_RAD</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>postProb</name>
+         <description>Posterior probability of detection being junk</description>
+         <ucd>STAT_PROBABILITY</ucd>
+         <dataType>float</dataType>
+      </column>
+   </table>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>Neighbours</name>
+      <description />
+      <column>
+         <name>objID</name>
+         <description>Unique identifier of merged source</description>
+         <ucd>ID_MAIN</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>neighbourObjID</name>
+         <description>Unique identifier of merged source near neighbour</description>
+         <ucd>ID_CATALOG</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>distanceMins</name>
+         <description>The angular separation of the cross-neighbour</description>
+         <unit>arcminutes</unit>
+         <ucd>POS_ANG_DIST_GENERAL</ucd>
+         <dataType>float</dataType>
+      </column>
+   </table>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>ReliableGalaxies</name>
+      <description />
+      <column>
+         <name>objID</name>
+         <description>Unique identifier of merged source</description>
+         <ucd>ID_MAIN</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>objIDB</name>
+         <description>objID for B band detection merged into this object</description>
+         <ucd>ID_ASSOCIATED</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>objIDR1</name>
+         <description>objID for R1 band detection merged into this
+            object</description>
+         <ucd>ID_ASSOCIATED</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>objIDR2</name>
+         <description>objID for R2 band detection merged into this
+            object</description>
+         <ucd>ID_ASSOCIATED</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>objIDI</name>
+         <description>objID for I band detection merged into this object</description>
+         <ucd>ID_ASSOCIATED</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>htmId</name>
+         <description>Hierarchical Triangular Mesh (20-deep) of centroid</description>
+         <ucd>POS_GENERAL</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>epoch</name>
+         <description>Epoch of position (variance weighted mean epoch of
+            available measures)</description>
+         <unit>year</unit>
+         <ucd>TIME_EPOCH</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>ra</name>
+         <description>Mean RA, computed from detections merged in this
+            catalogue</description>
+         <unit>deg</unit>
+         <ucd>POS_EQ_RA_MAIN</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>dec</name>
+         <description>Mean Dec, computed from detections merged in this
+            catalogue</description>
+         <unit>deg</unit>
+         <ucd>POS_EQ_DEC_MAIN</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sigRA</name>
+         <description>Uncertainty in RA (formal random error not inc.
+            systematic errors)</description>
+         <unit>deg</unit>
+         <ucd>ERROR</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sigDec</name>
+         <description>Uncertainty in Dec (formal random error not inc.
+            systematic errors)</description>
+         <unit>deg</unit>
+         <ucd>ERROR</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>cx</name>
+         <description>Cartesian x of unit (ra,dec) vector on celestial
+            sphere</description>
+         <ucd>POS_EQ_X</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>cy</name>
+         <description>Cartesian y of unit (ra,dec) vector on celestial
+            sphere</description>
+         <ucd>POS_EQ_Y</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>cz</name>
+         <description>Cartesian z of unit (ra,dec) vector on celestial
+            sphere</description>
+         <ucd>POS_EQ_Z</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>muAcosD</name>
+         <description>Proper motion in RA direction</description>
+         <unit>mas/yr</unit>
+         <ucd>POS_EQ_PMRA</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>muD</name>
+         <description>Proper motion in Dec direction</description>
+         <unit>mas/yr</unit>
+         <ucd>POS_EQ_PMDEC</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sigMuAcosD</name>
+         <description>Error on proper motion in RA direction</description>
+         <unit>mas/yr</unit>
+         <ucd>ERROR</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sigMuD</name>
+         <description>Error on proper motion in Dec direction</description>
+         <unit>mas/yr</unit>
+         <ucd>ERROR</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>chi2</name>
+         <description>Chi-squared value of proper motion solution</description>
+         <ucd>FIT_CHI2</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>Nplates</name>
+         <description>No. of plates used for this proper motion
+            measurement</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>classMagB</name>
+         <description>B band magnitude selected by B image class</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_BJ</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>classMagR1</name>
+         <description>R1 band magnitude selected by R1 image class</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_R</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>classMagR2</name>
+         <description>R2 band magnitude selected by R2 image class</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_R</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>classMagI</name>
+         <description>I band magnitude selected by I image class</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_I</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>gCorMagB</name>
+         <description>B band magnitude assuming object is galaxy</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_BJ</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>gCorMagR1</name>
+         <description>R1 band magnitude assuming object is galaxy</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_R</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>gCorMagR2</name>
+         <description>R2 band magnitude assuming object is galaxy</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_R</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>gCorMagI</name>
+         <description>I band magnitude assuming object is galaxy</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_I</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sCorMagB</name>
+         <description>B band magnitude assuming object is star</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_BJ</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sCorMagR1</name>
+         <description>R1 band magnitude assuming object is star</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_R</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sCorMagR2</name>
+         <description>R2 band magnitude assuming object is star</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_R</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sCorMagI</name>
+         <description>I band magnitude assuming object is star</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_I</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>meanClass</name>
+         <description>Estimate of image class based on unit-weighted
+            mean of individual classes</description>
+         <ucd>CLASS_OBJECT</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>classB</name>
+         <description>Image classification from B band detection</description>
+         <ucd>CLASS_OBJECT</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>classR1</name>
+         <description>Image classification from R1 band detection</description>
+         <ucd>CLASS_OBJECT</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>classR2</name>
+         <description>Image classification from R2 band detection</description>
+         <ucd>CLASS_OBJECT</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>classI</name>
+         <description>Image classification from I band detection</description>
+         <ucd>CLASS_OBJECT</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>ellipB</name>
+         <description>Ellipticity of B band detection</description>
+         <ucd>PHYS_ELLIPTICITY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>ellipR1</name>
+         <description>Ellipticity of R1 band detection</description>
+         <ucd>PHYS_ELLIPTICITY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>ellipR2</name>
+         <description>Ellipticity of R2 band detection</description>
+         <ucd>PHYS_ELLIPTICITY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>ellipI</name>
+         <description>Ellipticity of I band detection</description>
+         <ucd>PHYS_ELLIPTICITY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>qualB</name>
+         <description>Bitwise quality flag from B band detection</description>
+         <ucd>CODE_QUALITY</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>qualR1</name>
+         <description>Bitwise quality flag from R1 band detection</description>
+         <ucd>CODE_QUALITY</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>qualR2</name>
+         <description>Bitwise quality flag from R2 band detection</description>
+         <ucd>CODE_QUALITY</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>qualI</name>
+         <description>Bitwise quality flag from I band detection</description>
+         <ucd>CODE_QUALITY</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>blendB</name>
+         <description>Blend flag from B band detection</description>
+         <ucd>CODE_MULT_INDEX</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>blendR1</name>
+         <description>Blend flag from R1 band detection</description>
+         <ucd>CODE_MULT_INDEX</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>blendR2</name>
+         <description>Blend flag from R2 band detection</description>
+         <ucd>CODE_MULT_INDEX</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>blendI</name>
+         <description>Blend flag from I band detection</description>
+         <ucd>CODE_MULT_INDEX</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>prfStatB</name>
+         <description>Profile statistic from B band detection</description>
+         <unit>N(0,1)</unit>
+         <ucd>CLASS_STAR_GALAXY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>prfStatR1</name>
+         <description>Profile statistic from R1 band detection</description>
+         <unit>N(0,1)</unit>
+         <ucd>CLASS_STAR_GALAXY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>prfStatR2</name>
+         <description>Profile statistic from R2 band detection</description>
+         <unit>N(0,1)</unit>
+         <ucd>CLASS_STAR_GALAXY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>prfStatI</name>
+         <description>Profile statistic from I band detection</description>
+         <unit>N(0,1)</unit>
+         <ucd>CLASS_STAR_GALAXY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>l</name>
+         <description>The Galactic longitude of the source</description>
+         <unit>deg</unit>
+         <ucd>POS_GAL_LON</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>b</name>
+         <description>The Galactic latitude of the source</description>
+         <unit>deg</unit>
+         <ucd>POS_GAL_LAT</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>d</name>
+         <description>The great-circle distance of the source from the
+            Galactic centre</description>
+         <unit>deg</unit>
+         <ucd>POS_ANG_DIST_REL</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>Ebmv</name>
+         <description>The estimated foreground reddening at this
+            position from Schlegel et al. (1998)</description>
+         <unit>mag</unit>
+         <ucd>PHOT_EXTINCTION_GAL</ucd>
+         <dataType>float</dataType>
+      </column>
+   </table>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>Source</name>
+      <description />
+      <column>
+         <name>objID</name>
+         <description>Unique identifier of merged source</description>
+         <ucd>ID_MAIN</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>objIDB</name>
+         <description>objID for B band detection merged into this object</description>
+         <ucd>ID_ASSOCIATED</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>objIDR1</name>
+         <description>objID for R1 band detection merged into this
+            object</description>
+         <ucd>ID_ASSOCIATED</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>objIDR2</name>
+         <description>objID for R2 band detection merged into this
+            object</description>
+         <ucd>ID_ASSOCIATED</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>objIDI</name>
+         <description>objID for I band detection merged into this object</description>
+         <ucd>ID_ASSOCIATED</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>htmId</name>
+         <description>Hierarchical Triangular Mesh (20-deep) of centroid</description>
+         <ucd>POS_GENERAL</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>epoch</name>
+         <description>Epoch of position (variance weighted mean epoch of
+            available measures)</description>
+         <unit>year</unit>
+         <ucd>TIME_EPOCH</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>ra</name>
+         <description>Mean RA, computed from detections merged in this
+            catalogue</description>
+         <unit>deg</unit>
+         <ucd>POS_EQ_RA_MAIN</ucd>
+         <dataType>double</dataType>
+      </column>
+      <column>
+         <name>dec</name>
+         <description>Mean Dec, computed from detections merged in this
+            catalogue</description>
+         <unit>deg</unit>
+         <ucd>POS_EQ_DEC_MAIN</ucd>
+         <dataType>double</dataType>
+      </column>
+      <column>
+         <name>sigRA</name>
+         <description>Uncertainty in RA (formal random error not inc.
+            systematic errors)</description>
+         <unit>deg</unit>
+         <ucd>ERROR</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sigDec</name>
+         <description>Uncertainty in Dec (formal random error not inc.
+            systematic errors)</description>
+         <unit>deg</unit>
+         <ucd>ERROR</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>cx</name>
+         <description>Cartesian x of unit (ra,dec) vector on celestial
+            sphere</description>
+         <ucd>POS_EQ_X</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>cy</name>
+         <description>Cartesian y of unit (ra,dec) vector on celestial
+            sphere</description>
+         <ucd>POS_EQ_Y</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>cz</name>
+         <description>Cartesian z of unit (ra,dec) vector on celestial
+            sphere</description>
+         <ucd>POS_EQ_Z</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>muAcosD</name>
+         <description>Proper motion in RA direction</description>
+         <unit>mas/yr</unit>
+         <ucd>POS_EQ_PMRA</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>muD</name>
+         <description>Proper motion in Dec direction</description>
+         <unit>mas/yr</unit>
+         <ucd>POS_EQ_PMDEC</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sigMuAcosD</name>
+         <description>Error on proper motion in RA direction</description>
+         <unit>mas/yr</unit>
+         <ucd>ERROR</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sigMuD</name>
+         <description>Error on proper motion in Dec direction</description>
+         <unit>mas/yr</unit>
+         <ucd>ERROR</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>chi2</name>
+         <description>Chi-squared value of proper motion solution</description>
+         <ucd>FIT_CHI2</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>Nplates</name>
+         <description>No. of plates used for this proper motion
+            measurement</description>
+         <ucd>NUMBER</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>classMagB</name>
+         <description>B band magnitude selected by B image class</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_BJ</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>classMagR1</name>
+         <description>R1 band magnitude selected by R1 image class</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_R</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>classMagR2</name>
+         <description>R2 band magnitude selected by R2 image class</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_R</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>classMagI</name>
+         <description>I band magnitude selected by I image class</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_I</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>gCorMagB</name>
+         <description>B band magnitude assuming object is galaxy</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_BJ</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>gCorMagR1</name>
+         <description>R1 band magnitude assuming object is galaxy</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_R</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>gCorMagR2</name>
+         <description>R2 band magnitude assuming object is galaxy</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_R</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>gCorMagI</name>
+         <description>I band magnitude assuming object is galaxy</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_I</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sCorMagB</name>
+         <description>B band magnitude assuming object is star</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_BJ</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sCorMagR1</name>
+         <description>R1 band magnitude assuming object is star</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_R</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sCorMagR2</name>
+         <description>R2 band magnitude assuming object is star</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_R</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sCorMagI</name>
+         <description>I band magnitude assuming object is star</description>
+         <unit>mag</unit>
+         <ucd>PHOT_PHG_I</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>meanClass</name>
+         <description>Estimate of image class based on unit-weighted
+            mean of individual classes</description>
+         <ucd>CLASS_OBJECT</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>classB</name>
+         <description>Image classification from B band detection</description>
+         <ucd>CLASS_OBJECT</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>classR1</name>
+         <description>Image classification from R1 band detection</description>
+         <ucd>CLASS_OBJECT</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>classR2</name>
+         <description>Image classification from R2 band detection</description>
+         <ucd>CLASS_OBJECT</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>classI</name>
+         <description>Image classification from I band detection</description>
+         <ucd>CLASS_OBJECT</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>ellipB</name>
+         <description>Ellipticity of B band detection</description>
+         <ucd>PHYS_ELLIPTICITY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>ellipR1</name>
+         <description>Ellipticity of R1 band detection</description>
+         <ucd>PHYS_ELLIPTICITY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>ellipR2</name>
+         <description>Ellipticity of R2 band detection</description>
+         <ucd>PHYS_ELLIPTICITY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>ellipI</name>
+         <description>Ellipticity of I band detection</description>
+         <ucd>PHYS_ELLIPTICITY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>qualB</name>
+         <description>Bitwise quality flag from B band detection</description>
+         <ucd>CODE_QUALITY</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>qualR1</name>
+         <description>Bitwise quality flag from R1 band detection</description>
+         <ucd>CODE_QUALITY</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>qualR2</name>
+         <description>Bitwise quality flag from R2 band detection</description>
+         <ucd>CODE_QUALITY</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>qualI</name>
+         <description>Bitwise quality flag from I band detection</description>
+         <ucd>CODE_QUALITY</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>blendB</name>
+         <description>Blend flag from B band detection</description>
+         <ucd>CODE_MULT_INDEX</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>blendR1</name>
+         <description>Blend flag from R1 band detection</description>
+         <ucd>CODE_MULT_INDEX</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>blendR2</name>
+         <description>Blend flag from R2 band detection</description>
+         <ucd>CODE_MULT_INDEX</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>blendI</name>
+         <description>Blend flag from I band detection</description>
+         <ucd>CODE_MULT_INDEX</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>prfStatB</name>
+         <description>Profile statistic from B band detection</description>
+         <unit>N(0,1)</unit>
+         <ucd>CLASS_STAR_GALAXY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>prfStatR1</name>
+         <description>Profile statistic from R1 band detection</description>
+         <unit>N(0,1)</unit>
+         <ucd>CLASS_STAR_GALAXY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>prfStatR2</name>
+         <description>Profile statistic from R2 band detection</description>
+         <unit>N(0,1)</unit>
+         <ucd>CLASS_STAR_GALAXY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>prfStatI</name>
+         <description>Profile statistic from I band detection</description>
+         <unit>N(0,1)</unit>
+         <ucd>CLASS_STAR_GALAXY</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>l</name>
+         <description>The Galactic longitude of the source</description>
+         <unit>deg</unit>
+         <ucd>POS_GAL_LON</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>b</name>
+         <description>The Galactic latitude of the source</description>
+         <unit>deg</unit>
+         <ucd>POS_GAL_LAT</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>d</name>
+         <description>The great-circle distance of the source from the
+            Galactic centre</description>
+         <unit>deg</unit>
+         <ucd>POS_ANG_DIST_REL</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>Ebmv</name>
+         <description>The estimated foreground reddening at this
+            position from Schlegel et al. (1998)</description>
+         <unit>mag</unit>
+         <ucd>PHOT_EXTINCTION_GAL</ucd>
+         <dataType>float</dataType>
+      </column>
+   </table>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>Field</name>
+      <description />
+      <column>
+         <name>systemID</name>
+         <description>Unique identifier of the system of survey field
+            centres</description>
+         <ucd>ID_MAIN</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>fieldID</name>
+         <description>Unique identifier of survey field (fieldNum and
+            systemID combo)</description>
+         <ucd>ID_FIELD</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>fieldNum</name>
+         <description>ESO/SRC or Palomar survey system field number</description>
+         <ucd>ID_FIELD</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>nominalRA</name>
+         <description>Nominal field centre RA</description>
+         <unit>deg</unit>
+         <ucd>POS_EQ_RA_MAIN</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>nominalDec</name>
+         <description>Nominal field centre Dec</description>
+         <unit>deg</unit>
+         <ucd>POS_EQ_DEC_MAIN</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>htmId</name>
+         <description>Hierarchical Triangular Mesh (20-deep) of nominal
+            field centre</description>
+         <ucd>POS_GENERAL</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>cx</name>
+         <description>Cartesian x of unit (ra,dec) vector on celestial
+            sphere</description>
+         <ucd>POS_EQ_X</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>cy</name>
+         <description>Cartesian y of unit (ra,dec) vector on celestial
+            sphere</description>
+         <ucd>POS_EQ_Y</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>cz</name>
+         <description>Cartesian z of unit (ra,dec) vector on celestial
+            sphere</description>
+         <ucd>POS_EQ_Z</ucd>
+         <dataType>float</dataType>
+      </column>
+   </table>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>IsoCalVersion</name>
+      <description />
+      <column>
+         <name>versionID</name>
+         <description>Unique identifier for the calibration version</description>
+         <ucd>ID_VERSION</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>startDate</name>
+         <description>Start date at which the calibration was released</description>
+         <unit>MM-DD-YYYY</unit>
+         <ucd>TIME_DATE</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>endDate</name>
+         <description>End date at which the calibration was superseded</description>
+         <unit>MM-DD-YYYY</unit>
+         <ucd>TIME_DATE</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+      <column>
+         <name>description</name>
+         <description>Short description of the calibration version</description>
+         <ucd>REMARKS</ucd>
+         <dataType arraysize="*">char</dataType>
+      </column>
+   </table>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>PrevIsoCal</name>
+      <description />
+      <column>
+         <name>versionID</name>
+         <description>Unique identifier for the calibration version</description>
+         <ucd>ID_MAIN</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>plateID</name>
+         <description>Unique identifier of the plate</description>
+         <ucd>ID_PLATE</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>gradient</name>
+         <description>Gradient of the isophotal scale</description>
+         <unit>mags per instrumental mag</unit>
+         <ucd>MODEL_PARAM</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>zeropoint</name>
+         <description>Zeropoint of the isophotal scale</description>
+         <unit>mags</unit>
+         <ucd>PHOT_ZP</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>slump</name>
+         <description>Fourth-order radial term in calibration</description>
+         <unit>mags per (2.5 deg)^4</unit>
+         <ucd>MODEL_PARAM</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>colourZP</name>
+         <description>Colour zeropoint (wrt Bj) of calibration</description>
+         <unit>mags</unit>
+         <ucd>MODEL_PARAM</ucd>
+         <dataType>float</dataType>
+      </column>
+   </table>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>CurrIsoCal</name>
+      <description />
+      <column>
+         <name>plateID</name>
+         <description>Unique identifier of the plate</description>
+         <ucd>ID_PLATE</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>gradient</name>
+         <description>Gradient of the isophotal scale</description>
+         <unit>mags per instrumental mag</unit>
+         <ucd>MODEL_PARAM</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>zeropoint</name>
+         <description>Zeropoint of the isophotal scale</description>
+         <unit>mags</unit>
+         <ucd>PHOT_ZP</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>slump</name>
+         <description>Fourth-order radial term in calibration</description>
+         <unit>mags per (2.5 deg)^4</unit>
+         <ucd>MODEL_PARAM</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>colourZP</name>
+         <description>Colour zeropoint (wrt Bj) of calibration</description>
+         <unit>mags</unit>
+         <ucd>MODEL_PARAM</ucd>
+         <dataType>float</dataType>
+      </column>
+   </table>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>CrossNeighboursEDR</name>
+      <description />
+      <column>
+         <name>ssaID</name>
+         <description>The object identifier from the SSA Source table</description>
+         <ucd>ID_MAIN</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>sdssID</name>
+         <description>The object identifier from SkyServer.PhotoObj</description>
+         <ucd>ID_CATALOG</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>distanceMins</name>
+         <description>The angular separation of the cross-neighbour</description>
+         <unit>arcminutes</unit>
+         <ucd>POS_ANG_DIST_GENERAL</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sdssType</name>
+         <description>The SDSS image classification flag</description>
+         <ucd>CLASS_OBJECT</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>sdssPrimary</name>
+         <description />
+         <ucd>CODE_MISC</ucd>
+         <dataType>int</dataType>
+      </column>
+   </table>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>CrossNeighbours2MASSXSC</name>
+      <description />
+      <column>
+         <name>ssaID</name>
+         <description>The object identifier from the SSA Source table</description>
+         <ucd>ID_MAIN</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>xscID</name>
+         <description>The object identifier (ext_key) from
+            TWOMASS.twomass_xsc</description>
+         <ucd>ID_CATALOG</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>distanceMins</name>
+         <description>The angular separation of the cross-neighbour</description>
+         <unit>arcminutes</unit>
+         <ucd>POS_ANG_DIST_GENERAL</ucd>
+         <dataType>float</dataType>
+      </column>
+   </table>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>CrossNeighboursDR1</name>
+      <description />
+      <column>
+         <name>ssaID</name>
+         <description>The object identifier from the SSA Source table</description>
+         <ucd>ID_MAIN</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>sdssID</name>
+         <description>The object identifier from BestDR1.PhotoObj</description>
+         <ucd>ID_CATALOG</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>distanceMins</name>
+         <description>The angular separation of the cross-neighbour</description>
+         <unit>arcminutes</unit>
+         <ucd>POS_ANG_DIST_GENERAL</ucd>
+         <dataType>float</dataType>
+      </column>
+      <column>
+         <name>sdssType</name>
+         <description>The SDSS image classification flag</description>
+         <ucd>CLASS_OBJECT</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>sdssPrimary</name>
+         <description />
+         <ucd>CODE_MISC</ucd>
+         <dataType>int</dataType>
+      </column>
+   </table>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>CrossNeighbours2MASSPSC</name>
+      <description />
+      <column>
+         <name>ssaID</name>
+         <description>The object identifier from the SSA Source table</description>
+         <ucd>ID_MAIN</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>pscID</name>
+         <description>The object identifier (pts_key) from
+            TWOMASS.twomass_psc</description>
+         <ucd>ID_CATALOG</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>distanceMins</name>
+         <description>The angular separation of the cross-neighbour</description>
+         <unit>arcminutes</unit>
+         <ucd>POS_ANG_DIST_GENERAL</ucd>
+         <dataType>float</dataType>
+      </column>
+   </table>
+   <table xmlns:tab="urn:astrogrid:schema:TableMetadata">
+      <name>CrossNeighboursUSNOB</name>
+      <description />
+      <column>
+         <name>ssaID</name>
+         <description>The object identifier from the SSA Source table</description>
+         <ucd>ID_MAIN</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>zone</name>
+         <description>The zone file number of the USNOB source.</description>
+         <ucd>ID_CATALOG</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>seqNo</name>
+         <description>The sequence number within the zone file of the
+            USNOB source</description>
+         <ucd>ID_CATALOG</ucd>
+         <dataType>int</dataType>
+      </column>
+      <column>
+         <name>distanceMins</name>
+         <description>The angular separation of the cross-neighbour</description>
+         <unit>arcminutes</unit>
+         <ucd>POS_ANG_DIST_GENERAL</ucd>
+         <dataType>float</dataType>
+      </column>
+   </table>
+</ri:Resource>

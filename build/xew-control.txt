@@ -1,0 +1,1 @@
+org.javastro.ivoa.entities.uws.impl.JobImpl.JobInfoImpl=exclude

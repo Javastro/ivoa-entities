@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+	<properties>
+		<author email="pah@jb.man.ac.uk">Paul Harrison</author>
+		<title>IVOA Objects</title>
+	</properties>
+	<body>
+		<section name="Overview">
+			<p> This library contains object for data binding to standard IVOA schema. The XML binding technology that is used is
+         <a href="https://jaxb.dev.java.net/">JAXB2</a>.</p>
+         <p>The objects are originally automatically generated from the schema, but now include specific customizations so that when the schema change the objects will have to have
+         these customizations reapplied - fortunately JAXB2 annotations make this process relatively painless. The schema that these objects will bind to are all contained in the "astrogrid contracts" project.
+         </p>
+   
+		<p>More information on using the classes is given in the <a href="apidocs/index.html">javadocs</a>.</p>
+      <section name="Database binding">
+              <p>There is additionally a <a href="http://www.jcp.org/en/jsr/detail?id=317">JPA</a> binding for the objects that allows the objects to be persisted into a relational database.</p>
+              
+              <p>Although in principle using JPA means that any JPA provider can be used with these classes, in fact the mapping has been done by using a few <a href="http://www.eclipse.org/eclipselink/">eclipselink</a> specific features, so that only eclipselink is supported in the current version.</p>
+              
+              <p>The JPA mapping can be done in many ways because of the flexibility of JPA. In general the mapping was performed to reduce the number of tables as much as possible, with the following specific strategies.
+
+<ul>
+   <li>An entity was treated as embedded wherever the multiplicity was 1:1</li>
+   <li>Added an ID field where necessary - i.e. all freestanding tables (appropriate JAXB markup was used to stop these IDs being written to XML)</li>
+   <li>Used single table represent type hierarchy with a column (KIND) to distinguish the types</li>
+   <li>Lists of enumerations have been converted to a comma separated set of values in a string.</li>
+   <li>One to many relationships have been modeled by putting a back-reference into the many end so that can be annotated for the foreign key</li>
+   </ul></p>
+      </section>
+      </section>
+	</body>
+</document>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ri:resource xsi:type="vs:CatalogService" status="active"
+          created="2000-01-01T09:00:00" updated="2000-01-01T09:00:00"
+          xmlns:ri="http://www.ivoa.net/xml/RegistryInterface/v1.0"
+          xmlns:vr="http://www.ivoa.net/xml/VOResource/v1.0"
+          xmlns:vs="http://www.ivoa.net/xml/VODataService/v1.1"
+          xmlns:cs="http://www.ivoa.net/xml/ConeSearch/v1.0"
+          xmlns:stc="http://www.ivoa.net/xml/STC/stc-v1.30.xsd" 
+          xmlns:xlink="http://www.w3.org/1999/xlink" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.ivoa.net/xml/RegistryInterface/v1.0 http://www.ivoa.net/xml/RegistryInterface/v1.0   
+                        http://www.ivoa.net/xml/VODataService/v1.1 http://www.ivoa.net/xml/VODataService/v1.1
+                        http://www.ivoa.net/xml/ConeSearch/v1.0 http://www.ivoa.net/xml/ConeSearch/v1.0
+                        http://www.ivoa.net/xml/STC/stc-v1.30.xsd http://www.ivoa.net/xml/STC/stc-v1.30.xsd
+                        
+                       http://www.ivoa.net/xml/VOResource/v1.0    http://www.ivoa.net/xml/VOResource/v1.0"
+          >
+
+    <title>NCSA Astronomy Digital Image Library Cone Search</title>
+    <shortName>ADIL</shortName>
+    <identifier>ivo://adil.ncsa/vocone</identifier>
+
+    <curation>
+      <publisher ivo-id="ivo://adil.ncsa/adil">
+         NCSA Astronomy Digital Image Library (ADIL)
+      </publisher>
+      <creator>
+        <name>Dr. Raymond Plante</name>
+        <logo>http://adil.ncsa.uiuc.edu/gifs/adilfooter.gif</logo>
+      </creator>
+      <date role="created">2002-01-01</date>
+      <contact>
+        <name>ADIL Librarian</name>
+	<email>adil@ncsa.uiuc.edu</email>
+      </contact>
+    </curation>
+
+    <content>
+      <subject>data repositories</subject>
+      <subject>digital libraries</subject>
+      <description>
+         This Cone Search implementation allows clients to progrommatically 
+         search for images in the ADIL that overlap with the given cone.  
+      </description>
+      <referenceURL>http://adil.ncsa.uiuc.edu/</referenceURL>
+      <type>Archive</type>
+      <contentLevel>University</contentLevel>
+      <contentLevel>Research</contentLevel>
+      <contentLevel>Community College</contentLevel>
+
+      <relationship>
+         <relationshipType>  service-for  </relationshipType>
+         <relatedResource ivo-id="ivo://adil.ncsa/adil">
+            NCSA Astronomy Digital Image Library
+         </relatedResource>
+      </relationship>
+    </content>
+
+    <capability xsi:type="cs:ConeSearch" 
+                standardID="ivo://ivoa.net/std/ConeSearch">
+
+       <interface xsi:type="vs:ParamHTTP" role="std">
+          <accessURL use="base">
+             http://adil.ncsa.uiuc.edu/vocone?survey=f&amp;
+          </accessURL>
+       </interface>
+
+       <maxSR>10</maxSR>
+       <maxRecords>5000</maxRecords>
+       <verbosity>false</verbosity>
+
+       <testQuery>
+          <ra> 102.2  </ra>
+          <dec> 28.5  </dec>
+          <sr> 0.5 </sr>
+       </testQuery>
+    </capability>
+
+    <coverage>
+       <stc:STCResourceProfile
+            xmlns="http://www.ivoa.net/xml/STC/stc-v1.30.xsd">
+
+          <AstroCoordSystem xlink:type="simple"
+                            xlink:href="ivo://STClib/CoordSys#UTC-FK5-TOPO" 
+                            id="UTC-FK5-TOPO"/> 
+
+          <AstroCoordArea coord_system_id="UTC-FK5-TOPO">
+             <AllSky/>
+          </AstroCoordArea>
+
+       </stc:STCResourceProfile>
+
+       <waveband>Radio</waveband>
+       <waveband>Millimeter</waveband>
+       <waveband>Infrared</waveband>
+       <waveband>Optical</waveband>
+       <waveband>UV</waveband>
+
+    </coverage>
+
+</ri:resource>

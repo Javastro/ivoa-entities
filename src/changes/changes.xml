@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/changes/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
+  <properties>
+    <title>Changes since previous release</title>
+  </properties>
+  <body>
+    <release version="1.1">
+       <action type="update" dev="pah">
+          Added a JPA binding to the IVOA objects so that they can be persisted in a relational database.
+       </action>
+    </release>
+    <release version="2009.1">
+       <action type="fix" dev="pah">
+          Corrected the behaviour of dates when nulls encountered in net.ivoa.DateTimeXmlAdapter
+       </action>
+       <action type="update" dev="pah">
+         Updated UWS in new.ivoa.uws to 0.9.2 version of schema
+       </action>
+    </release>
+    <release version="2008.2" date="2008-09-01" description="Initial Release">
+    
+      <action dev="pah" type="add"  issue="2320">
+      </action>
+   </release>
+  </body>
+</document>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xsi:type="vt:ServiceStandard" status="active"
+          created="2000-01-01T09:00:00" updated="2000-01-01T09:00:00"
+          xmlns:vr="http://www.ivoa.net/xml/VOResource/v1.0"
+          xmlns:vt="http://www.ivoa.net/xml/StandardsRegExt/v1.0" 
+          xmlns:vs="http://www.ivoa.net/xml/VODataService/v1.1" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.ivoa.net/xml/VOResource/v1.0
+                              http://www.ivoa.net/xml/VOResource/v1.0
+                              http://www.ivoa.net/xml/VODataService/v1.1
+                              http://www.ivoa.net/xml/VODataService/v1.1
+                              http://www.ivoa.net/xml/StandardsRegExt/v1.0
+                              ../StandardsRegExt-v1.0.xsd">
+
+    <title>VOSpace specification</title>
+    <shortName>VOSpace</shortName>
+    <identifier>ivo://ivoa.net/vospace/core</identifier>
+
+    <curation>
+      <publisher ivo-id="ivo://ivoa.net/IVOA">
+        International Virtual Observatory Alliance
+      </publisher>
+      <creator>
+        <name>Matthew Graham</name>
+      </creator>
+      <creator>
+        <name>Dave Morris</name>
+      </creator>
+      <creator>
+        <name>Guy Rixon</name>
+      </creator>
+      <date>2009-10-07</date>
+      <version>1.15</version>
+      <contact>
+        <name>Grid and Web Services Working Group</name>
+        <email>gws@ivoa.net</email>
+      </contact>
+    </curation>
+
+    <content>
+      <subject>software standard</subject>
+      <subject>virtual observatory</subject>
+      <description>
+        VOSpace is the IVOA interface to distributed storage. This
+        version extends the existing VOSpace 1.0 (SOAP-based)
+        specification to support containers, links between individual
+        VOSpace instances, third party APIs, and a find
+        mechanism. Note, however, that VOSpace-1.0 compatible clients
+        will not work with this new version of the interface. 
+      </description>
+      <referenceURL>
+         http://www.ivoa.net/Documents/latest/VOSpace.html
+      </referenceURL>
+      <type>Other</type>
+      <contentLevel>Research</contentLevel>
+    </content>
+
+    <endorsedVersion use="deprecated" status="rec">1.02</endorsedVersion>
+    <endorsedVersion status="rec">1.15</endorsedVersion>
+    <key>
+      <name>vospace-1.0</name>
+      <description>
+        The capability identifier that indicates support for the VOSpace v1.0
+        (as defined by the VOSpace 1.02 specification). 
+      </description>
+    </key>
+    <key>
+      <name>vospace-1.1</name>
+      <description>
+        The capability identifier that indicates support for the VOSpace v1.1
+        (as defined by the VOSpace 1.15 specification). 
+      </description>
+    </key>
+    <key>
+      <name>vospace-2.0</name>
+      <description>
+        The capability identifier that indicates support for the VOSpace v2.0
+        (as defined by the VOSpace 2.0 specification). 
+      </description>
+    </key>
+    <key>
+      <name>view-any</name>
+      <description>
+        A view (a description of data formats and contents available for 
+        importing or exporting data to or from a VOSpace) that indicates 
+        that the  VOSpace will accept any data format or View for a Node.  
+      </description>
+    </key>
+    <key>
+      <name>anyview</name>
+      <description>
+        A view (a description of data formats and contents available for 
+        importing or exporting data to or from a VOSpace) that indicates 
+        that the  VOSpace will accept any data format or View for a Node.  
+      </description>
+    </key>
+    <key>
+      <name>binaryview</name>
+      <description>
+        A view (a description of data formats and contents available for 
+        importing or exporting data to or from a VOSpace) that indicates 
+        that the  VOSpace will accept any data format or View for a Node.  
+      </description>
+    </key>
+    <key>
+      <name>defaultview</name>
+      <description>
+        A view (a description of data formats and contents available for 
+        importing or exporting data to or from a VOSpace) that indicates 
+        that the  VOSpace will accept any data format or View for a Node.  
+      </description>
+    </key>
+    <key>
+      <name>httpget</name>
+      <description>
+        A transfer protocol that uses the HTTP GET operation
+      </description>
+    </key>
+    <key>
+      <name>httpput</name>
+      <description>
+        A transfer protocol that uses the HTTP PUT operation
+      </description>
+    </key>
+    <key>
+      <name>mimetype</name>
+      <description>
+        a destination property indicating a MIME type for a data item.
+      </description>
+    </key>
+    <key>
+      <name>votable</name>
+      <description>
+        a view (of a data set) in VOTable format 
+      </description>
+    </key>
+ 
+    <interface xsi:type="vr:WebService" role="std" version="1.0">
+      <accessURL use="full">http://sample.org/soap/vospace</accessURL>
+      <wsdlURL>http://www.ivoa.net/twiki/bin/view/IVOA/VOSpaceHome</wsdlURL>
+    </interface>
+
+</resource>
+

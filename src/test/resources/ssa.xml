@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ri:resource xsi:type="vs:CatalogService" status="active"
+          created="2000-01-01T09:00:00" updated="2000-01-01T09:00:00"
+          xmlns:ri="http://www.ivoa.net/xml/RegistryInterface/v1.0"
+          xmlns:ssa="http://www.ivoa.net/xml/SSA/v1.1"
+          xmlns:vr="http://www.ivoa.net/xml/VOResource/v1.0"
+          xmlns:vs="http://www.ivoa.net/xml/VODataService/v1.1"
+          xmlns:stc="http://www.ivoa.net/xml/STC/stc-v1.30.xsd" 
+          xmlns:xlink="http://www.w3.org/1999/xlink" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.ivoa.net/xml/RegistryInterface/v1.0 http://www.ivoa.net/xml/RegistryInterface/v1.0 
+          http://www.ivoa.net/xml/VODataService/v1.1 http://www.ivoa.net/xml/VODataService/v1.1
+          http://www.ivoa.net/xml/SSA/v1.1 http://www.ivoa.net/xml/SSA/v1.1"
+          
+          >
+          
+
+    <title>NCSA Astronomy Digital Image Library Spectrum Service</title>
+    <shortName>ADIL</shortName>
+    <identifier>ivo://adil.ncsa/vossa</identifier>
+
+    <curation>
+      <publisher ivo-id="ivo://adil.ncsa/adil">
+         NCSA Astronomy Digital Image Library (ADIL)
+      </publisher>
+      <creator>
+        <name>Dr. Raymond Plante</name>
+        <logo>http://adil.ncsa.uiuc.edu/gifs/adilfooter.gif</logo>
+      </creator>
+      <date role="created">2006-01-01</date>
+      <contact>
+        <name>ADIL Librarian</name>
+	<email>adil@ncsa.uiuc.edu</email>
+      </contact>
+    </curation>
+
+    <content>
+      <subject>data repositories</subject>
+      <subject>digital libraries</subject>
+      <subject>spectral data cubes</subject>
+
+      <description>
+         This service will will extract and export spectra from image
+         data cubes in the Astronomy Digital Image Library.  Users can
+         provide a position, apeture and various other constraints and
+         get back a list of available spectra which can then be
+         downloaded.  On download, the spectra are created from the
+         underlying data cubes.  It's possible to cache these spectra
+         on the server for faster future access.  Programmatic access
+         is available via the IVOA Simple Spectral Access standard
+         protocol; however, an interactive web page form is also
+         available. 
+      </description>
+
+      <referenceURL>http://adil.ncsa.uiuc.edu/aboutSpectra.html</referenceURL>
+      <type>Archive</type>
+      <contentLevel>University</contentLevel>
+      <contentLevel>Research</contentLevel>
+      <contentLevel>Community College</contentLevel>
+
+      <relationship>
+         <relationshipType>  service-for  </relationshipType>
+         <relatedResource ivo-id="ivo://adil.ncsa/adil">
+            NCSA Astronomy Digital Image Library
+         </relatedResource>
+      </relationship>
+    </content>
+
+    <!-- 
+      -  here's my support for SSA
+      -->
+    <capability xsi:type="ssa:SimpleSpectralAccess" 
+                standardID="ivo://ivoa.net/std/SSA">
+
+       <!--
+         -  this is the standard GET interface
+         -->
+       <interface xsi:type="vs:ParamHTTP" role="std">
+          <accessURL use="base">
+             http://adil.ncsa.uiuc.edu/cgi-bin/vossa
+          </accessURL>
+
+          <!--
+            -  here's a service-defined parameter
+            -->
+          <param std="false">
+             <name>cachedonly</name>
+             <description>
+                If set to 1 (true), this will return only those
+                previously calculated spectra currently in the cache. 
+             </description>
+             <dataType>boolean</dataType>
+          </param>
+       </interface>
+
+       <!--
+         -  Here's an interactive version.  Since it's just a front-end to 
+         -  the GET service, it shares the same capability metadata. 
+         -->
+       <interface xsi:type="vr:WebBrowser">
+          <accessURL> http://adil.ncsa.uiuc.edu/ws/vossa </accessURL>
+       </interface>
+
+       <!--
+         -  This starts the SSA-specific metadata
+         -->
+       <complianceLevel>full</complianceLevel>
+       <dataSource>pointed</dataSource>
+       <creationType>cutout</creationType>
+
+       <!--
+         -  These are the supported WCS frames.  The identifiers point to 
+         -  standard (registered) coordinate systems described with STC.
+         -  "Non-standard" systems can also be list, but then would need to 
+         -  be registered separately.   --> 
+       <supportedFrame>FK5</supportedFrame>
+       <supportedFrame>GALACTIC_I</supportedFrame>
+       
+         
+       <maxSearchRadius>10</maxSearchRadius>
+       <maxRecords>10000</maxRecords>
+       <defaultMaxRecords>500</defaultMaxRecords>
+       <maxAperture>3600</maxAperture>
+         
+
+       <!-- recall also alternative approach of listing as IVOA identifiers
+       <supports> NativePassthru  </supports>
+       <supports> QueryByBandpass </supports>
+       <supports> Compression     </supports>
+       <supports> Paging          </supports>
+         -->
+
+       <!--
+         -  a test query is for periodic, automated testing; adjust 
+         -  parameters to suit the SSA interface.  
+         -->
+       <testQuery>
+          <pos>
+             <long> 102.2 </long>
+             <lat> 28.5 </lat>
+          </pos>
+          <size> 0.5 </size>
+       <!--
+          <band>
+             <min> 0.0005 </min>
+             <max> 0.5 </max>
+             <name> radio </name>
+          </band>
+          <time>
+             <earliest>1991-01-01</earliest>
+          </time>
+          <extras> survey=f </extras>
+         -->
+          <queryDataCmd>POS=102.2,28.5&amp;SIZE=0.5</queryDataCmd>
+       </testQuery>
+    </capability>
+
+    <coverage>
+       <stc:STCResourceProfile
+            xmlns="http://www.ivoa.net/xml/STC/stc-v1.30.xsd">
+
+          <AstroCoordSystem xlink:type="simple"
+                            xlink:href="ivo://STClib/CoordSys#UTC-FK5-TOPO" 
+                            id="UTC-FK5-TOPO"/> 
+
+          <AstroCoordArea coord_system_id="UTC-FK5-TOPO">
+             <AllSky/>
+          </AstroCoordArea>
+
+       </stc:STCResourceProfile>
+
+       <waveband>Radio</waveband>
+       <waveband>Millimeter</waveband>
+       <waveband>Infrared</waveband>
+       <waveband>Optical</waveband>
+       <waveband>UV</waveband>
+
+    </coverage>
+
+</ri:resource>

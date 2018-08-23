@@ -1,0 +1,271 @@
+<jxb:bindings version="2.1" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+   xmlns:namespace="http://jaxb2-commons.dev.java.net/namespace-prefix"   
+   xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
+   http://jaxb2-commons.dev.java.net/namespace-prefix ./prefix-namespace-schema.xsd"
+>
+    <jxb:globalBindings generateValueClass="false" generateElementProperty="false"> <!-- generateElementProperty=false means that nillable not supported - mainly for stc  -->
+           <xjc:simple />
+  <!--         <xjc:treatRestrictionLikeNewType/>  treat restrictions like new class -->
+           
+           <xjc:typeSubstitution type="complex"/>
+           <xjc:javaType name="java.time.LocalDateTime" xmlType="xs:dateTime"
+                adapter="org.javastro.ivoa.entities.jaxb.adapters.DateTimeXmlAdapter" />
+                
+           
+    </jxb:globalBindings>
+    
+   <jxb:bindings schemaLocation="../target/dependency/schema/VOResource-v1.0.xsd"
+   >
+      <jxb:schemaBindings>
+         <jxb:package name="org.javastro.ivoa.entities.resource">
+            <jxb:javadoc><![CDATA[<body>Resource base classes</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+      </jxb:schemaBindings>
+      <jxb:bindings>
+       <namespace:prefix name="vr" /> 
+      </jxb:bindings>
+   </jxb:bindings>
+   
+   
+  
+ 
+   
+   
+
+   <jxb:bindings schemaLocation="../target/dependency/schema/VODataService-v1.1.xsd"
+   >
+      <jxb:schemaBindings>
+         <jxb:package name="org.javastro.ivoa.entities.resource.dataservice">
+            <jxb:javadoc><![CDATA[<body>Dataservice description classes</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+       </jxb:schemaBindings>
+       <jxb:bindings>
+                 <namespace:prefix name="vs" />           
+       </jxb:bindings>
+   </jxb:bindings>
+
+
+   <jxb:bindings  schemaLocation="../target/dependency/schema/ConeSearch-v1.0.xsd" >
+      <jxb:schemaBindings>
+         <jxb:package name="org.javastro.ivoa.entities.resource.cone">
+            <jxb:javadoc><![CDATA[<body>Cone search description classes</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+       </jxb:schemaBindings>
+   </jxb:bindings>
+   
+    
+ <jxb:bindings schemaLocation="../target/dependency/schema/stc-v1.30.xsd"
+   >
+      <jxb:schemaBindings>
+         <jxb:package
+            name="org.javastro.ivoa.entities.stc.v1">
+            <jxb:javadoc><![CDATA[<body>STC v1 XML objects</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+         
+      </jxb:schemaBindings>
+      <jxb:bindings  node="//xs:simpleType[@name='relocatableOriginType']">
+         <jxb:javaType name="org.javastro.ivoa.entities.jaxb.hacks.RelocatableOriginType"/>
+        
+      </jxb:bindings>
+      
+   </jxb:bindings>
+   
+  
+   <jxb:bindings schemaLocation="../target/dependency/schema/VORegistry-v1.0.xsd" 
+   >
+      <jxb:schemaBindings>
+         <jxb:package name="org.javastro.ivoa.entities.resource.registry">
+            <jxb:javadoc><![CDATA[<body>Registry desciption classes</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+       </jxb:schemaBindings>
+       <jxb:bindings>
+       <namespace:prefix name="vrr" /> 
+      </jxb:bindings>
+   </jxb:bindings>
+   
+   <jxb:bindings schemaLocation="../target/dependency/schema/SIA-v1.1.xsd" 
+   >
+      <jxb:schemaBindings>
+         <jxb:package name="org.javastro.ivoa.entities.resource.sia">
+            <jxb:javadoc><![CDATA[<body>SIA base classes</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+       </jxb:schemaBindings>
+             <jxb:bindings>
+  <namespace:prefix name="sia" />
+      </jxb:bindings>
+   </jxb:bindings>
+
+   <jxb:bindings schemaLocation="../target/dependency/schema/SSA-v1.2.xsd" 
+   >
+      <jxb:schemaBindings>
+         <jxb:package name="org.javastro.ivoa.entities.resource.ssap">
+            <jxb:javadoc><![CDATA[<body>SSAP base classes</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+       </jxb:schemaBindings>
+             <jxb:bindings>
+         <namespace:prefix name="ssap" />
+      </jxb:bindings>
+   </jxb:bindings>
+
+<!--  <jxb:bindings schemaLocation="../target/dependency/schema/SLAP-v1.1.xsd" 
+   >
+      <jxb:schemaBindings>
+         <jxb:package name="org.javastro.ivoa.entities.resource.slap">
+            <jxb:javadoc><![CDATA[<body>SLAP base classes</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+       </jxb:schemaBindings>
+           <jxb:bindings>
+  <namespace:prefix name="slap" />
+      </jxb:bindings>
+   </jxb:bindings>
+    -->  
+
+
+   <jxb:bindings schemaLocation="../target/dependency/schema/VOApplication-1.0.xsd" >
+
+       <jxb:schemaBindings>
+         <jxb:package name="org.javastro.ivoa.entities.resource.applications">
+            <jxb:javadoc><![CDATA[<body>Application classes</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+      </jxb:schemaBindings>
+      <jxb:bindings>
+<namespace:prefix name="va" />
+      </jxb:bindings>
+      
+   </jxb:bindings>
+   
+   <jxb:bindings schemaLocation="../target/dependency/schema/StandardsRegExt-1.0.xsd"
+    
+   >
+      <jxb:schemaBindings>
+         <jxb:package name="org.javastro.ivoa.entities.resource.standard">
+            <jxb:javadoc><![CDATA[<body>VO Standard</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+       </jxb:schemaBindings>
+       <jxb:bindings>
+ <namespace:prefix name="std" />
+      </jxb:bindings>
+       
+   </jxb:bindings>
+    <jxb:bindings schemaLocation="../target/dependency/schema/TAPRegExt-v1.0.xsd"
+  
+   >
+      <jxb:schemaBindings>
+         <jxb:package name="org.javastro.ivoa.entities.resource.tap">
+            <jxb:javadoc><![CDATA[<body>TAP description classes</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+       </jxb:schemaBindings>
+        <jxb:bindings>
+          <namespace:prefix name="tr" />
+      </jxb:bindings>
+   </jxb:bindings>
+    <jxb:bindings schemaLocation="../target/dependency/schema/VOSIAvailability-v1.0.xsd"
+
+   >
+      <jxb:schemaBindings>
+         <jxb:package name="org.javastro.ivoa.entities.vosi">
+            <jxb:javadoc><![CDATA[<body>VOSI description classes</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+       </jxb:schemaBindings>
+              <jxb:bindings>
+     <namespace:prefix name="vosi" />
+      </jxb:bindings>
+       
+   </jxb:bindings>
+   
+   
+   <jxb:bindings schemaLocation="../target/dependency/schema/RegistryInterface-v1.0.xsd"
+   
+   >
+      <jxb:schemaBindings>
+         <jxb:package name="org.javastro.ivoa.entities.resource.registry.iface">
+            <jxb:javadoc><![CDATA[<body>Registry interface classes</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+       </jxb:schemaBindings>
+              <jxb:bindings>
+      </jxb:bindings>
+       
+   </jxb:bindings> 
+  <jxb:bindings schemaLocation="../target/dependency/schema/UWS-1.1.xsd"
+ 
+   >
+      <jxb:schemaBindings>
+         <jxb:package
+            name="org.javastro.ivoa.entities.uws">
+            <jxb:javadoc><![CDATA[<body>Base UWS schema objects</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+       </jxb:schemaBindings>
+      <jxb:bindings>
+       <namespace:prefix name="uws" /> 
+      </jxb:bindings>
+   </jxb:bindings>
+
+  <jxb:bindings schemaLocation="../target/dependency/schema/vo-dml-v1.0.xsd"
+ 
+   >
+      <jxb:schemaBindings>
+         <jxb:package
+            name="org.javastro.ivoa.entities.vodml">
+            <jxb:javadoc><![CDATA[<body>Base VODML schema objects</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+       </jxb:schemaBindings>
+      <jxb:bindings>
+       <namespace:prefix name="vodml" /> 
+      </jxb:bindings>
+      
+      <jxb:bindings  node="//xs:complexType[@name='Model']/xs:attribute[@name='version']">
+       <jxb:property name="documentVersion" ></jxb:property>
+      </jxb:bindings>
+   </jxb:bindings>
+    
+   
+  <jxb:bindings schemaLocation="../target/dependency/schema/OAI-PMH.xsd"  
+   >
+      <jxb:schemaBindings>
+         <jxb:package
+            name="org.javastro.ivoa.entities.resource.registry.oaipmh">
+            <jxb:javadoc><![CDATA[<body>Base OAI-PMH schema objects</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+         
+      </jxb:schemaBindings>
+         <jxb:bindings>
+         <namespace:prefix name="oai" />
+      </jxb:bindings>
+      
+   </jxb:bindings> 
+  <jxb:bindings schemaLocation="../target/dependency/schema/xlink.xsd"  
+   >
+      <jxb:schemaBindings>
+         <jxb:package
+            name="org.javastro.ivoa.entities.xlink">
+            <jxb:javadoc><![CDATA[<body>Base OAI-PMH schema objects</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+         
+      </jxb:schemaBindings>
+         <jxb:bindings>
+         <namespace:prefix name="oai" />
+      </jxb:bindings>
+      
+   </jxb:bindings> 
+  
+</jxb:bindings>

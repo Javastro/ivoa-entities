@@ -1,0 +1,68 @@
+<ri:VOResources from="1" more="false" numberReturned="1"
+
+    xmlns:cs="http://www.ivoa.net/xml/ConeSearch/v1.0"
+   xmlns:osn="http://www.ivoa.net/xml/OpenSkyNode/v0.2" xmlns:ri="http://www.ivoa.net/xml/RegistryInterface/v1.0"
+   xmlns:sia="http://www.ivoa.net/xml/SIA/v1.1" xmlns:sla="http://www.ivoa.net/xml/SLA/v0.2"
+   xmlns:ssa="http://www.ivoa.net/xml/SSA/v0.4" xmlns:tsa="http://www.ivoa.net/xml/TSA/v0.2"
+   xmlns:vg="http://www.ivoa.net/xml/VORegistry/v1.0" xmlns:vr="http://www.ivoa.net/xml/VOResource/v1.0"
+   xmlns:vs="http://www.ivoa.net/xml/VODataService/v1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.ivoa.net/xml/RegistryInterface/v1.0 http://www.ivoa.net/xml/RegistryInterface/v1.0   
+                       http://www.ivoa.net/xml/VOResource/v1.0 http://www.ivoa.net/xml/VOResource/v1.0     
+                       http://www.ivoa.net/xml/VORegistry/v1.0 http://www.ivoa.net/xml/VORegistry/v1.0"
+   
+>
+<ri:Resource created="2009-02-15T12:00:00" status="active" updated="2009-03-09T12:00:00" xsi:type="vg:Registry">
+   <title>ESAVO Registry Resource</title>
+   <shortName>ESAVO Registry</shortName>
+   <identifier>ivo://test/registry</identifier>
+   <curation>
+      <publisher>European Space Agency</publisher>
+      <creator>
+         <name>European Space Agency</name>
+         <logo>http://esavo.esac.esa.int/img/logo.gif</logo>
+      </creator>
+      <contributor>ESAC ESAVO</contributor>
+      <contact>
+         <name>European Space Agency</name>
+         <email>esavo.registry@sciops.esa.int</email>
+      </contact>
+   </curation>
+   <content>
+      <subject>Registry</subject>
+      <description>ESAVO Registry Resource</description>
+      <referenceURL>http://registry.euro-vo.org/</referenceURL>
+      <type>Registry</type>
+      <contentLevel>General</contentLevel>
+   </content>
+   <rights>public</rights>
+   <capability standardID="ivo://ivoa.net/std/Registry"
+      xsi:type="vg:Harvest"
+   >
+      <interface role="std" version="1.0" xsi:type="vg:OAIHTTP">
+         <accessURL use="base">http://registry.euro-vo.org/oai.jsp</accessURL>
+      </interface>
+      <interface role="std" version="1.0" xsi:type="vg:OAISOAP">
+         <accessURL use="full">http://registry.euro-vo.org/services/RegistryHarvest</accessURL>
+      </interface>
+      <maxRecords>100</maxRecords>
+   </capability>
+   <capability standardID="ivo://ivoa.net/std/Registry"
+      xsi:type="vg:Search"
+   >
+      <interface role="gui" version="1.0" xsi:type="vr:WebBrowser">
+         <accessURL use="full">http://registry.euro-vo.org/search.jsp</accessURL>
+      </interface>
+      <interface role="std" version="1.0" xsi:type="vr:WebService">
+         <accessURL use="full">http://registry.euro-vo.org/services/RegistrySearch</accessURL>
+      </interface>
+      <maxRecords>100</maxRecords>
+      <extensionSearchSupport>core</extensionSearchSupport>
+   </capability>
+   <full>true</full>
+   <managedAuthority>esavo</managedAuthority>
+   <managedAuthority>vo.sim</managedAuthority>
+   <managedAuthority>svo.ifca</managedAuthority>
+   <managedAuthority>Leden</managedAuthority>
+   <managedAuthority>xcatdb</managedAuthority>
+</ri:Resource>
+</ri:VOResources>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: application.xml,v 1.2 2011-09-13 13:43:30 pah Exp $ -->
+<!--SampleApplication definitions - please note that none of these are exaustively complete - in particular the
+ standard VOResource parts of the metadata should be better for a published registry entry, but they are intended to illustrate various feature of the VOApplication schema-->
+<!-- Aladin - a classic VO desktop application! -->
+<ri:VOResources xmlns:ri="http://www.ivoa.net/xml/RegistryInterface/v1.0"
+   xmlns:app="http://www.ivoa.net/xml/VOApplication/v1.0rc1"
+   xmlns:vr="http://www.ivoa.net/xml/VOResource/v1.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.ivoa.net/xml/RegistryInterface/v1.0 http://www.ivoa.net/xml/RegistryInterface/v1.0
+                       http://www.ivoa.net/xml/VOResource/v1.0 http://www.ivoa.net/xml/VOResource/v1.0
+                       http://www.ivoa.net/xml/VOApplication/v1.0rc1 file:///Users/pharriso/Work/ag/src/contracts/src/schema/vo-resource-types/VOApplication/v1.0rc1/VOApplication.xsd"
+                        from="1" more="false" numberReturned="4">
+   <ri:Resource updated="2006-08-13T00:00:00"
+      created="2006-08-13T00:00:00" status="active"
+      xsi:type="app:DesktopApplication">
+      <title>The Aladin Sky Atlas</title>
+      <shortName>Aladin</shortName>
+      <identifier>ivo://cds.fr/applications/aladin</identifier>
+      <curation>
+         <publisher ivo-id="ivo://xxx/x/x">String</publisher>
+         <creator>
+            <name ivo-id="ivo://xxx/x/x">Centre des Données Astronomiques de Strasbourg</name>
+            <logo>http://cdsweb.u-strasbg.fr/Icons/cds_icon.gif</logo>
+         </creator>
+         <date role="representative">1967-08-13</date>
+         <version>String</version>
+         <contact>
+            <name ivo-id="ivo://xxx/x/x">Pierre Fernique</name>
+            <address>String</address>
+            <email>String</email>
+            <telephone>String</telephone>
+         </contact>
+      </curation>
+      <content>
+         <subject>String</subject>
+         <description>Aladin is an interactive software sky atlas allowing the user to visualize digitized images of any part of the sky, to superimpose entries from astronomical catalogs or personal user data files, and to interactively access related data and information from the SIMBAD, NED, VizieR, or other archives for all known objects in the field. Aladin is particularly useful for multi-spectral cross-identifications of astronomical sources, observation preparation and quality control of new data sets.</description>
+        <!-- this is a reference to a description -->
+         <referenceURL>http://aladin.u-strasbg.fr/</referenceURL>
+         <type>Other</type>
+         <contentLevel>General</contentLevel>
+       </content>
+      <!-- some example data formats that Aladin supports - not an exhaustive list -->
+      <dataFormat standardID="ivo://net.ivoa.application/formats#FITS"
+         direction="both" />
+      <dataFormat
+         standardID="ivo://net.ivoa.application/formats#VOtable"
+         direction="both" />
+      <!-- standard that aladin supports - note that the ivo ID not finalized yet. -->
+      <voStandard standardID="ivo://ivoa.net/SIA" />
+      <sourceLanguage>
+         ivo://net.ivoa.application/language#Java
+      </sourceLanguage>
+      <!-- note that aladin can be started via webstart -->
+      <executable>
+         <platform>
+            ivo://net.ivoa.application/platforms#JavaWebStart
+         </platform>
+         <download>
+            http://aladin.u-strasbg.fr/java/nph-aladin.pl?frame=get&amp;id=aladin.jnlp
+         </download>
+      </executable>
+      <!-- or downloaded directly-->
+      <executable>
+         <platform>ivo://net.ivoa.application/platforms#Java</platform>
+         <download>
+            http://aladin.u-strasbg.fr/java/nph-aladin.pl?frame=get&amp;id=Aladin.jar
+         </download>
+      </executable>
+      <!-- or even run as an applet -->
+      <executable>
+         <platform>
+            ivo://net.ivoa.application/platforms#JavaApplet
+         </platform>
+         <download>
+            http://aladin.u-strasbg.fr/java/nph-aladin.pl
+         </download>
+      </executable>
+   </ri:Resource>
+   <ri:Resource updated="1967-08-13T00:00:00"
+      created="1967-08-13T00:00:00" status="active"
+      xsi:type="app:DesktopApplication">
+      <title>The AstroGrid Workbench</title>
+      <shortName>Workbench</shortName>
+      <identifier>
+         ivo://org.astrogrid/applications/workbench
+      </identifier>
+      <curation>
+         <publisher ivo-id="ivo://xxx/x/x">String</publisher>
+         <creator>
+            <name ivo-id="ivo://xxx/x/x">String</name>
+            <logo>http://www.ivoa.net/pub/images/IVOA_wb_300.jpg</logo>
+         </creator>
+         <contributor ivo-id="ivo://xxx/x/x">String</contributor>
+         <date role="representative">1967-08-13</date>
+         <!--  -->
+         <version>1.3</version>
+         <contact>
+            <name>Noel Winstanley</name>
+            <address>Astrogrid</address>
+            <email>nw@jb.man.ac.uk</email>
+         </contact>
+      </curation>
+      <content>
+         <subject>Astrogrid Workbench</subject>
+         <description>
+            The Workbench is a graphical desktop application that
+            interacts with AstroGrid services. It provides a user
+            interface to Browse, read and write MySpace Launch
+            Parameterized Workflows Launch remote (CEA) applications
+            Monitor and control workflows and applications View registry
+            entries a simple programmer's interface for working with
+            AstroGrid services. This interface can be accessed from
+            scripts and other programs via HTTP, XMLRPC or JavaRMI
+         </description>
+         <source format="String">String</source>
+         <!-- this is a reference to a description -->
+         <referenceURL>
+            http://software.astrogrid.org/userdocs/workbench.html
+         </referenceURL>
+         <type>Other</type>
+         <contentLevel>General</contentLevel>
+         <relationship>
+            <relationshipType>mirror-of</relationshipType>
+            <relatedResource ivo-id="ivo://xxx/x/x">
+               String
+            </relatedResource>
+            <relatedResource ivo-id="ivo://xxx/x/x">
+               String
+            </relatedResource>
+         </relationship>
+      </content>
+      <licence>Academic Free</licence>
+      <openSource>true</openSource>
+      <sourceLanguage>
+         ivo://net.ivoa.application/language#Java
+      </sourceLanguage>
+      <executable>
+         <platform>
+            ivo://net.ivoa.application/platforms#JavaWebStart
+         </platform>
+         <minVersion>1.4</minVersion>
+         <download>
+            http://software.astrogrid.org/jnlp/astrogrid-desktop/astrogrid-desktop.jnlp
+         </download>
+      </executable>
+   </ri:Resource>
+   <!-- STIL - and example of a library -->
+   <ri:Resource updated="1967-08-13T00:00:00"
+      created="1967-08-13T00:00:00" status="active"
+      xsi:type="app:SoftwareLibrary">
+      <title>Starlink Tables Infrastructure Library</title>
+      <shortName>STIL</shortName>
+      <identifier>ivo://starlink.org/applications/stil</identifier>
+      <curation>
+         <publisher ivo-id="ivo://xxx/x/x">String</publisher>
+         <creator>
+            <name ivo-id="ivo://xxx/x/x">String</name>
+            <logo>http://www.ivoa.net/pub/images/IVOA_wb_300.jpg</logo>
+         </creator>
+         <contributor ivo-id="ivo://xxx/x/x">String</contributor>
+         <date role="representative">1967-08-13</date>
+         <!--  -->
+         <version>2.3-1</version>
+         <contact>
+            <name>Mark Taylor</name>
+            <address>Starlink</address>
+            <email>m.b.taylor@bristol.ac.uk</email>
+         </contact>
+      </curation>
+      <content>
+         <subject>
+            STIL - Starlink Tables Infrastructure Library
+         </subject>
+         <description>
+            STIL is a pure Java library for generic input, output and
+            processing of tabular data. It presents to the application
+            programmer a view of a table which looks the same regardless
+            of whether it came from a FITS file, a VOTable, an ASCII
+            text file, a query on a relational database, or whatever.
+            Thus the application doesn't have to worry about the storage
+            format of tables either when reading or writing them, it can
+            concentrate on doing processing. STIL's idea of a table is
+            rich enough to include table and column metadata, and table
+            cells which contain scalar or single- or multi-dimensional
+            array data of numerical, string or other types. This is well
+            suited to astronomical data, though it can be of use in
+            other fields as well.
+         </description>
+         <source format="String">String</source>
+         <!-- this is a reference to a description -->
+         <referenceURL>
+            http://www.star.bristol.ac.uk/~mbt/stil/
+         </referenceURL>
+         <type>Other</type>
+         <contentLevel>General</contentLevel>
+      </content>
+      <sourceLanguage>
+         ivo://net.ivoa.application/language#Java
+      </sourceLanguage>
+      <library>
+         <platform>ivo://net.ivoa.application/platforms#Java</platform>
+         <minVersion>1.4</minVersion>
+         <download>
+            http://www.star.bristol.ac.uk/~mbt/stil/stil.jar
+         </download>
+      </library>
+   </ri:Resource>
+   <!--  a classic unix desktop application -->
+   <ri:Resource xsi:type="app:DesktopApplication"
+      updated="1967-08-13T00:00:00" created="1967-08-13T00:00:00"
+      status="active">
+      <!-- note that this resource describes the sextractor application itself rather than any CEA wrapping of it.-->
+      <title>SExtractor</title>
+      <shortName>SExtractor</shortName>
+      <identifier>ivo://org.astrogrid/apps/SExtractor</identifier>
+      <curation>
+         <publisher>Astrogrid</publisher>
+         <creator>
+            <name>Terapix</name>
+            <logo>http://terapix.iap.fr/IMG/terapix.png</logo>
+         </creator>
+         <date role="representative">2004-03-26</date>
+         <version>2.5.0</version>
+         <contact>
+            <name>Paul Harrison</name>
+            <email>pah@jb.man.ac.uk</email>
+         </contact>
+      </curation>
+      <content>
+         <subject>???</subject>
+         <description>
+            SExtractor is a program that builds a catalogue of objects
+            from an astronomical image. Although it is particularly
+            oriented towards reduction of large scale galaxy-survey
+            data, it performs rather well on moderately crowded star
+            fields.
+         </description>
+         <referenceURL>
+            http://terapix.iap.fr/cplt/oldSite/soft/sextractor/
+         </referenceURL>
+         <type>Other</type>
+      </content>
+      <cost>free</cost>
+      <sourceLanguage>
+         ivo://net.ivoa.application/languages#C
+      </sourceLanguage>
+      <sourceCodeURL>
+         ftp://ftp.iap.fr/pub/from_users/bertin/sextractor/sextractor-2.5.0.tar.gz
+      </sourceCodeURL>
+      <executable>
+         <platform>ivo://net.ivoa.application/platforms#Unix</platform>
+         <architecture>x86</architecture>
+         <download>
+            ftp://ftp.iap.fr/pub/from_users/bertin/sextractor/sextractor-2.5.0-1.i686.rpm
+         </download>
+      </executable>
+   </ri:Resource>
+</ri:VOResources>
