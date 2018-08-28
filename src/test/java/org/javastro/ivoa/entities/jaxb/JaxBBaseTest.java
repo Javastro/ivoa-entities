@@ -35,6 +35,7 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
 import org.javastro.ivoa.entities.resource.Resource;
+import org.javastro.ivoa.entities.resource.dataservice.Tableset;
 import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
 import org.javastro.ivoa.schema.Namespaces;
 import org.javastro.ivoa.schema.SchemaMap;
@@ -90,6 +91,7 @@ public class JaxBBaseTest {
                 ,Namespaces.VS.getNamespace()
                 ,Namespaces.SIA.getNamespace()
                 ,Namespaces.VSTD.getNamespace()
+                ,Namespaces.VOSI_TAB.getNamespace()
         };
         
         for (String namespace : namespaces) {
@@ -165,6 +167,23 @@ public class JaxBBaseTest {
             return vr;
             
         }
+    
+    protected Tableset readVosiTableSet(String resource) throws JAXBException, IOException,
+    SAXException {
+         validator.validate(new StreamSource(getClass().getResourceAsStream(resource)));
+         ((AssertDefaultHandler)validator.getErrorHandler()).checkError();
+         Object ob = um.unmarshal(getClass().getResourceAsStream(resource));
+         Tableset vr =  ((Tableset)ob);
+         System.out.println(vr.getSchemas().size());
+    //
+    // 
+            m.marshal(new JAXBElement(new QName(
+                    "http://www.ivoa.net/xml/RegistryInterface/v1.0", "Tableset"),
+                    Tableset.class, vr), System.out);
+            return vr;
+            
+        }
+
 
     /** collapse the map into a space-separated string, suitable for passing to the parser */
     @SuppressWarnings("rawtypes")

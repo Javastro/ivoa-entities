@@ -6,11 +6,10 @@
    xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
    http://jaxb2-commons.dev.java.net/namespace-prefix ./prefix-namespace-schema.xsd"
 >
-    <jxb:globalBindings generateValueClass="false" generateElementProperty="false"> <!-- generateElementProperty=false means that nillable not supported - mainly for stc  -->
-           <xjc:simple />
+    <jxb:globalBindings generateValueClass="true" generateElementProperty="false"> <!-- generateElementProperty=false means that nillable not supported - mainly for stc  -->
   <!--         <xjc:treatRestrictionLikeNewType/>  treat restrictions like new class -->
+           <xjc:simple />
            
-           <xjc:typeSubstitution type="complex"/>
            <xjc:javaType name="java.time.LocalDateTime" xmlType="xs:dateTime"
                 adapter="org.javastro.ivoa.entities.jaxb.adapters.DateTimeXmlAdapter" />
                 
@@ -20,12 +19,19 @@
    <jxb:bindings schemaLocation="../target/dependency/schema/VOResource-v1.0.xsd"
    >
       <jxb:schemaBindings>
-         <jxb:package name="org.javastro.ivoa.entities.resource">
+         <jxb:package name="org.javastro.ivoa.entities.resource" >
             <jxb:javadoc><![CDATA[<body>Resource base classes</body>]]>
             </jxb:javadoc>
+            
          </jxb:package>
+  
       </jxb:schemaBindings>
+      <jxb:bindings  node="//xs:complexType[@name='Interface']">
+         <jxb:class name="ServiceInterface"></jxb:class>
+      </jxb:bindings>
+      
       <jxb:bindings>
+        
        <namespace:prefix name="vr" /> 
       </jxb:bindings>
    </jxb:bindings>
@@ -45,7 +51,7 @@
          </jxb:package>
        </jxb:schemaBindings>
        <jxb:bindings>
-                 <namespace:prefix name="vs" />           
+      <namespace:prefix name="vs" />           
        </jxb:bindings>
    </jxb:bindings>
 
@@ -177,7 +183,37 @@
 
    >
       <jxb:schemaBindings>
-         <jxb:package name="org.javastro.ivoa.entities.vosi">
+         <jxb:package name="org.javastro.ivoa.entities.vosi.availability">
+            <jxb:javadoc><![CDATA[<body>VOSI description classes</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+       </jxb:schemaBindings>
+              <jxb:bindings>
+     <namespace:prefix name="vosi" />
+      </jxb:bindings>
+       
+   </jxb:bindings>
+   
+     <jxb:bindings schemaLocation="../target/dependency/schema/VOSICapabilities-v1.0.xsd"
+
+   >
+      <jxb:schemaBindings>
+         <jxb:package name="org.javastro.ivoa.entities.vosi.capabilities">
+            <jxb:javadoc><![CDATA[<body>VOSI description classes</body>]]>
+            </jxb:javadoc>
+         </jxb:package>
+       </jxb:schemaBindings>
+              <jxb:bindings>
+     <namespace:prefix name="vosi" />
+      </jxb:bindings>
+       
+   </jxb:bindings>
+   
+       <jxb:bindings schemaLocation="../target/dependency/schema/VOSITables-v1.1.xsd"
+
+   >
+      <jxb:schemaBindings>
+         <jxb:package name="org.javastro.ivoa.entities.vosi.tables">
             <jxb:javadoc><![CDATA[<body>VOSI description classes</body>]]>
             </jxb:javadoc>
          </jxb:package>
@@ -232,7 +268,7 @@
       </jxb:bindings>
       
       <jxb:bindings  node="//xs:complexType[@name='Model']/xs:attribute[@name='version']">
-       <jxb:property name="documentVersion" ></jxb:property>
+       <jxb:property name="schemaVersion" ></jxb:property>
       </jxb:bindings>
    </jxb:bindings>
     

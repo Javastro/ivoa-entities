@@ -31,14 +31,15 @@ public class IvoaJAXBContextFactory {
 	  jc = JAXBContext.newInstance(
 //	          "org.javastro.ivoa.entities.regtap"
             
-	  		  "org.javastro.ivoa.entities.resource.impl"
-            + ":org.javastro.ivoa.entities.resource.dataservice.impl"
-            + ":org.javastro.ivoa.entities.resource.registry.impl"
-            + ":org.javastro.ivoa.entities.resource.registry.iface.impl"
-            + ":org.javastro.ivoa.entities.resource.applications.impl"
-            + ":org.javastro.ivoa.entities.resource.cone.impl"
-            + ":org.javastro.ivoa.entities.resource.sia.impl"
-            + ":org.javastro.ivoa.entities.resource.standard.impl"
+	  		  "org.javastro.ivoa.entities.resource"
+            + ":org.javastro.ivoa.entities.resource.dataservice"
+            + ":org.javastro.ivoa.entities.resource.registry"
+            + ":org.javastro.ivoa.entities.resource.registry.iface"
+            + ":org.javastro.ivoa.entities.resource.applications"
+            + ":org.javastro.ivoa.entities.resource.cone"
+            + ":org.javastro.ivoa.entities.resource.sia"
+            + ":org.javastro.ivoa.entities.resource.standard"
+            
 	  		);
 	return jc;
 

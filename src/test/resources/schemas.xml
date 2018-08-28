@@ -1,8 +1,0 @@
-<?xml version="1.0" ?>
-<locatingRules xmlns="http://thaiopensource.com/ns/locating-rules/1.0">
-   <uri
-      resource="file:/Users/pharriso/Work/volute/projects/registry/StandardsRegExt/samples/vospacestd.xml"
-      uri="file:/Users/pharriso/Work/volute/projects/registry/StandardsRegExt/StandardsRegExt-v1.0.xsd" />
-   <include
-      rules="file:/Users/pharriso/Library/jEdit/plugins/xml.XmlPlugin/schemas.xml" />
-</locatingRules>

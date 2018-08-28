@@ -20,6 +20,7 @@ import java.io.IOException;
 import javax.xml.bind.JAXBException;
 
 import org.javastro.ivoa.entities.resource.Resource;
+import org.javastro.ivoa.entities.resource.dataservice.Tableset;
 import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
 import org.junit.Test;
 import org.xml.sax.SAXException;
@@ -70,7 +71,22 @@ public class JaxBReadingTest extends JaxBBaseTest {
         assertEquals("identifier" , "ivo://ivoa.net/vospace/core", rs.getIdentifier());
     }
       
-   
+    @Test
+    public void testReadVOSITablesm() throws JAXBException, IOException, SAXException{
+        Tableset rs = readVosiTableSet("/vosi-tables-min.xml");
+        assertEquals("identifier" , "ivo://ivoa.net/vospace/core", rs);
+    }
+    @Test
+    public void testReadVOSITablesf() throws JAXBException, IOException, SAXException{
+        Tableset rs = readVosiTableSet("/vosi-tables-full.xml");
+        assertEquals("identifier" , "ivo://ivoa.net/vospace/core", rs);
+    }
+//    @Test
+//    public void testReadVOSITabless() throws JAXBException, IOException, SAXException{
+//        Resource rs = readVosiTable("/vosi-tables-single.xml");
+//        assertEquals("identifier" , "ivo://ivoa.net/vospace/core", rs.getIdentifier());
+//    }
+ 
 }
 
 

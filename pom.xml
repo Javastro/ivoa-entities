@@ -158,21 +158,55 @@
                         <arg>-Xxew</arg>
                         <arg>-Xxew:plural</arg>
                         <arg>-Xxew:control</arg>
-                        <arg>${basedir}/build/xew-control.txt</arg> - this possibly causes problems
+                        <arg>${basedir}/build/xew-control.txt</arg> <!-- this possibly causes problems --> 
+
                         <arg>-Xvalue-constructor</arg>
                         <arg>-XsimpleEquals</arg>
                         <arg>-XsimpleHashCode</arg>
                         <arg>-XtoString</arg>                        
-                        <arg>-Xvisitor</arg>
-                        <arg>-Xvisitor-package:org.javastro.ivoa.jaxb.visitor</arg>
-                        <arg>-Xvisitor-includeType</arg>
-                        <arg>-Xvisitor-noClasses</arg> <!--  the traverser class messes up with the Date Converter annotation  -->
-                        <arg>-Xcopyable</arg>
+<!--   massfords                      <arg>-Xvisitor</arg> -->
+<!--                         <arg>-Xvisitor-package:org.javastro.ivoa.jaxb.visitor</arg> -->
+<!--                         <arg>-Xvisitor-includeType</arg> -->
+<!--                         <arg>-Xvisitor-noClasses</arg>  the traverser class messes up with the Date Converter annotation  -->
+<!--                         <arg>-Xcopyable</arg> -->
                         <arg>-Xmergeable</arg>
                         <arg>-XenumValue</arg>
-                        <arg>-Xfluent-api</arg>
                         
                         <arg>-Xnamespace-prefix</arg>
+                        <!-- the -->
+                        <arg>-Xclone</arg>
+                            <arg>-cloneThrows=y</arg>
+                        <arg>-Xcopy</arg>
+                            <arg>-partial=y</arg>
+                            <arg>-generateTools=y</arg>
+                            <arg>-constructor=n</arg>
+                            <arg>-narrow=n</arg>
+                            <arg>-selectorClassName=Selector</arg>
+                            <arg>-rootSelectorClassName=Select</arg>
+                        <arg>-Xfluent-builder</arg>
+                            <arg>-rootSelectorClassName=Select</arg>
+                            <arg>-newBuilderMethodName=builder</arg>
+                            <arg>-newCopyBuilderMethodName=newCopyBuilder</arg>
+                            <arg>-copyToMethodName=copyTo</arg>
+                            <arg>-builderFieldSuffix=_Builder</arg>
+                            <arg>-generateTools=y</arg>
+                            <arg>-narrow=n</arg>
+                            <arg>-copyPartial=y</arg>
+                            <arg>-selectorClassName=Selector</arg>
+                            <arg>-builderClassName=Builder</arg>
+                            <arg>-builderInterfaceName=BuildSupport</arg>
+                            <arg>-copyAlways=n</arg>
+                            <arg>-buildMethodName=build</arg>
+                            <arg>-endMethodName=end</arg>
+                        <arg>-Xmeta</arg>
+                            <arg>-generateTools=y</arg>
+                            <arg>-extended=y</arg>
+                            <arg>-camelCase=n</arg>
+                            <arg>-metaClassName=PropInfo</arg>
+                            <arg>-allowSet=n</arg>
+                            <arg>-visitMethodName=visit</arg>
+                        
+                        
 <!--                         <arg>-Xjaxbindex</arg> this does not do nice stuff! -->
                      
                      </args>
@@ -184,14 +218,16 @@
                         <include>VOApplication-1.0.xsd</include>
                         <include>TAPRegExt-v1.0.xsd</include>
                         <include>VOSIAvailability-v1.0.xsd</include>
+                        <include>VOSICapabilities-v1.0.xsd</include>
+                        <include>VOSITables-v1.1.xsd</include>
                         <include>OAI-PMH.xsd</include>
                         <include>UWS-1.1.xsd</include>
                         <include>RegistryInterface-v1.0.xsd</include>
                         <include>VORegistry-v1.0.xsd</include>
-                        <include>vo-dml-v1.0.xsd</include>
                         <include>StandardsRegExt-1.0.xsd</include>
                         <include>SSA-v1.2.xsd</include>
                         <include>xlink.xsd</include>                       
+                        <include>vo-dml-v1.0.xsd</include>
                         <!-- <include>SLAP-v1.1.xsd</include> not in the autogenerate as enums cause conflicts with SSA -->
                         
                      </schemaIncludes>

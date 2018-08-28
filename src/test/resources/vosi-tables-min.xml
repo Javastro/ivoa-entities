@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vosi:tableset
+  xmlns:vosi="http://www.ivoa.net/xml/VOSITables/v1.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:vs="http://www.ivoa.net/xml/VODataService/v1.1"
+  xsi:schemaLocation="http://www.ivoa.net/xml/VOSITables/v1.0 http://www.ivoa.net/xml/VOSITables/VOSITables-v1.1.xsd
+                       http://www.ivoa.net/xml/RegistryInterface/v1.0 http://www.ivoa.net/xml/RegistryInterface/v1.0   
+                       http://www.ivoa.net/xml/VOResource/v1.0 http://www.ivoa.net/xml/VOResource/v1.0     
+                       http://www.ivoa.net/xml/VORegistry/v1.0 http://www.ivoa.net/xml/VORegistry/v1.0"
+  
+  version="1.1">
+
+  <schema>
+    <name>cfht</name>
+    <table type="output">
+      <name>cfht.deepU</name>
+    </table>
+  </schema>
+  
+  <schema>
+    <name>TAP_SCHEMA</name>
+    <table type="output">
+      <name>TAP_SCHEMA.tables</name>
+    </table>
+    <table type="output">
+      <name>TAP_SCHEMA.columns</name>
+    </table>
+    <table type="output">
+      <name>TAP_SCHEMA.keys</name>
+    </table>
+    <table type="output">
+      <name>TAP_SCHEMA.key_columns</name>
+    </table>
+  </schema>
+
+</vosi:tableset>
