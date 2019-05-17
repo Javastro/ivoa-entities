@@ -21,3 +21,9 @@ RegTAP
 
 There is additionally an model for RegTAP instances
 
+Security
+--------
+
+This code in this library is configured to use only local schema definitions as
+per the recommendations of https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.md
+

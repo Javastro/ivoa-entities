@@ -15,6 +15,8 @@ package org.javastro.ivoa.entities.jaxb;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.URL;
 
 import javax.xml.bind.JAXBContext;
@@ -25,6 +27,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.helpers.DefaultValidationEventHandler;
 import javax.xml.namespace.QName;
 import javax.xml.transform.Source;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -39,42 +42,16 @@ import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.w3c.dom.Document;
 import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.SAXException;
 
 public class JaxbTest {
 
-    private static JAXBContext jc;
-    private static Unmarshaller um;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        jc = IvoaJAXBContextFactory.newInstance();
-        System.out.println(jc.toString());
-        um = jc.createUnmarshaller();
-        System.out.println(jc.toString());
-        javax.xml.validation.SchemaFactory sf = SchemaFactory
-                .newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
-        LSResourceResolver resourceResolver = new LSResourceResolver() {
-
-            public LSInput resolveResource(String type, String namespaceURI,
-                    String publicId, String systemId, String baseURI) {
-                System.out.println("ns=" + namespaceURI + " base=" + baseURI);
-                LSInput retval = null;
-                return retval;
-            }
-
-        };
-        sf.setResourceResolver(resourceResolver);
-        URL url = SchemaMap.getSchemaURL(Namespaces.RI.getNamespace());
-        Source schemas = new StreamSource(url.openStream(), url
-                .toExternalForm());
-//        Schema schema = sf.newSchema(schemas);
-        Schema schema = sf.newSchema();//no arg constructor allows read from doc
-        um.setSchema(schema);
-        um.setEventHandler(new DefaultValidationEventHandler());
     }
 
     @Before
@@ -82,19 +59,16 @@ public class JaxbTest {
     }
 
     @Test
-    public void testReadXML() throws JAXBException, IOException, SAXException{
+    public void testReadXML() throws JAXBException, IOException, SAXException, TransformerException{
         // Unmarshall the file into a content object
-        um.setSchema(null);
-        VOResources vr =  (VOResources) um.unmarshal(getClass()
-                .getResourceAsStream("/VOResource.xml"));
+        VOResources vr =   IvoaJAXBUtils.unmarshall(new InputStreamReader(getClass()
+                .getResourceAsStream("/VOResource.xml")),VOResources.class, true);
         System.out.println(vr.getResources().get(0).getIdentifier());
 
-        Marshaller m = jc.createMarshaller();
-        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        Document doc = IvoaJAXBUtils.marshall(vr);
+        IvoaJAXBUtils.printXML(doc, new PrintWriter(System.out));
  
-        m.marshal(new JAXBElement<VOResources>(new QName(
-                Namespaces.RI.getNamespace(), "VOResources"),
-                VOResources.class, vr), System.out);
+       
         
     }
 //    @Test

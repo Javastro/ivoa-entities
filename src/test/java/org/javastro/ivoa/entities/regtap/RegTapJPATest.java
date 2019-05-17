@@ -32,6 +32,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
 import org.javastro.ivoa.entities.jaxb.IvoaJAXBContextFactory;
+import org.javastro.ivoa.entities.jaxb.IvoaJAXBUtils;
 import org.javastro.ivoa.entities.regtap.Capability;
 import org.javastro.ivoa.entities.regtap.Interface;
 import org.javastro.ivoa.entities.regtap.InterfacePK;
@@ -81,25 +82,8 @@ public class RegTapJPATest extends BaseTestPersistence {
         System.out.println(jc.toString());
         um = jc.createUnmarshaller();
         System.out.println(jc.toString());
-        javax.xml.validation.SchemaFactory sf = SchemaFactory
-                .newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
 
-        LSResourceResolver resourceResolver = new LSResourceResolver() {
-
-            public LSInput resolveResource(String type, String namespaceURI,
-                    String publicId, String systemId, String baseURI) {
-                System.out.println("ns=" + namespaceURI + " base=" + baseURI);
-                LSInput retval = null;
-                return retval;
-            }
-
-        };
-        sf.setResourceResolver(resourceResolver);
-        URL url = SchemaMap.getSchemaURL(Namespaces.RI.getNamespace());
-        Source schemas = new StreamSource(url.openStream(), url
-                .toExternalForm());
-//        Schema schema = sf.newSchema(schemas);
-        Schema schema = sf.newSchema();//no arg constructor allows read from doc
+        Schema schema = IvoaJAXBUtils.findSchema(Namespaces.RI.getNamespace());
         um.setSchema(schema);
         um.setEventHandler(new DefaultValidationEventHandler());
 

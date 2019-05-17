@@ -123,13 +123,14 @@
             <accessURL use="full">http://silly.url/dir/this.html</accessURL>
             <accessURL use="dir">http://silly.url/dir/</accessURL>
             <securityMethod standardID="ivo://ivoa.net/SSL" />
-            <securityMethod standardID="ivo://ivoa.net/OPENID" />
+            <!-- I think that multiple security methods might be back in -->
+<!--             <securityMethod standardID="ivo://ivoa.net/OPENID" /> -->
          </interface>
          <interface version="1.0" role="std" xsi:type="vr:WebBrowser">
             <accessURL use="full">http://silly.url/dir/this.html</accessURL>
             <accessURL use="dir">http://silly.url/dir/</accessURL>
             <securityMethod standardID="ivo://ivoa.net/SSL" />
-            <securityMethod standardID="ivo://ivoa.net/OPENID" />
+<!--             <securityMethod standardID="ivo://ivoa.net/OPENID" /> -->
          </interface>
       </capability>
       
