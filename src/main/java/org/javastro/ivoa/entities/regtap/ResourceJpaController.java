@@ -35,19 +35,20 @@ import org.javastro.ivoa.entities.regtap.exceptions.PreexistingEntityException;
 @XmlTransient
 public class ResourceJpaController implements Serializable {
 
+
     public ResourceJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
-    public EntityManager getEntityManager() {
+    public EntityManager createEntityManager() {
         return emf.createEntityManager();
     }
 
     public void create(Resource resource) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
-            em = getEntityManager();
+            em = createEntityManager();
             em.getTransaction().begin();
             em.persist(resource); // just rely on the cascade semantics to do the related elements
             em.getTransaction().commit();
@@ -66,7 +67,7 @@ public class ResourceJpaController implements Serializable {
     public void edit(Resource resource) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
-            em = getEntityManager();
+            em = createEntityManager();
             em.getTransaction().begin();
             Resource persistentResource = em.find(Resource.class, resource.getIvoid());
             persistentResource.getIvoid();
@@ -176,7 +177,7 @@ public class ResourceJpaController implements Serializable {
     public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
-            em = getEntityManager();
+            em = createEntityManager();
             em.getTransaction().begin();
             Resource resource;
             try {
@@ -203,7 +204,7 @@ public class ResourceJpaController implements Serializable {
     }
 
     private List<Resource> findResourceEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
+        EntityManager em = createEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Resource.class));
@@ -219,7 +220,7 @@ public class ResourceJpaController implements Serializable {
     }
 
     public Resource findResource(String id) {
-        EntityManager em = getEntityManager();
+        EntityManager em = createEntityManager();
         try {
             return em.find(Resource.class, id);
         } finally {
@@ -228,7 +229,7 @@ public class ResourceJpaController implements Serializable {
     }
 
     public int getResourceCount() {
-        EntityManager em = getEntityManager();
+        EntityManager em = createEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Resource> rt = cq.from(Resource.class);

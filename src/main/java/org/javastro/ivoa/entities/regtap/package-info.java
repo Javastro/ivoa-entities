@@ -2,7 +2,7 @@
  * $Id$
  */
 /**
- * JPA objects for RegTap .
+ * JPA/JAXB objects for RegTap .
  * @author Paul Harrison (paul.harrison@manchester.ac.uk) 17 Jan 2013
  * @version $Revision$ $date$
  */

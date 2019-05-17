@@ -49,6 +49,8 @@ import org.javastro.ivoa.schema.SchemaMap;
 import org.javastro.ivoa.entities.resource.Resource;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 
@@ -62,7 +64,7 @@ import org.xml.sax.SAXException;
  */
 public class IvoaJAXBUtils {
 
-//    public static Transformer regStylesheet;
+//    public static Transformer regStylesheet
     public static Transformer identityTransformer;
    /** logger for this class */
 private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory
@@ -263,5 +265,25 @@ private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory
             e.printStackTrace();
         }
     }
+    
+       static class IVOAEntityResolver implements EntityResolver{
+
+        /* (non-Javadoc)
+         * @see org.xml.sax.EntityResolver#resolveEntity(java.lang.String, java.lang.String)
+         */
+        @Override
+        public InputSource resolveEntity(String publicId, String systemId)
+                throws SAXException, IOException {
+            System.err.println("entity resolver "+publicId+" "+systemId);
+            URL schemaURL;
+            if( (schemaURL = SchemaMap.getSchemaURL(systemId)) == null) {
+                schemaURL = new URL(systemId); // hope that systemID is a valid URL if not a namespace
+            }
+            return new InputSource(schemaURL.openStream());
+        }
+        
+    }
+
+
 
 }

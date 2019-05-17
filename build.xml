@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+ This was used for manual generation  - the maven build is taking precedence now
+ 
+     pharriso                                                                
+     ====================================================================== 
+     note the use of maven ant tasks to get the dependencies-->
+<project name="ivoa-objects" default="xjcgen" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+	<description>create jaxb objects from schema</description>
+
+	<!-- ================================= 
+          target: xjcgen              
+         ================================= -->
+	<target name="xjcgen" description="create jaxb objects from schema" depends="getschema">
+		<xjc destdir="src/generated" header="false">
+			
+			<schema dir="target/schema/schema/" includes="">
+				<include name="VOResource-v1.1.xsd" />
+				<include name="VODataService-v1.1.xsd" />
+				<include name="ConeSearch-v1.0.xsd" />
+				<include name="SIA-v1.0.xsd" />
+				<include name="VOApplication-1.0.xsd" />
+				<include name="VOStandard-1.0.xsd" />
+				<include name="TAPRegExt-v1.0.xsd" />
+				<include name="VOSIAvailability-v1.0.xsd" />
+				<include name="OAI-PMH.xsd" />
+				<include name="UWS-1.1.xsd" />
+				<include name="RegistryInterface-v1.0.xsd" />
+				<include name="VORegistry-v1.0.xsd" />
+			</schema>
+			<binding dir="build/">
+				<include name="xjb-binding.xml" />
+			</binding>
+			<classpath refid="dependency.plugins" />
+			<arg value="-extension" />
+			<!--				<arg value="-Xlocator" />
+	   	<arg value="-nv" /> -->
+			<arg value="-enableIntrospection"/>
+			<arg value="-verbose" />
+			<arg value="-Xvisitor" />
+			<arg value="-Xvisitor-package:net.ivoa.jaxb.visitor" />
+			<arg value="-Xfluent-api" />
+			<arg value="-Xvalue-constructor" />
+<!--			<arg value="-Xnamespace-prefix" /> does not seem to work because of schema validatation any longer -->
+		</xjc>
+	</target>
+
+	<target name="getschema" description="extract the schema from jar">
+		<unzip dest="target/schema">
+			<fileset file="${org.javastro:ivoa-schema:jar}" />
+		</unzip>
+	</target>
+
+	<target name="regtapschemagen" description="create schema from regtap sources">
+		<schemagen srcdir="src/main/java/" destdir="src/main/resources/schema">
+			
+			<schema namespace="http://www.ivoa.net/xml/RegTAP/v1.0" file="regtap-v1.0.xsd"/>
+			<include name="org/javastro/ivoa/entities/regtap/*.java" />
+		</schemagen>
+		<classpath refid="dependency.classpath" />
+	</target>
+	
+	
+	<!-- ================================= 
+          target: transformToRegTap              
+         ================================= -->
+    <target name="transformToRegTap"  description="transforms instance to regtap">
+    	       <xslt in="${source.xml}"
+    	       out="${out.dir}/${output.xml}"
+    	       style="${basedir}/${stylesheet.xsl}"
+    	       processor="trax">
+    	       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    	       <classpath refid="saxon-classpath" />
+    	 </xslt>          
+    </target>
+
+	<artifact:dependencies pathId="saxon-classpath">
+		<dependency groupId="net.sf.saxon" artifactId="Saxon-HE" version="9.9.1-2" />
+   </artifact:dependencies>
+
+	<artifact:dependencies pathId="dependency.classpath">
+		<dependency groupId="junit" artifactId="junit" version="4.8.2" scope="test" />
+		<dependency groupId="javax.servlet" artifactId="servlet-api" version="2.4" scope="provided" />
+		<!--   <dependency groupId="" artifactId="" version=""/> -->
+		<!--   <dependency groupId="" artifactId="" version=""/> -->
+
+		<dependency groupId="javax.xml.bind" artifactId="jaxb-api" version="2.2.3" scope="provided" />
+		<dependency groupId="com.sun.xml.bind" artifactId="jaxb-impl" version="2.2.11" />
+		<dependency groupId="com.sun.xml.bind" artifactId="jaxb-xjc" version="2.2.11" />
+		<dependency groupId="com.sun.xml.bind" artifactId="jaxb-jxc" version="2.2.11" />
+		<dependency groupId="com.sun.xml.bind" artifactId="jaxb-core" version="2.2.11" />
+
+
+	</artifact:dependencies>
+
+	<artifact:dependencies pathId="dependency.plugins">
+		<dependency groupId="com.massfords" artifactId="jaxb-visitor" version="2.3">
+			<exclusion groupId="com.sun.xml.bind" artifactId="jaxb-impl" />
+			<exclusion groupId="com.sun.xml.bind" artifactId="jaxb-xjc" />
+		</dependency>
+		<dependency groupId="org.jvnet.jaxb2_commons" artifactId="jaxb2-basics" version="0.9.4">
+			<exclusion groupId="com.sun.xml.bind" artifactId="jaxb-impl" />
+			<exclusion groupId="com.sun.xml.bind" artifactId="jaxb-xjc" />
+		</dependency>
+		<dependency groupId="org.jvnet.jaxb2_commons" artifactId="jaxb2-fluent-api" version="3.0">
+			<exclusion groupId="com.sun.xml.bind" artifactId="jaxb-impl" />
+			<exclusion groupId="com.sun.xml.bind" artifactId="jaxb-xjc" />
+
+		</dependency>
+		<dependency groupId="org.jvnet.jaxb2_commons" artifactId="jaxb2-value-constructor" version="3.0">
+			<exclusion groupId="com.sun.xml.bind" artifactId="jaxb-impl" />
+			<exclusion groupId="com.sun.xml.bind" artifactId="jaxb-xjc" />
+
+		</dependency>
+		<dependency groupId="org.jvnet.jaxb2_commons" artifactId="jaxb2-namespace-prefix" version="1.1" />
+
+	</artifact:dependencies>
+
+	<artifact:dependencies filesetId="dependency.schema">
+		<dependency groupId="org.javastro" artifactId="ivoa-schema" version="1.0-SNAPSHOT" />
+
+	</artifact:dependencies>
+
+	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+		<classpath refid="dependency.classpath" />
+	</taskdef>
+
+	<taskdef name="schemagen" classname="com.sun.tools.jxc.SchemaGenTask">
+		<classpath refid="dependency.classpath" />
+	</taskdef>
+
+</project>

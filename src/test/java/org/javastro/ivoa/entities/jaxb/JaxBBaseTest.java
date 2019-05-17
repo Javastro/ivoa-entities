@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -35,8 +36,8 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
 import org.javastro.ivoa.entities.resource.Resource;
-import org.javastro.ivoa.entities.resource.dataservice.Tableset;
 import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
+import org.javastro.ivoa.entities.vosi.tables.Tableset;
 import org.javastro.ivoa.schema.Namespaces;
 import org.javastro.ivoa.schema.SchemaMap;
 import org.junit.Before;
@@ -121,6 +122,8 @@ public class JaxBBaseTest {
         AssertDefaultHandler handler = new AssertDefaultHandler();
         validator = schema.newValidator();
         validator.setErrorHandler(handler);
+        validator.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        validator.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
         
         reader = saxParser.getXMLReader();
        

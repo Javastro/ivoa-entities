@@ -11,7 +11,7 @@
    <parent>
       <artifactId>javastro-suite</artifactId>
       <groupId>org.javastro</groupId>
-      <version>0.1</version>
+      <version>0.2</version>
       <relativePath>../mavenbase/</relativePath>
    </parent>
    <packaging>jar</packaging>
@@ -77,11 +77,16 @@
       <dependency>
          <groupId>net.sf.saxon</groupId>
          <artifactId>Saxon-HE</artifactId>
-         <version>9.5.1-8</version>
+         <version>9.9.1-2</version>
       </dependency>
       <dependency>
          <groupId>org.jvnet.jaxb2_commons</groupId>
          <artifactId>jaxb2-basics-runtime</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.derby</groupId>
+         <artifactId>derby</artifactId>
+         <scope>test</scope>
       </dependency>
    </dependencies>
    <build>
@@ -131,6 +136,7 @@
                <extension>true</extension>
                <forceRegenerate>false</forceRegenerate>
                <episode>true</episode>
+               <locator>true</locator>
                <specVersion>2.2</specVersion>
                <target>2.2</target>
                <bindingDirectory>${basedir}/build</bindingDirectory>
@@ -140,9 +146,8 @@
                <markGenerated>true</markGenerated>
                <noFileHeader>true</noFileHeader>
                
-               
                <vmArgs>
-                  <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
+                  <vmArg>-Djavax.xml.accessExternalSchema=file</vmArg>
                </vmArgs>
             </configuration>
             <executions>
@@ -159,6 +164,9 @@
                         <arg>-Xxew:plural</arg>
                         <arg>-Xxew:control</arg>
                         <arg>${basedir}/build/xew-control.txt</arg> <!-- this possibly causes problems --> 
+                        <arg>-Xxew:summary</arg>
+                        <arg>xewmanipulations.log</arg>
+   
 
                         <arg>-Xvalue-constructor</arg>
                         <arg>-XsimpleEquals</arg>
@@ -173,7 +181,7 @@
                         <arg>-XenumValue</arg>
                         
                         <arg>-Xnamespace-prefix</arg>
-                        <!-- the -->
+ 
                         <arg>-Xclone</arg>
                             <arg>-cloneThrows=y</arg>
                         <arg>-Xcopy</arg>
@@ -205,13 +213,14 @@
                             <arg>-metaClassName=PropInfo</arg>
                             <arg>-allowSet=n</arg>
                             <arg>-visitMethodName=visit</arg>
+                            
                         
                         
 <!--                         <arg>-Xjaxbindex</arg> this does not do nice stuff! -->
                      
                      </args>
                      <schemaIncludes>
-                        <include>VOResource-v1.0.xsd</include>
+                        <include>VOResource-v1.1.xsd</include>
                         <include>VODataService-v1.1.xsd</include>
                         <include>ConeSearch-v1.0.xsd</include>
                         <include>SIA-v1.1.xsd</include>
@@ -228,6 +237,7 @@
                         <include>SSA-v1.2.xsd</include>
                         <include>xlink.xsd</include>                       
                         <include>vo-dml-v1.0.xsd</include>
+                        <include>stc-v1.30.xsd</include>
                         <!-- <include>SLAP-v1.1.xsd</include> not in the autogenerate as enums cause conflicts with SSA -->
                         
                      </schemaIncludes>
@@ -237,6 +247,8 @@
                   </configuration>
                </execution>
             </executions>
+            <dependencies>
+            </dependencies>
          </plugin>
          <plugin>
             <groupId>de.empulse.eclipselink</groupId>

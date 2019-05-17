@@ -20,8 +20,8 @@ import java.io.IOException;
 import javax.xml.bind.JAXBException;
 
 import org.javastro.ivoa.entities.resource.Resource;
-import org.javastro.ivoa.entities.resource.dataservice.Tableset;
 import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
+import org.javastro.ivoa.entities.vosi.tables.Tableset;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
@@ -74,12 +74,17 @@ public class JaxBReadingTest extends JaxBBaseTest {
     @Test
     public void testReadVOSITablesm() throws JAXBException, IOException, SAXException{
         Tableset rs = readVosiTableSet("/vosi-tables-min.xml");
-        assertEquals("identifier" , "ivo://ivoa.net/vospace/core", rs);
+        assertEquals("number of tables in second schema" , 4, rs.getSchemas().get(1).getTables().size());
     }
     @Test
     public void testReadVOSITablesf() throws JAXBException, IOException, SAXException{
         Tableset rs = readVosiTableSet("/vosi-tables-full.xml");
-        assertEquals("identifier" , "ivo://ivoa.net/vospace/core", rs);
+        assertEquals("number of tables in first schema" , 2, rs.getSchemas().get(0).getTables().size());
+    }
+    @Test
+    public void testReadVOSITablesRegRap() throws JAXBException, IOException, SAXException{
+        Tableset rs = readVosiTableSet("/vosi-tables-regtap.xml");
+        assertEquals("number of tables in regtap schema" , 20, rs.getSchemas().get(0).getTables().size());
     }
 //    @Test
 //    public void testReadVOSITabless() throws JAXBException, IOException, SAXException{

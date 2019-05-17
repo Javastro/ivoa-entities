@@ -10,7 +10,7 @@
  *
  */ 
 
-package org.javastro.ivoa.entities.jaxb;
+package org.javastro.ivoa.entities.regtap;
 
 import static org.junit.Assert.*; 
 
@@ -61,14 +61,13 @@ import org.w3c.dom.ls.LSResourceResolver;
  * @author Paul Harrison (paul.harrison@manchester.ac.uk) 22 Jan 2013
  * @version $Revision$ $date$
  */
-public class RegTapJPATest {
+public class RegTapJPATest extends BaseTestPersistence {
 
     /** IVOID.
      */
     private static final String IVOID = "ivo://test.org/testresource";
     private static JAXBContext jc;
     private static Unmarshaller um;
-    protected static EntityManagerFactory  emf;
     private org.javastro.ivoa.entities.regtap.Resource vr;
     private static ResourceJpaController rjc;
 
@@ -77,7 +76,7 @@ public class RegTapJPATest {
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        emf = Persistence.createEntityManagerFactory("net.ivoa.regtap_pu");
+        
         jc = IvoaJAXBContextFactory.newInstance();
         System.out.println(jc.toString());
         um = jc.createUnmarshaller();
@@ -119,6 +118,8 @@ public class RegTapJPATest {
     public void tearDown() throws Exception {
         rjc.destroy(IVOID);
     }
+    
+    
     @Test
     public void createtest() throws PreexistingEntityException, Exception {
         vr = new org.javastro.ivoa.entities.regtap.Resource();

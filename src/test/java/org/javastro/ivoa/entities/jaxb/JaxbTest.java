@@ -112,13 +112,3 @@ public class JaxbTest {
 //    }
 }
 
-
-/*
- * $Log: not supported by cvs2svn $
- * Revision 1.2  2011/09/13 13:43:32  pah
- * result of merge of branch ivoa_pah_2931
- *
- * Revision 1.1.2.1  2011/06/09 22:18:52  pah
- * basic VOResource schema nearly done - but not got save/recall working
- *
- */

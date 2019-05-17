@@ -3,12 +3,14 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
    xmlns:namespace="http://jaxb2-commons.dev.java.net/namespace-prefix"   
+   xmlns:orm="http://java.sun.com/xml/ns/persistence/orm"
    xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
    http://jaxb2-commons.dev.java.net/namespace-prefix ./prefix-namespace-schema.xsd"
 >
-    <jxb:globalBindings generateValueClass="true" generateElementProperty="false"> <!-- generateElementProperty=false means that nillable not supported - mainly for stc  -->
+    <jxb:globalBindings generateValueClass="true" generateElementProperty="false" 
+    fixedAttributeAsConstantProperty="true" mapSimpleTypeDef="false" generateMixedExtensions="true"> <!-- generateElementProperty=false means that nillable not supported - mainly for stc  -->
   <!--         <xjc:treatRestrictionLikeNewType/>  treat restrictions like new class -->
-           <xjc:simple />
+           <xjc:simple/>
            
            <xjc:javaType name="java.time.LocalDateTime" xmlType="xs:dateTime"
                 adapter="org.javastro.ivoa.entities.jaxb.adapters.DateTimeXmlAdapter" />
@@ -16,7 +18,7 @@
            
     </jxb:globalBindings>
     
-   <jxb:bindings schemaLocation="../target/dependency/schema/VOResource-v1.0.xsd"
+   <jxb:bindings schemaLocation="../target/dependency/schema/VOResource-v1.1.xsd"
    >
       <jxb:schemaBindings>
          <jxb:package name="org.javastro.ivoa.entities.resource" >
@@ -29,6 +31,7 @@
       <jxb:bindings  node="//xs:complexType[@name='Interface']">
          <jxb:class name="ServiceInterface"></jxb:class>
       </jxb:bindings>
+     
       
       <jxb:bindings>
         
@@ -68,7 +71,7 @@
     
  <jxb:bindings schemaLocation="../target/dependency/schema/stc-v1.30.xsd"
    >
-      <jxb:schemaBindings>
+      <jxb:schemaBindings >
          <jxb:package
             name="org.javastro.ivoa.entities.stc.v1">
             <jxb:javadoc><![CDATA[<body>STC v1 XML objects</body>]]>
@@ -204,12 +207,12 @@
          </jxb:package>
        </jxb:schemaBindings>
               <jxb:bindings>
-     <namespace:prefix name="vosi" />
+     <namespace:prefix name="vca" />
       </jxb:bindings>
        
    </jxb:bindings>
    
-       <jxb:bindings schemaLocation="../target/dependency/schema/VOSITables-v1.1.xsd"
+       <jxb:bindings schemaLocation="../target/dependency/schema/VOSITables-v1.1.xsd" node="/xs:schema"
 
    >
       <jxb:schemaBindings>
@@ -218,9 +221,17 @@
             </jxb:javadoc>
          </jxb:package>
        </jxb:schemaBindings>
-              <jxb:bindings>
-     <namespace:prefix name="vosi" />
+      <jxb:bindings>
+          <namespace:prefix name="vtm" />
       </jxb:bindings>
+      <!-- force the generation of the classes for these elements in different namespace - might affect how they are marshalled - i.e. without xsi:type  -->    
+    <jxb:bindings node="//xs:element[@name = 'tableset']">
+        <jxb:class name="Tableset" />
+    </jxb:bindings>
+    <jxb:bindings node="//xs:element[@name = 'table']">
+        <jxb:class name="Table" />
+    </jxb:bindings>
+          
        
    </jxb:bindings>
    
