@@ -1,3 +1,4 @@
+RegTAP
 Resource
 Capability
 CapabilityPK
@@ -7,7 +8,6 @@ Interface
 InterfacePK
 IntfParam
 IntfParamPK
-ObjectFactory
 PKIndexList
 Relationship
 RelationshipPK
@@ -25,3 +25,5 @@ TableColumn
 TableColumnPK
 Validation
 ValidationPK
+AltIdentifier
+AltIdentifierPK

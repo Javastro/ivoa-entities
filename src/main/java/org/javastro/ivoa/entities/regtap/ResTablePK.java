@@ -35,7 +35,7 @@ public class ResTablePK implements Serializable {
      */
     private static final long serialVersionUID = 2157877338889390524L;
     @Basic(optional = false)
-    @Column(nullable = false, length = 256)
+    @Column(name="ivoid",nullable = false, length = 256)
     private String ivoid;
     @Basic(optional = false)
     @Column(name = "schema_index", nullable = false)

@@ -86,8 +86,15 @@ public class ResourceJpaController implements Serializable {
                     em.persist(subjectListNewSubjectToAttach);
                 }
             }
-            for (ResDetail resDetailListNewResDetailToAttach : resource.getResDetailList()) {
-                if (em.find(resDetailListNewResDetailToAttach.getClass(), resDetailListNewResDetailToAttach.getResDetailPK())
+            for (AltIdentifier newAltIDToAttach : resource.getAltIdentifier()) {
+                if (em.find(newAltIDToAttach.getClass(), newAltIDToAttach.getAltidPK())
+                        == null)
+                {
+                    em.persist(newAltIDToAttach);
+                }
+            }
+           for (ResDetail resDetailListNewResDetailToAttach : resource.getResDetailList()) {
+                if (em.find(resDetailListNewResDetailToAttach.getClass(), resDetailListNewResDetailToAttach.getIvoid())
                         == null)
                 {
                     em.persist(resDetailListNewResDetailToAttach);

@@ -12,7 +12,10 @@
 
 package org.javastro.ivoa.entities.jaxb;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -175,7 +178,9 @@ public class JaxBBaseTest {
     SAXException {
          validator.validate(new StreamSource(getClass().getResourceAsStream(resource)));
          ((AssertDefaultHandler)validator.getErrorHandler()).checkError();
-         Object ob = um.unmarshal(getClass().getResourceAsStream(resource));
+         final InputStream res = getClass().getResourceAsStream(resource);
+         assertNotNull("resource not found "+resource, res);
+        Object ob = um.unmarshal(res);
          Tableset vr =  ((Tableset)ob);
          System.out.println(vr.getSchemas().size());
     //

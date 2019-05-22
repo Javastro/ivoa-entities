@@ -31,10 +31,10 @@ import javax.xml.bind.annotation.XmlType;
 @Embeddable
 public class SubjectPK implements Serializable {
     @Basic(optional = false)
-    @Column(nullable = false, length = 256)
+    @Column(name="ivoid", nullable = false, length = 256)
     private String ivoid;
     @Basic(optional = false)
-    @Column(nullable = false, length = 256)
+    @Column(name="subject",nullable = false, length = 256)
     private String subject;
 
     public SubjectPK() {

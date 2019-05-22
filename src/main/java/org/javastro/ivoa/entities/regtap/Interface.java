@@ -49,7 +49,7 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
 @NamedQueries({
     @NamedQuery(name = "Interface.findAll", query = "SELECT i FROM Interface i"),
     @NamedQuery(name = "Interface.findByIvoid", query = "SELECT i FROM Interface i WHERE i.interfacePK.ivoid = :ivoid"),
-    @NamedQuery(name = "Interface.findByCapIndex", query = "SELECT i FROM Interface i WHERE i.interfacePK.capIndex = :capIndex"),
+    @NamedQuery(name = "Interface.findByCapIndex", query = "SELECT i FROM Interface i WHERE i.capIndex = :capIndex"),
     @NamedQuery(name = "Interface.findByIntfIndex", query = "SELECT i FROM Interface i WHERE i.interfacePK.intfIndex = :intfIndex"),
     @NamedQuery(name = "Interface.findByIntfType", query = "SELECT i FROM Interface i WHERE i.intfType = :intfType"),
     @NamedQuery(name = "Interface.findByIntfRole", query = "SELECT i FROM Interface i WHERE i.intfRole = :intfRole"),
@@ -64,6 +64,10 @@ public class Interface implements Serializable,PKIndex {
     @EmbeddedId
     @XmlPath(".")
     protected InterfacePK interfacePK;
+    @Basic(optional = false)
+    @Column(name = "cap_index", nullable = false)
+    @XmlElement(name = "cap_index")
+    private short capIndex;
     @Column(name = "intf_type", length = 256)
     @XmlElement(name = "intf_type")
     private String intfType;
@@ -80,7 +84,7 @@ public class Interface implements Serializable,PKIndex {
     @XmlElement(name = "result_type")
     private String resultType;
     @Column(name = "wsdl_url", length = 256)
-    @XmlElement(name = "wsdl_url")
+    @XmlElement(name = "wsdlURL")
     private String wsdlUrl;
     @Basic(optional = false)
     @Column(name = "url_use", nullable = false, length = 256)
@@ -90,8 +94,20 @@ public class Interface implements Serializable,PKIndex {
     @Column(name = "access_url", nullable = false, length = 256)
     @XmlElement(name = "access_url")
     private String accessUrl;
+ 
+    @Basic(optional = true)
+    @Column(name = "mirror_url", nullable = true, length = 256)
+    @XmlElement(name = "mirror_url")
+    private String mirrorUrl;
+    
+    @Basic(optional = false)
+    @Column(name = "authenticated_only", nullable = false)
+    @XmlElement(name = "authenticated_only")
+    private int authenticatedOnly;
+
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iface", targetEntity=IntfParam.class, fetch= FetchType.LAZY, orphanRemoval=true)
+    @XmlElement(name = "param")
     private List<IntfParam> intfParamList;
 
     @XmlTransient
@@ -114,7 +130,8 @@ public class Interface implements Serializable,PKIndex {
     }
 
     public Interface(String ivoid, short capIndex, short intfIndex) {
-        this.interfacePK = new InterfacePK(ivoid, capIndex, intfIndex);
+        this.interfacePK = new InterfacePK(ivoid, intfIndex);
+        this.capIndex = capIndex;
     }
 
     /**
@@ -125,7 +142,8 @@ public class Interface implements Serializable,PKIndex {
      * @param string2
      */
     public Interface(Resource vr, Capability cap, short s, String urlUse, String accessUrl) {
-        this(new InterfacePK(vr.getIvoid(), cap.getCapabilityPK().getCapIndex(), s),urlUse, accessUrl);
+        this(new InterfacePK(vr.getIvoid(),s),urlUse, accessUrl);
+        this.capIndex =  cap.getCapabilityPK().getCapIndex();
     }
 
     public InterfacePK getInterfacePK() {
@@ -219,8 +237,22 @@ public class Interface implements Serializable,PKIndex {
         {
             capability.getInterfaceList().addAndSetIndex(this);
         }
-        this.interfacePK.setCapIndex(capability.getIndex());
+        this.setCapIndex(capability.getIndex());
         this.interfacePK.setIvoid(capability.getCapabilityPK().getIvoid());
+    }
+
+    /**
+     * @return the capIndex
+     */
+    public short getCapIndex() {
+        return capIndex;
+    }
+
+    /**
+     * @param capIndex the capIndex to set
+     */
+    public void setCapIndex(short capIndex) {
+        this.capIndex = capIndex;
     }
 
     @Override

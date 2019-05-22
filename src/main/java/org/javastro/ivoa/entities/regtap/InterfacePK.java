@@ -32,12 +32,8 @@ import javax.xml.bind.annotation.XmlType;
 @Embeddable
 public class InterfacePK implements Serializable {
     @Basic(optional = false)
-    @Column(nullable = false, length = 256)
+    @Column(name="ivoid",nullable = false, length = 256)
     private String ivoid;
-    @Basic(optional = false)
-    @Column(name = "cap_index", nullable = false)
-    @XmlElement(name = "cap_index")
-    private short capIndex;
     @Basic(optional = false)
     @Column(name = "intf_index", nullable = false)
     @XmlElement(name = "intf_index")
@@ -46,9 +42,8 @@ public class InterfacePK implements Serializable {
     public InterfacePK() {
     }
 
-    public InterfacePK(String ivoid, short capIndex, short intfIndex) {
+    public InterfacePK(String ivoid, short intfIndex) {
         this.ivoid = ivoid;
-        this.capIndex = capIndex;
         this.intfIndex = intfIndex;
     }
 
@@ -60,14 +55,7 @@ public class InterfacePK implements Serializable {
         this.ivoid = ivoid;
     }
 
-    public short getCapIndex() {
-        return capIndex;
-    }
-
-    public void setCapIndex(short capIndex) {
-        this.capIndex = capIndex;
-    }
-
+ 
     public short getIntfIndex() {
         return intfIndex;
     }
@@ -80,7 +68,6 @@ public class InterfacePK implements Serializable {
     public int hashCode() {
         int hash = 0;
         hash += (ivoid != null ? ivoid.hashCode() : 0);
-        hash += (int) capIndex;
         hash += (int) intfIndex;
         return hash;
     }
@@ -95,9 +82,6 @@ public class InterfacePK implements Serializable {
         if ((this.ivoid == null && other.ivoid != null) || (this.ivoid != null && !this.ivoid.equals(other.ivoid))) {
             return false;
         }
-        if (this.capIndex != other.capIndex) {
-            return false;
-        }
         if (this.intfIndex != other.intfIndex) {
             return false;
         }
@@ -106,7 +90,7 @@ public class InterfacePK implements Serializable {
 
     @Override
     public String toString() {
-        return "net.ivoa.regtap.InterfacePK[ ivoid=" + ivoid + ", capIndex=" + capIndex + ", intfIndex=" + intfIndex + " ]";
+        return "net.ivoa.regtap.InterfacePK[ ivoid=" + ivoid + ",  intfIndex=" + intfIndex + " ]";
     }
 
 }

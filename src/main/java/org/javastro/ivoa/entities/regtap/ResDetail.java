@@ -19,6 +19,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -42,15 +43,23 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
     @NamedQuery(name = "ResDetail.findAll", query = "SELECT r FROM ResDetail r"),
-    @NamedQuery(name = "ResDetail.findByIvoid", query = "SELECT r FROM ResDetail r WHERE r.resDetailPK.ivoid = :ivoid"),
-    @NamedQuery(name = "ResDetail.findByCapIndex", query = "SELECT r FROM ResDetail r WHERE r.resDetailPK.capIndex = :capIndex"),
-    @NamedQuery(name = "ResDetail.findByDetailUtype", query = "SELECT r FROM ResDetail r WHERE r.resDetailPK.detailUtype = :detailUtype"),
+    @NamedQuery(name = "ResDetail.findByIvoid", query = "SELECT r FROM ResDetail r WHERE r.ivoid = :ivoid"),
+    @NamedQuery(name = "ResDetail.findByCapIndex", query = "SELECT r FROM ResDetail r WHERE r.capIndex = :capIndex"),
+    @NamedQuery(name = "ResDetail.findByDetailUtype", query = "SELECT r FROM ResDetail r WHERE r.detailUtype = :detailUtype"),
     @NamedQuery(name = "ResDetail.findByDetailValue", query = "SELECT r FROM ResDetail r WHERE r.detailValue = :detailValue")})
-public class ResDetail implements Serializable, PKIndex {
+public class ResDetail implements Serializable {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    @XmlPath(".")
-    protected ResDetailPK resDetailPK;
+    @Id
+    @Column(name="ivoid",nullable = false, length = 256)
+    private String ivoid;
+    @Basic(optional = true)
+    @Column(name = "cap_index", nullable = true)
+    @XmlElement(name = "cap_index", nillable = true)
+    private Short capIndex;
+    @Basic(optional = false)
+    @Column(name = "detail_utype", nullable = false, length = 256)
+    @XmlElement(name = "detail_utype")
+    private String detailUtype;
     @Basic(optional = false)
     @Column(name = "detail_value", nullable = false, length = 256)
     @XmlElement(name = "detail_value")
@@ -61,29 +70,95 @@ public class ResDetail implements Serializable, PKIndex {
     private Resource resource;
 
     public ResDetail() {
-        this.resDetailPK = new ResDetailPK();
     }
 
-    public ResDetail(ResDetailPK resDetailPK) {
-        this.resDetailPK = resDetailPK;
-    }
-
-    public ResDetail(ResDetailPK resDetailPK, String detailValue) {
-        this.resDetailPK = resDetailPK;
+  
+   
+ 
+ 
+    /**
+     * @param ivoid
+     * @param capIndex
+     * @param detailUtype
+     * @param detailValue
+     */
+    public ResDetail(String ivoid, Short capIndex, String detailUtype,
+            String detailValue) {
+        this.ivoid = ivoid;
+        this.capIndex = capIndex;
+        this.detailUtype = detailUtype;
         this.detailValue = detailValue;
     }
 
-    public ResDetail(String ivoid, short capIndex, String detailUtype) {
-        this.resDetailPK = new ResDetailPK(ivoid, capIndex, detailUtype);
+
+
+
+
+    /**
+     * @return the ivoid
+     */
+    public String getIvoid() {
+        return ivoid;
     }
 
-    public ResDetailPK getResDetailPK() {
-        return resDetailPK;
+
+
+
+
+    /**
+     * @param ivoid the ivoid to set
+     */
+    public void setIvoid(String ivoid) {
+        this.ivoid = ivoid;
     }
 
-    public void setResDetailPK(ResDetailPK resDetailPK) {
-        this.resDetailPK = resDetailPK;
+
+
+
+
+    /**
+     * @return the capIndex
+     */
+    public Short getCapIndex() {
+        return capIndex;
     }
+
+
+
+
+
+    /**
+     * @param capIndex the capIndex to set
+     */
+    public void setCapIndex(Short capIndex) {
+        this.capIndex = capIndex;
+    }
+
+
+
+
+
+    /**
+     * @return the detailUtype
+     */
+    public String getDetailUtype() {
+        return detailUtype;
+    }
+
+
+
+
+
+    /**
+     * @param detailUtype the detailUtype to set
+     */
+    public void setDetailUtype(String detailUtype) {
+        this.detailUtype = detailUtype;
+    }
+
+
+
+
 
     public String getDetailValue() {
         return detailValue;
@@ -99,68 +174,72 @@ public class ResDetail implements Serializable, PKIndex {
 
     public void addToResource(Resource resource) {
         this.resource = resource;
-        this.resDetailPK.setIvoid(resource.getIvoid());
-        this.resDetailPK.setCapIndex((short) -1);
-        if(resource.getResDetailList().indexOf(this) == -1){
-            resource.getResDetailList().add(this);
-        }
-    }
-    
-    public void addToCapability(Capability capability){
-        this.resource = capability.getResource();
-        if(resource.getResDetailList().indexOf(this) == -1){
-            resource.getResDetailList().addAndSetIndex(this);
-            
-        }
-        this.resDetailPK.setIvoid(resource.getIvoid());
-   }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (resDetailPK != null ? resDetailPK.hashCode() : 0);
-        return hash;
+        this.ivoid = (resource.getIvoid());
+        resource.getResDetailList().add(this);
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ResDetail)) {
-            return false;
-        }
-        ResDetail other = (ResDetail) object;
-        if ((this.resDetailPK == null && other.resDetailPK != null) || (this.resDetailPK != null && !this.resDetailPK.equals(other.resDetailPK))) {
-            return false;
-        }
-        return true;
-    }
 
-    @Override
-    public String toString() {
-        return "net.ivoa.regtap.ResDetail[ resDetailPK=" + resDetailPK + " ]";
-    }
 
-    /* (non-Javadoc)
-     * @see net.ivoa.regtap.PKIndex#getIndex()
-     */
-    @Override
-    public short getIndex() {
-        return this.resDetailPK.getCapIndex();
-    }
 
-    /* (non-Javadoc)
-     * @see net.ivoa.regtap.PKIndex#setPKIndex(short)
-     */
-    @Override
-    public void setPKIndex(short idx) {
-        this.resDetailPK.setCapIndex(idx);
-    }
 
     /**
-     * @param string
+     * {@inheritDoc}
+     * overrides @see java.lang.Object#hashCode()
      */
-    public void setDetailUtype(String string) {
-       getResDetailPK().setDetailUtype(string);
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + ((capIndex == null) ? 0 : capIndex.hashCode());
+        result = prime * result
+                + ((detailUtype == null) ? 0 : detailUtype.hashCode());
+        result = prime * result
+                + ((detailValue == null) ? 0 : detailValue.hashCode());
+        result = prime * result + ((ivoid == null) ? 0 : ivoid.hashCode());
+        return result;
     }
 
+
+
+
+
+    /**
+     * {@inheritDoc}
+     * overrides @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof ResDetail))
+            return false;
+        ResDetail other = (ResDetail) obj;
+        if (capIndex == null) {
+            if (other.capIndex != null)
+                return false;
+        } else if (!capIndex.equals(other.capIndex))
+            return false;
+        if (detailUtype == null) {
+            if (other.detailUtype != null)
+                return false;
+        } else if (!detailUtype.equals(other.detailUtype))
+            return false;
+        if (detailValue == null) {
+            if (other.detailValue != null)
+                return false;
+        } else if (!detailValue.equals(other.detailValue))
+            return false;
+        if (ivoid == null) {
+            if (other.ivoid != null)
+                return false;
+        } else if (!ivoid.equals(other.ivoid))
+            return false;
+        return true;
+    }
+    
+
+  
 }

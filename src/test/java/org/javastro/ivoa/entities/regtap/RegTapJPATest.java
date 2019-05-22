@@ -149,25 +149,11 @@ public class RegTapJPATest extends BaseTestPersistence {
         
         rjc.edit(vr);
         Resource res = rjc.findResource(IVOID);
-        assertEquals("number of schema",1, res.getResDetailList().size());
-        assertEquals("detail capindex for resource", (short)-1, res.getResDetailList().get(0).getIndex());
+        assertEquals("number of details",1, res.getResDetailList().size());
+        assertNull("detail capindex for resource",  res.getResDetailList().get(0).getCapIndex());
         
     }
 
-    @Test
-    public void addDetailToCapabiltytest() throws PreexistingEntityException, Exception{
-        createtest();
-        ResDetail det = new ResDetail();
-        det.setDetailUtype("dutype");
-        det.setDetailValue("capdetail");
-        det.addToCapability(vr.getCapabilityList().get(0));
-        
-        rjc.edit(vr);
-        Resource res = rjc.findResource(IVOID);
-        assertEquals("number of schema",1, res.getResDetailList().size());
-        assertEquals("capindex",1, (int)res.getResDetailList().get(0).getIndex());
-       
-    }
 
     @Test
     public void addResRoletest() throws PreexistingEntityException, Exception{
@@ -195,6 +181,17 @@ public class RegTapJPATest extends BaseTestPersistence {
         
     }
     @Test
+    public void addAltIdtest() throws PreexistingEntityException, Exception{
+        createtest();
+        AltIdentifier det = new AltIdentifier("altId");
+        det.addToResource(vr);
+        
+        rjc.edit(vr);
+        Resource res = rjc.findResource(IVOID);
+        assertEquals("number of alt ids",1, res.getAltIdentifier().size());
+        
+    }
+   @Test
     public void addResRelationshiptest() throws PreexistingEntityException, Exception{
         createtest();
         Relationship det = new Relationship();

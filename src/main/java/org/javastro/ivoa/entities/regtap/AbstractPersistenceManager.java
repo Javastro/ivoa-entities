@@ -29,10 +29,11 @@ public abstract class AbstractPersistenceManager {
        /**
      * set connection properties in the props map;
      */
-    abstract void setupConnectionProperties();
+      abstract void setupConnectionProperties();
   
        public EntityManagerFactory createEmf()
        {
+          setupConnectionProperties();
           return Persistence.createEntityManagerFactory(PU, props);
        }
 }

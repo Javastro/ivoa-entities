@@ -44,13 +44,13 @@ import javax.xml.bind.annotation.XmlType;
  */
 @Entity
 @Table(name="resource")
-@XmlRootElement(name="resource")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder={"ivoid", "resType","created","updated","status","shortName","resTitle","contentLevel",
-        "resDescription", "referenceUrl", "contentType", "sourceFormat", "sourceValue", "version",
-        "regionOfRegard", "waveband",  "rights", 
-        "validationList", "subjectList", "resDetailList", "resSchemaList", "dateList",
-        "relationshipList", "resRoleList", "capabilityList"
+@XmlType(name="resource", propOrder={"ivoid", "altIdentifier", "resType","created","updated","status","shortName","resTitle","contentLevel",
+        "resDescription", "referenceUrl", "creator", "contentType", "sourceFormat", "sourceValue", "version",
+        "regionOfRegard", "waveband",  "rights", "rightsURI",
+        "resRoleList", "subjectList", "capabilityList",
+        "validationList", "relationshipList",  "dateList", "resSchemaList", 
+         "resDetailList"
         })
 @NamedQueries({
     @NamedQuery(name = "Resource.findAll", query = "SELECT r FROM Resource r"),
@@ -76,23 +76,28 @@ public class Resource implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(nullable = false, length = 256)
+    @Column(name="ivoid", nullable = false, length = 256)
     private String ivoid;
+    
+    @XmlElement(type=Subject.class, name="alt_identifier")
+    @XmlElementWrapper(name="altids")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "resource", targetEntity=AltIdentifier.class, fetch= FetchType.LAZY, orphanRemoval=true)
+    private List<AltIdentifier> altIdentifier;
     
     @Basic(optional = false)
     @Column(name = "res_type", nullable = false, length = 256)
     @XmlElement(name = "res_type")
     private String resType;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name="created",nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name="updated", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date updated;
     @Basic(optional = false)
-    @Column(nullable = false, length = 256)
+    @Column(name="status",nullable = false, length = 256)
     private String status;
     @Basic(optional = false)
     @Column(name = "short_name", nullable = false, length = 256)
@@ -113,6 +118,11 @@ public class Resource implements Serializable {
     @Column(name = "reference_url", nullable = false, length = 256)
     @XmlElement(name = "reference_url")
     private String referenceUrl;
+    
+    @Basic(optional = false)
+    @Column(name="creator_seq", length=256)
+    @XmlElement(name="creator_seq")
+    private String creator;
     @Column(name = "content_type", length = 256)
     @XmlElement(name = "content_type")
     private String contentType;
@@ -122,16 +132,20 @@ public class Resource implements Serializable {
     @Column(name = "source_value", length = 256)
     @XmlElement(name = "source_value")
     private String sourceValue;
-    @Column(length = 256)
+    @Column(name="res_vesion",length = 256)
+    @XmlElement(name="res_version")
     private String version;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "region_of_regard", precision = 22)
     @XmlElement(name = "region_of_regard")
     private Double regionOfRegard;
-    @Column(length = 256)
+    @Column(name="waveband",length = 256)
     private String waveband;
-    @Column(length = 256)
+    @Column(name="rights",length = 256)
     private String rights;
+    @Column(name="rights_uri",length = 256)
+    @XmlElement(name="rights_uri")
+    private String rightsURI;
     //IMPL would be nice (more efficient) to make the fetchtype LAZY - but does not appear easy/possible
     @XmlElement(type=Validation.class, name="validation")
     @XmlElementWrapper(name="validationList")
@@ -146,7 +160,7 @@ public class Resource implements Serializable {
     @XmlElement(type=ResDetail.class, name="detail")
     @XmlElementWrapper(name="details")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "resource", targetEntity=ResDetail.class, fetch= FetchType.EAGER, orphanRemoval=true)
-    private PKIndexList<ResDetail> resDetailList;
+    private List<ResDetail> resDetailList;
     
     @XmlElement(type=ResSchema.class, name="schema")
     @XmlElementWrapper(name="schemata")
@@ -198,6 +212,20 @@ public class Resource implements Serializable {
 
     public void setIvoid(String ivoid) {
         this.ivoid = ivoid;
+    }
+
+    /**
+     * @return the altIdentifier
+     */
+    public List<AltIdentifier> getAltIdentifier() {
+        return altIdentifier;
+    }
+
+    /**
+     * @param altIdentifier the altIdentifier to set
+     */
+    public void setAltIdentifier(List<AltIdentifier> altIdentifier) {
+        this.altIdentifier = altIdentifier;
     }
 
     public String getResType() {
@@ -349,12 +377,12 @@ public class Resource implements Serializable {
     }
 
     @XmlTransient
-    public PKIndexList<ResDetail> getResDetailList() {
-        if (resDetailList == null) resDetailList = new  PKIndexList<ResDetail>();
+    public List<ResDetail> getResDetailList() {
+        if (resDetailList == null) resDetailList = new  ArrayList<>();
         return resDetailList;
     }
 
-    public void setResDetailList(PKIndexList<ResDetail> resDetailList) {
+    public void setResDetailList(List<ResDetail> resDetailList) {
         this.resDetailList = resDetailList;
     }
 

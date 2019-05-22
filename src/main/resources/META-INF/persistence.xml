@@ -8,6 +8,8 @@
   
    <persistence-unit name="org.javastro.ivoa.entities.regtap_pu" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>org.javastro.ivoa.entities.regtap.AltIdentifier</class>
+    <class>org.javastro.ivoa.entities.regtap.AltIdentifierPK</class>
     <class>org.javastro.ivoa.entities.regtap.Capability</class>
     <class>org.javastro.ivoa.entities.regtap.CapabilityPK</class>
     <class>org.javastro.ivoa.entities.regtap.Date</class>
@@ -19,7 +21,6 @@
     <class>org.javastro.ivoa.entities.regtap.Relationship</class>
     <class>org.javastro.ivoa.entities.regtap.RelationshipPK</class>
     <class>org.javastro.ivoa.entities.regtap.ResDetail</class>
-    <class>org.javastro.ivoa.entities.regtap.ResDetailPK</class>
     <class>org.javastro.ivoa.entities.regtap.Resource</class>
     <class>org.javastro.ivoa.entities.regtap.ResRole</class>
     <class>org.javastro.ivoa.entities.regtap.ResSchema</class>
@@ -38,7 +39,7 @@
     <properties>
       <property name="eclipselink.create-ddl-jdbc-file-name" value="create_regtap.sql"/>
       <property name="eclipselink.drop-ddl-jdbc-file-name" value="drop_regtap.sql"/>
-      <property name="eclipselink.ddl-generation.output-mode" value="both"/> <!-- sql-script or both -->
+      <property name="eclipselink.ddl-generation.output-mode" value="sql-script"/> <!-- sql-script or both -->
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/rr"/>
       <property name="javax.persistence.jdbc.password" value=""/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
@@ -47,7 +48,7 @@
       <property name="eclipselink.logging.level" value="FINEST" />
       <property name="eclipselink.target-database" value="MySQL"/>
       <!-- try to stop DALI complaining about missing columns just because of case -->
-      <property name="eclipselink.jpa.uppercase-column-names" value="true"/>
+      <property name="eclipselink.jpa.uppercase-column-names" value="false"/>
       <property name="eclipselink.jdbc.uppercase-column-names" value="false"/>
       <property name="eclipselink.canonicalmodel.subpackage" value="mmregtap"/>
       <property name="eclipselink.weaving" value="false"/>

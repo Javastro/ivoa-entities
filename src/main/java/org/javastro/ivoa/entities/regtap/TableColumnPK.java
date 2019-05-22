@@ -35,7 +35,7 @@ public class TableColumnPK implements Serializable {
      */
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
-    @Column(nullable = false, length = 256)
+    @Column(name="ivoid",nullable = false, length = 256)
     private String ivoid;
     @Basic(optional = false)
     @Column(name = "schema_index", nullable = false)
@@ -46,7 +46,7 @@ public class TableColumnPK implements Serializable {
     @XmlElement(name = "table_index")
     private short tableIndex;
     @Basic(optional = false)
-    @Column(nullable = false, length = 256)
+    @Column(name="name",nullable = false, length = 256)
     private String name;
 
     public TableColumnPK() {

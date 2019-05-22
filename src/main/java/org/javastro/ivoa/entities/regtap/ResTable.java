@@ -61,25 +61,31 @@ public class ResTable implements Serializable, PKIndex {
     @EmbeddedId
     @XmlPath(".")
     protected ResTablePK resTablePK;
+    
     @Basic(optional = false)
     @Column(name = "table_name", nullable = false, length = 256)
-    @XmlElement(name = "table_name")
+    @XmlElement(name = "name")
     private String name;
+    
     @Column(name = "table_title", length = 256)
-    @XmlElement(name = "table_title")
+    @XmlElement(name = "title")
     private String title;
-    @Basic(optional = false)
-    @Column(name = "table_type", nullable = false, length = 256)
-    @XmlElement(name = "table_type")
-    private String type;
-    @Column(name = "table_utype", length = 256)
-    @XmlElement(name = "table_utype")
-    private String utype;
+    
     @Column(name = "table_description", length = 256)
-    @XmlElement(name = "table_description")
+    @XmlElement(name = "description")
     private String description;
     
+    @Column(name = "table_utype", length = 256)
+    @XmlElement(name = "utype")
+    private String utype;
+
+    @Basic(optional = false)
+    @Column(name = "table_type", nullable = false, length = 256)
+    @XmlElement(name = "type")
+    private String type;
+
     @OneToMany(cascade = CascadeType.ALL, targetEntity=TableColumn.class, fetch= FetchType.LAZY, orphanRemoval=true, mappedBy = "table")
+    @XmlElement(name = "column")
     private List<TableColumn> tableColumnList;
  
     @XmlTransient

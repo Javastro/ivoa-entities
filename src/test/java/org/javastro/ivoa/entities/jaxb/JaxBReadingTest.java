@@ -82,7 +82,7 @@ public class JaxBReadingTest extends JaxBBaseTest {
         assertEquals("number of tables in first schema" , 2, rs.getSchemas().get(0).getTables().size());
     }
     @Test
-    public void testReadVOSITablesRegRap() throws JAXBException, IOException, SAXException{
+    public void testReadVOSITablesRegTap() throws JAXBException, IOException, SAXException{
         Tableset rs = readVosiTableSet("/vosi-tables-regtap.xml");
         assertEquals("number of tables in regtap schema" , 20, rs.getSchemas().get(0).getTables().size());
     }

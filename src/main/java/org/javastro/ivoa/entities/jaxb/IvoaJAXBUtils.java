@@ -50,7 +50,7 @@ import javax.xml.validation.SchemaFactory;
 
 import org.javastro.ivoa.schema.Namespaces;
 import org.javastro.ivoa.schema.SchemaMap;
-
+import org.javastro.ivoa.entities.regtap.RegTAP;
 import org.javastro.ivoa.entities.resource.Resource;
 import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
 import org.w3c.dom.Document;
@@ -283,6 +283,25 @@ private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory
                 Namespaces.VR.getNamespace(), "resource"), Resource.class,
                 desc), IvoaJAXBUtils.identityTransformer, schema);
     }
+    
+        /**
+     * @param rt
+         * @throws TransformerException 
+         * @throws JAXBException 
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public static Document marshall(RegTAP rt) throws JAXBException, TransformerException {
+       Schema schema = null;// do not attempt to validate at the moment, as
+                             // there is often not a single schema that suffices
+                             // for Resources...(e.g. multiple capabilities)
+                             // findSchema(desc.getClass());
+        return IvoaJAXBUtils.marshall(new JAXBElement(new QName(
+                Namespaces.REGTAP.getNamespace(), "regtap"), RegTAP.class,
+                rt), IvoaJAXBUtils.identityTransformer, schema);
+        
+    }
+
+ 
 
    public static Document marshall(VOResources desc)
             throws JAXBException,
@@ -369,6 +388,10 @@ private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory
         return unmarshall(rd, clazz, true);
     }
 
+    public static <T> T unmarshall(Node doc, Class<T> clazz, boolean validate)
+            throws JAXBException, IOException, SAXException {
+        return unmarshall( new DOMSource(doc), clazz, validate);
+    }
  
     public static <T> T unmarshall(Reader r, Class<T> clazz, boolean validate)
             throws JAXBException, IOException, SAXException {
@@ -383,12 +406,13 @@ private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory
         saxreader.setEntityResolver(new IVOAEntityResolver());
         SAXSource s = new SAXSource(saxreader, new InputSource(r));
 
-        return unmarshall(clazz, validate, s);
+        return unmarshall(s, clazz, validate);
 
     }
 
-    private static <T> T unmarshall(Class<T> clazz, boolean validate,
-            Source s) throws JAXBException, ValidationException {
+  
+    private static <T> T unmarshall(Source s, Class<T> clazz,
+            boolean validate) throws JAXBException, ValidationException {
         T retval;
         logger.debug("unmarshalling to " + clazz.getSimpleName());
         Unmarshaller um = contextFactory.createUnmarshaller();
@@ -477,6 +501,7 @@ private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory
         
     }
 
+ 
 
 
 }

@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlType;
 @Embeddable
 public class DatePK implements Serializable {
     @Basic(optional = false)
-    @Column(nullable = false, length = 256)
+    @Column(name="ivoid",nullable = false, length = 256)
     private String ivoid;
     @Basic(optional = false)
     @Column(name = "value_role", nullable = false, length = 256)

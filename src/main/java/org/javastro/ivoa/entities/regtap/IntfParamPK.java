@@ -32,26 +32,21 @@ import javax.xml.bind.annotation.XmlType;
 @Embeddable
 public class IntfParamPK implements Serializable {
     @Basic(optional = false)
-    @Column(nullable = false, length = 256)
+    @Column(name="ivoid", nullable = false, length = 256)
     private String ivoid;
-    @Basic(optional = false)
-    @Column(name = "cap_index", nullable = false)
-    @XmlElement(name = "cap_index")
-    private short capIndex;
     @Basic(optional = false)
     @Column(name = "intf_index", nullable = false)
     @XmlElement(name = "intf_index")
     private short intfIndex;
     @Basic(optional = false)
-    @Column(nullable = false, length = 256)
+    @Column(name="name",nullable = false, length = 256)
     private String name;
 
     public IntfParamPK() {
     }
 
-    public IntfParamPK(String ivoid, short capIndex, short intfIndex, String name) {
+    public IntfParamPK(String ivoid,  short intfIndex, String name) {
         this.ivoid = ivoid;
-        this.capIndex = capIndex;
         this.intfIndex = intfIndex;
         this.name = name;
     }
@@ -64,13 +59,6 @@ public class IntfParamPK implements Serializable {
         this.ivoid = ivoid;
     }
 
-    public short getCapIndex() {
-        return capIndex;
-    }
-
-    public void setCapIndex(short capIndex) {
-        this.capIndex = capIndex;
-    }
 
     public short getIntfIndex() {
         return intfIndex;
@@ -92,7 +80,6 @@ public class IntfParamPK implements Serializable {
     public int hashCode() {
         int hash = 0;
         hash += (ivoid != null ? ivoid.hashCode() : 0);
-        hash += (int) capIndex;
         hash += (int) intfIndex;
         hash += (name != null ? name.hashCode() : 0);
         return hash;
@@ -108,9 +95,6 @@ public class IntfParamPK implements Serializable {
         if ((this.ivoid == null && other.ivoid != null) || (this.ivoid != null && !this.ivoid.equals(other.ivoid))) {
             return false;
         }
-        if (this.capIndex != other.capIndex) {
-            return false;
-        }
         if (this.intfIndex != other.intfIndex) {
             return false;
         }
@@ -122,7 +106,7 @@ public class IntfParamPK implements Serializable {
 
     @Override
     public String toString() {
-        return "net.ivoa.regtap.IntfParamPK[ ivoid=" + ivoid + ", capIndex=" + capIndex + ", intfIndex=" + intfIndex + ", name=" + name + " ]";
+        return "net.ivoa.regtap.IntfParamPK[ ivoid=" + ivoid +  ", intfIndex=" + intfIndex + ", name=" + name + " ]";
     }
 
 }

@@ -64,35 +64,37 @@ public class TableColumn implements Serializable {
     @EmbeddedId
     @XmlPath(".")
     protected TableColumnPK tableColumnPK;
-    @Basic(optional = false)
-    @Column(nullable = false, length = 256)
-    private String datatype;
-    @Column(length = 256)
-    private String description;
-    @Column(length = 256)
-    private String ucd;
-    @Column(length = 256)
-    private String unit;
-    @Column(length = 256)
-    private String utype;
-    @Column(length = 256)
-    private String flag;
-    @Basic(optional = false)
-    @Column(nullable = false)
+    @Basic(optional = true)
+    @Column(name="std",nullable = true)
+    @XmlElement(nillable = true)
     private short std;
+   @Column(name="flag",length = 256)
+    private String flag;
+    @Column(name="description",length = 256)
+    private String description;
+    @Column(name="unit",length = 256)
+    private String unit;
+    @Column(name="ucd",length = 256)
+    private String ucd;
+    @Column(name="utype",length = 256)
+    private String utype;
+    @Basic(optional = false)
+    @Column(name="datatype",nullable = false, length = 256)
+    private String datatype;
     @Column(name = "extended_schema", length = 256)
     @XmlElement(name = "extended_schema")
     private String extendedSchema;
     @Column(name = "extended_type", length = 256)
     @XmlElement(name = "extended_type")
     private String extendedType;
-    @Column(length = 256)
+    @Column(name="arraysize",length = 256)
     private String arraysize;
-    @Column(length = 256)
+    @Column(name="delim",length = 256)
     private String delim;
     @Column(name = "type_system", length = 256)
     @XmlElement(name = "type_system")
     private String typeSystem;
+   
     @XmlTransient
     @ManyToOne(optional = false)
     @JoinColumns({@JoinColumn(name = "ivoid", nullable = false, insertable = false, updatable = false, referencedColumnName = "ivoid"),

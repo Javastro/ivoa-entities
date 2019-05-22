@@ -44,7 +44,6 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
 @NamedQueries({
     @NamedQuery(name = "IntfParam.findAll", query = "SELECT i FROM IntfParam i"),
     @NamedQuery(name = "IntfParam.findByIvoid", query = "SELECT i FROM IntfParam i WHERE i.intfParamPK.ivoid = :ivoid"),
-    @NamedQuery(name = "IntfParam.findByCapIndex", query = "SELECT i FROM IntfParam i WHERE i.intfParamPK.capIndex = :capIndex"),
     @NamedQuery(name = "IntfParam.findByIntfIndex", query = "SELECT i FROM IntfParam i WHERE i.intfParamPK.intfIndex = :intfIndex"),
     @NamedQuery(name = "IntfParam.findByName", query = "SELECT i FROM IntfParam i WHERE i.intfParamPK.name = :name"),
     @NamedQuery(name = "IntfParam.findByDatatype", query = "SELECT i FROM IntfParam i WHERE i.datatype = :datatype"),
@@ -55,38 +54,45 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
     @NamedQuery(name = "IntfParam.findByStd", query = "SELECT i FROM IntfParam i WHERE i.std = :std"),
     @NamedQuery(name = "IntfParam.findByExtendedSchema", query = "SELECT i FROM IntfParam i WHERE i.extendedSchema = :extendedSchema"),
     @NamedQuery(name = "IntfParam.findByExtendedType", query = "SELECT i FROM IntfParam i WHERE i.extendedType = :extendedType"),
-    @NamedQuery(name = "IntfParam.findByUse", query = "SELECT i FROM IntfParam i WHERE i.use_param = :use_param")})
+    @NamedQuery(name = "IntfParam.findByUse", query = "SELECT i FROM IntfParam i WHERE i.param_use = :use_param")})
 public class IntfParam implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     @XmlPath(".")
     protected IntfParamPK intfParamPK;
-    @Basic(optional = false)
-    @Column(nullable = false, length = 256)
-    private String datatype;
-    @Column(length = 256)
+    @Column(name="description",length = 256)
     private String description;
-    @Column(length = 256)
+    @Column(name="ucd",length = 256)
     private String ucd;
-    @Column(length = 256)
+    @Column(name="unit",length = 256)
     private String unit;
-    @Column(length = 256)
+    @Column(name="utype",length = 256)
     private String utype;
     @Basic(optional = false)
-    @Column(nullable = false)
-    private short std;
+    @Column(name="datatype",nullable = false, length = 256)
+    private String datatype;
     @Column(name = "extended_schema", length = 256)
     @javax.xml.bind.annotation.XmlElement(name = "extended_schema")
     private String extendedSchema;
     @Column(name = "extended_type", length = 256)
     @XmlElement(name = "extended_type")
     private String extendedType;
-    @Column(length = 256)
-    private String use_param;
-    
+    @Column(name = "arraysize", length = 256)
+    @XmlElement(name = "arraysize")
+    private String arraysize;
+    @Column(name = "delim", length = 256)
+    @XmlElement(name = "delim")
+    private String delim;
+    @Column(name="param_use",length = 256)
+    @XmlElement(name="use")
+    private String param_use;
+    @Basic(optional = false)
+    @Column(name="std",nullable = false)
+    private short std;
+     
     @XmlTransient
     @ManyToOne(optional = false)
-    @JoinColumns({@JoinColumn(name = "ivoid", nullable = false, insertable = false, updatable = false, referencedColumnName = "ivoid"),@JoinColumn(name = "cap_index", referencedColumnName = "cap_index", insertable = false, updatable = false,  nullable = false),
+    @JoinColumns({@JoinColumn(name = "ivoid", nullable = false, insertable = false, updatable = false, referencedColumnName = "ivoid"),
     @JoinColumn(name = "intf_index", referencedColumnName = "intf_index", insertable = false, updatable = false, nullable = false)})
     private Interface iface;
 
@@ -111,8 +117,8 @@ public class IntfParam implements Serializable {
         this.std = std;
     }
 
-    public IntfParam(String ivoid, short capIndex, short intfIndex, String name) {
-        this.intfParamPK = new IntfParamPK(ivoid, capIndex, intfIndex, name);
+    public IntfParam(String ivoid,  short intfIndex, String name) {
+        this.intfParamPK = new IntfParamPK(ivoid,  intfIndex, name);
     }
 
     public IntfParamPK getIntfParamPK() {
@@ -187,14 +193,7 @@ public class IntfParam implements Serializable {
         this.extendedType = extendedType;
     }
 
-    public String getUse_param() {
-        return use_param;
-    }
-
-    public void setUse_param(String use_param) {
-        this.use_param = use_param;
-    }
-
+ 
  
     public Interface getIface() {
         return iface;
@@ -208,8 +207,8 @@ public class IntfParam implements Serializable {
             iface.getIntfParamList().add(this);
         }
         this.intfParamPK.setIvoid(iface.getInterfacePK().getIvoid());
-        this.intfParamPK.setCapIndex(iface.getInterfacePK().getCapIndex());
         this.intfParamPK.setIntfIndex(iface.getIndex());
+
         
     }
 

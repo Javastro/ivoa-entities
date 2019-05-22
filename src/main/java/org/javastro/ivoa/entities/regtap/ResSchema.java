@@ -56,19 +56,20 @@ public class ResSchema implements Serializable, PKIndex {
     @XmlPath(".")
     protected ResSchemaPK resSchemaPK;
     @Column(name = "schema_name", length = 256)
-    @XmlElement(name = "schema_name")
+    @XmlElement(name = "name")
     private String name;
     @Column(name = "schema_title", length = 256)
-    @XmlElement(name = "schema_title")
+    @XmlElement(name = "title")
     private String title;
     @Column(name = "schema_description", length = 256)
-    @XmlElement(name = "schema_description")
+    @XmlElement(name = "description")
     private String description;
     @Column(name = "schema_utype", length = 256)
-    @XmlElement(name = "schema_utype")
+    @XmlElement(name = "utype")
     private String utype;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "schema", targetEntity=ResTable.class, fetch= FetchType.EAGER, orphanRemoval=true)
+    @XmlElement(name = "table")
     private PKIndexList<ResTable> resTableList;
 
     @XmlTransient

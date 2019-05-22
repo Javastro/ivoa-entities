@@ -30,26 +30,35 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @Embeddable
-public class ResDetailPK implements Serializable {
+public class AltIdentifierPK implements Serializable {
     @Basic(optional = false)
-    @Column(nullable = false, length = 256)
+    @Column(name="ivoid",nullable = false, length = 256)
     private String ivoid;
     @Basic(optional = false)
-    @Column(name = "cap_index", nullable = false)
-    @XmlElement(name = "cap_index")
-    private Short capIndex;
-    @Basic(optional = false)
-    @Column(name = "detail_utype", nullable = false, length = 256)
-    @XmlElement(name = "detail_utype")
-    private String detailUtype;
+    @XmlElement(name="alt_identifier")
+    @Column(name="alt_identifier", nullable = false, length = 256)
+    private String altIdentifier;
 
-    public ResDetailPK() {
+    /**
+     * @return the altIdentifier
+     */
+    public String getAltIdentifier() {
+        return altIdentifier;
     }
 
-    public ResDetailPK(String ivoid, Short capIndex, String detailUtype) {
+    /**
+     * @param altIdentifier the altIdentifier to set
+     */
+    public void setAltIdentifier(String altIdentifier) {
+        this.altIdentifier = altIdentifier;
+    }
+
+    public AltIdentifierPK() {
+    }
+
+    public AltIdentifierPK(String ivoid, String subject) {
         this.ivoid = ivoid;
-        this.capIndex = capIndex;
-        this.detailUtype = detailUtype;
+        this.altIdentifier = subject;
     }
 
     public String getIvoid() {
@@ -60,45 +69,26 @@ public class ResDetailPK implements Serializable {
         this.ivoid = ivoid;
     }
 
-    public Short getCapIndex() {
-        return capIndex;
-    }
-
-    public void setCapIndex(short i) {
-        this.capIndex = i;
-    }
-
-    public String getDetailUtype() {
-        return detailUtype;
-    }
-
-    public void setDetailUtype(String detailUtype) {
-        this.detailUtype = detailUtype;
-    }
-
+  
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (ivoid != null ? ivoid.hashCode() : 0);
-        if(capIndex != null)hash += (int) capIndex;
-        hash += (detailUtype != null ? detailUtype.hashCode() : 0);
+        hash += (altIdentifier != null ? altIdentifier.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ResDetailPK)) {
+        if (!(object instanceof AltIdentifierPK)) {
             return false;
         }
-        ResDetailPK other = (ResDetailPK) object;
+        AltIdentifierPK other = (AltIdentifierPK) object;
         if ((this.ivoid == null && other.ivoid != null) || (this.ivoid != null && !this.ivoid.equals(other.ivoid))) {
             return false;
         }
-        if (this.capIndex != other.capIndex) {
-            return false;
-        }
-        if ((this.detailUtype == null && other.detailUtype != null) || (this.detailUtype != null && !this.detailUtype.equals(other.detailUtype))) {
+        if ((this.altIdentifier == null && other.altIdentifier != null) || (this.altIdentifier != null && !this.altIdentifier.equals(other.altIdentifier))) {
             return false;
         }
         return true;
@@ -106,7 +96,7 @@ public class ResDetailPK implements Serializable {
 
     @Override
     public String toString() {
-        return "net.ivoa.regtap.ResDetailPK[ ivoid=" + ivoid + ", capIndex=" + capIndex + ", detailUtype=" + detailUtype + " ]";
+        return "net.ivoa.regtap.AltIdentifierPK[ ivoid=" + ivoid + ", subject=" + altIdentifier + " ]";
     }
 
 }

@@ -56,7 +56,7 @@ public class Validation implements Serializable, PKIndex {
     @XmlElement(name = "validated_by")
     private String validatedBy;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name="level",nullable = false)
     private short level;
     @XmlTransient
     @JoinColumn(name = "ivoid", referencedColumnName = "ivoid", nullable = false, insertable = false, updatable = false)

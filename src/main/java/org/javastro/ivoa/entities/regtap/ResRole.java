@@ -59,13 +59,14 @@ public class ResRole implements Serializable {
     @Column(name = "role_name", nullable = false, length = 256)
     @XmlElement(name = "role_name")
     private String roleName;
-    @Column(length = 256)
+    
+    @Column(name = "street_address" ,length = 256)
     private String address;
-    @Column(length = 256)
+    @Column(name="email",length = 256)
     private String email;
-    @Column(length = 256)
+    @Column(name="telephone", length = 256)
     private String telephone;
-    @Column(length = 256)
+    @Column(name="logo", length = 256)
     private String logo;
     @XmlTransient
     @JoinColumn(name = "ivoid", referencedColumnName = "ivoid", nullable = false, insertable = false, updatable = false)

@@ -69,6 +69,7 @@ public class Capability implements Serializable, PKIndex {
     private String standardId;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "capability", targetEntity=Interface.class, fetch= FetchType.EAGER, orphanRemoval=true)
+    @XmlElement(name = "interface")
     private PKIndexList<Interface> interfaceList;
 
     @XmlTransient
