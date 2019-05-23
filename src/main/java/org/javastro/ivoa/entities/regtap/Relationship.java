@@ -17,6 +17,7 @@ import java.io.Serializable;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -24,6 +25,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -33,65 +35,63 @@ import javax.xml.bind.annotation.XmlType;
 import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 /**
- *
+ * RegTAP relationship.
  * @author Paul Harrison <paul.harrison@manchester.ac.uk> 04-Feb-2013
  */
-@Entity
+@Embeddable
 @XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
-@Table(name="relationship")
 @NamedQueries({
     @NamedQuery(name = "Relationship.findAll", query = "SELECT r FROM Relationship r"),
-    @NamedQuery(name = "Relationship.findByIvoid", query = "SELECT r FROM Relationship r WHERE r.relationshipPK.ivoid = :ivoid"),
-    @NamedQuery(name = "Relationship.findByRelationshipType", query = "SELECT r FROM Relationship r WHERE r.relationshipPK.relationshipType = :relationshipType"),
-    @NamedQuery(name = "Relationship.findByRelatedId", query = "SELECT r FROM Relationship r WHERE r.relationshipPK.relatedId = :relatedId"),
+    @NamedQuery(name = "Relationship.findByRelationshipType", query = "SELECT r FROM Relationship r WHERE r.relationshipType = :relationshipType"),
+    @NamedQuery(name = "Relationship.findByRelatedId", query = "SELECT r FROM Relationship r WHERE r.relatedId = :relatedId"),
     @NamedQuery(name = "Relationship.findByRelatedName", query = "SELECT r FROM Relationship r WHERE r.relatedName = :relatedName")})
 public class Relationship implements Serializable {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    @XmlPath(".")
-    protected RelationshipPK relationshipPK;
+    @Transient //IMPL perhaps get rid of this - however useful in the intermediate XML representation
+    private String ivoid;
     @Basic(optional = false)
-    @Column(name = "related_name", nullable = false, length = 256)
+    @Column(name = "relationship_type", nullable = false)
+    @XmlElement(name = "relationship_type")
+    private String relationshipType;
+    @Basic(optional = true)
+    @Column(name = "related_id", nullable = true)
+    @XmlElement(name = "related_id")
+    private String relatedId;
+    @Basic(optional = true)
+    @Column(name = "related_name", nullable = true)
     @XmlElement(name = "related_name")
     private String relatedName;
+
+    //IMPL this might not be necessary with @elementCollection
     @XmlTransient
-    @JoinColumn(name = "ivoid", referencedColumnName = "ivoid", nullable = false, insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @Transient
     private Resource resource;
 
+    
+    
+  
+    /**
+     * 
+     */
     public Relationship() {
-        this.relationshipPK = new RelationshipPK();
     }
+    
+    
 
-    public Relationship(RelationshipPK relationshipPK) {
-        this.relationshipPK = relationshipPK;
-    }
-
-    public Relationship(RelationshipPK relationshipPK, String relatedName) {
-        this.relationshipPK = relationshipPK;
+    /**
+     * @param relationshipType
+     * @param relatedId
+     * @param relatedName
+     */
+    public Relationship(String relationshipType, String relatedId,
+            String relatedName) {
+        this.relationshipType = relationshipType;
+        this.relatedId = relatedId;
         this.relatedName = relatedName;
     }
 
-    public Relationship(String ivoid, String relationshipType, String relatedId) {
-        this.relationshipPK = new RelationshipPK(ivoid, relationshipType, relatedId);
-    }
 
-    public RelationshipPK getRelationshipPK() {
-        return relationshipPK;
-    }
-
-    public void setRelationshipPK(RelationshipPK relationshipPK) {
-        this.relationshipPK = relationshipPK;
-    }
-
-    public String getRelatedName() {
-        return relatedName;
-    }
-
-    public void setRelatedName(String relatedName) {
-        this.relatedName = relatedName;
-    }
 
     public Resource getResource() {
         return resource;
@@ -99,49 +99,60 @@ public class Relationship implements Serializable {
 
     public void addToResource(Resource resource) {
         this.resource = resource;
-        this.relationshipPK.setIvoid(resource.getIvoid());
+        this.ivoid = (resource.getIvoid());
         if(resource.getRelationshipList().indexOf(this) == -1){
             resource.getRelationshipList().add(this);
         }
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (relationshipPK != null ? relationshipPK.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Relationship)) {
-            return false;
-        }
-        Relationship other = (Relationship) object;
-        if ((this.relationshipPK == null && other.relationshipPK != null) || (this.relationshipPK != null && !this.relationshipPK.equals(other.relationshipPK))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "net.ivoa.regtap.Relationship[ relationshipPK=" + relationshipPK + " ]";
+    /**
+     * @return the relationshipType
+     */
+    public String getRelationshipType() {
+        return relationshipType;
     }
 
     /**
-     * @param string
+     * @param relationshipType the relationshipType to set
      */
-    public void setRelationshipType(String string) {
-        this.relationshipPK.setRelationshipType(string);
+    public void setRelationshipType(String relationshipType) {
+        this.relationshipType = relationshipType;
     }
 
     /**
-     * @param string
+     * @return the relatedId
      */
-    public void setRelatedId(String string) {
-        this.relationshipPK.setRelatedId(string);
+    public String getRelatedId() {
+        return relatedId;
     }
 
+    /**
+     * @param relatedId the relatedId to set
+     */
+    public void setRelatedId(String relatedId) {
+        this.relatedId = relatedId;
+    }
+
+    /**
+     * @return the relatedName
+     */
+    public String getRelatedName() {
+        return relatedName;
+    }
+
+    /**
+     * @param relatedName the relatedName to set
+     */
+    public void setRelatedName(String relatedName) {
+        this.relatedName = relatedName;
+    }
+
+    /**
+     * @return the ivoid
+     */
+    public String getIvoid() {
+        return ivoid;
+    }
+
+ 
 }

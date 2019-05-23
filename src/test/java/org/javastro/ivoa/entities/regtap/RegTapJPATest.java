@@ -12,50 +12,26 @@
 
 package org.javastro.ivoa.entities.regtap;
 
-import static org.junit.Assert.*; 
+import static org.junit.Assert.*;
 
-import java.net.URL;
 import java.util.Date;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.helpers.DefaultValidationEventHandler;
 import javax.xml.namespace.QName;
-import javax.xml.transform.Source;
-import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 
 import org.javastro.ivoa.entities.jaxb.IvoaJAXBContextFactory;
 import org.javastro.ivoa.entities.jaxb.IvoaJAXBUtils;
-import org.javastro.ivoa.entities.regtap.Capability;
-import org.javastro.ivoa.entities.regtap.Interface;
-import org.javastro.ivoa.entities.regtap.InterfacePK;
-import org.javastro.ivoa.entities.regtap.IntfParam;
-import org.javastro.ivoa.entities.regtap.Relationship;
-import org.javastro.ivoa.entities.regtap.ResDetail;
-import org.javastro.ivoa.entities.regtap.ResRole;
-import org.javastro.ivoa.entities.regtap.ResSchema;
-import org.javastro.ivoa.entities.regtap.ResTable;
-import org.javastro.ivoa.entities.regtap.Resource;
-import org.javastro.ivoa.entities.regtap.ResourceJpaController;
-import org.javastro.ivoa.entities.regtap.Subject;
-import org.javastro.ivoa.entities.regtap.TableColumn;
-import org.javastro.ivoa.entities.regtap.Validation;
 import org.javastro.ivoa.entities.regtap.exceptions.PreexistingEntityException;
 import org.javastro.ivoa.schema.Namespaces;
-import org.javastro.ivoa.schema.SchemaMap;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.w3c.dom.ls.LSInput;
-import org.w3c.dom.ls.LSResourceResolver;
 
 /**
  * Set of tests for basic JPA functionality of the RegTAP classes.  
@@ -218,7 +194,7 @@ public class RegTapJPATest extends BaseTestPersistence {
         rjc.edit(vr);
         Resource res = rjc.findResource(IVOID);
         assertEquals("number of schema",1, res.getValidationList().size());
-        assertEquals("detail capindex for resource", (short)-1, res.getValidationList().get(0).getIndex());
+        assertNull("detail capindex for resource", res.getValidationList().get(0).getCapIndex());
         
     }
 
@@ -232,8 +208,8 @@ public class RegTapJPATest extends BaseTestPersistence {
         
         rjc.edit(vr);
         Resource res = rjc.findResource(IVOID);
-        assertEquals("number of schema",1, res.getValidationList().size());
-        assertEquals("capindex",1, (int)res.getValidationList().get(0).getIndex());
+        assertEquals("number of validations",1, res.getValidationList().size());
+        assertEquals("capindex",1, (int)res.getValidationList().get(0).getCapIndex());
        
     }
 
@@ -248,6 +224,7 @@ public class RegTapJPATest extends BaseTestPersistence {
 
         Resource res = rjc.findResource(IVOID);
         assertEquals("number of schema",1, res.getResSchemaList().size());
+        vr=res; //for followon tests
 
     }
 
@@ -262,6 +239,7 @@ public class RegTapJPATest extends BaseTestPersistence {
 
         Resource res = rjc.findResource(IVOID);
         assertEquals("number of tables",1, res.getResSchemaList().get(0).getResTableList().size());
+        vr=res; //for followon tests
 
     }
     
@@ -337,6 +315,7 @@ public class RegTapJPATest extends BaseTestPersistence {
     }
     
     
+    @SuppressWarnings("unchecked")
     @Test
     public void jaxtest() throws PreexistingEntityException, Exception{
        addColTest();

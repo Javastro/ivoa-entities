@@ -32,14 +32,14 @@ import javax.xml.bind.annotation.XmlType;
 @Embeddable
 public class IntfParamPK implements Serializable {
     @Basic(optional = false)
-    @Column(name="ivoid", nullable = false, length = 256)
+    @Column(name="ivoid", nullable = false)
     private String ivoid;
     @Basic(optional = false)
     @Column(name = "intf_index", nullable = false)
     @XmlElement(name = "intf_index")
     private short intfIndex;
     @Basic(optional = false)
-    @Column(name="name",nullable = false, length = 256)
+    @Column(name="name",nullable = false)
     private String name;
 
     public IntfParamPK() {

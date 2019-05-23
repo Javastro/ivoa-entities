@@ -31,8 +31,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Embeddable
 public class ResSchemaPK implements Serializable {
+    /** serialVersionUID.
+     */
+    private static final long serialVersionUID = -1472454756028696002L;
     @Basic(optional = false)
-    @Column(name="ivoid",nullable = false, length = 256)
+    @Column(name="ivoid",nullable = false)
     private String ivoid;
     @Basic(optional = false)
     @Column(name = "schema_index", nullable = false)

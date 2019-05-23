@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- *
+ * Primary key for the Alt Identifier.
  * @author Paul Harrison <paul.harrison@manchester.ac.uk> 04-Feb-2013
  */
 @XmlType
@@ -32,11 +32,11 @@ import javax.xml.bind.annotation.XmlType;
 @Embeddable
 public class AltIdentifierPK implements Serializable {
     @Basic(optional = false)
-    @Column(name="ivoid",nullable = false, length = 256)
+    @Column(name="ivoid",nullable = false)
     private String ivoid;
     @Basic(optional = false)
-    @XmlElement(name="alt_identifier")
-    @Column(name="alt_identifier", nullable = false, length = 256)
+    @XmlElement(name="id")
+    @Column(name="alt_identifier", nullable = false)
     private String altIdentifier;
 
     /**

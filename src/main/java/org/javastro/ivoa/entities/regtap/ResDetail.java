@@ -17,6 +17,7 @@ import java.io.Serializable;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,6 +26,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -37,8 +39,7 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
  *
  * @author Paul Harrison <paul.harrison@manchester.ac.uk> 04-Feb-2013
  */
-@Entity
-@Table(name = "res_detail")
+@Embeddable
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
@@ -48,25 +49,22 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
     @NamedQuery(name = "ResDetail.findByDetailUtype", query = "SELECT r FROM ResDetail r WHERE r.detailUtype = :detailUtype"),
     @NamedQuery(name = "ResDetail.findByDetailValue", query = "SELECT r FROM ResDetail r WHERE r.detailValue = :detailValue")})
 public class ResDetail implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Column(name="ivoid",nullable = false, length = 256)
+    @Transient //but keep for the XML
     private String ivoid;
     @Basic(optional = true)
     @Column(name = "cap_index", nullable = true)
     @XmlElement(name = "cap_index", nillable = true)
     private Short capIndex;
     @Basic(optional = false)
-    @Column(name = "detail_utype", nullable = false, length = 256)
+    @Column(name = "detail_utype", nullable = false)
     @XmlElement(name = "detail_utype")
     private String detailUtype;
     @Basic(optional = false)
-    @Column(name = "detail_value", nullable = false, length = 256)
+    @Column(name = "detail_value", nullable = false)
     @XmlElement(name = "detail_value")
     private String detailValue;
     @XmlTransient
-    @JoinColumn(name = "ivoid", referencedColumnName = "ivoid", nullable = false, insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @Transient
     private Resource resource;
 
     public ResDetail() {

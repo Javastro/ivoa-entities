@@ -48,7 +48,7 @@
              <xsl:value-of select="title"/>
          </res_title>
          <content_level>
-            <xsl:value-of select="content/contentLevel"/>
+            <xsl:value-of select="content/contentLevel" separator="#"/>
          </content_level>
          <res_description>
             <xsl:value-of select="content/description"/>
@@ -60,7 +60,7 @@
            <xsl:value-of select="curation/creator/name"/>
          </creator_seq>
          <content_type>
-           <xsl:value-of select="content/type"/>
+           <xsl:value-of select="content/type" separator="#"/>
          </content_type>
          <source_format>
            <xsl:value-of select="content/source/@format"/>
@@ -104,6 +104,9 @@
          <schemata>
             <xsl:apply-templates select="tableset/schema"/>
          </schemata>
+         <tables>
+             <xsl:apply-templates select="tableset/schema/tables"/>
+         </tables>
          
          <details>
             <xsl:call-template name="details"/>
@@ -114,13 +117,23 @@
    <date>
       <xsl:call-template name="id"/>
       <value_role><xsl:value-of select="@role"/></value_role>
-      <date_value><xsl:value-of select="."/></date_value>
+      <date_value>
+        <xsl:choose>
+          <xsl:when test="string-length(.) lt 12">
+          <xsl:value-of select="concat(.,'T00:00:00')"/>
+          </xsl:when>
+          <xsl:otherwise>
+          <xsl:value-of select="."/>
+          </xsl:otherwise>
+        </xsl:choose>
+      
+      </date_value>
    </date>
    </xsl:template>
    <xsl:template match="altIdentifier">
      <alt_identifier>
           <xsl:call-template name="id"/>
-          <subject><xsl:value-of select ="."/></subject>
+          <id><xsl:value-of select ="."/></id>
      </alt_identifier>
    </xsl:template>
    <xsl:template match="regionOfRegard">
@@ -192,8 +205,8 @@
    <xsl:template match="interface">
       <interface>
          <xsl:call-template name="id"/>
-         <xsl:call-template name="capidx"/>     
          <intf_index><xsl:value-of select="count(preceding::interface[ancestor::ri:Resource/identifier=current()/ancestor::ri:Resource/identifier])+1"/></intf_index>
+         <xsl:call-template name="capidx"/>     
          <intf_type><xsl:value-of select="@xsi:type"/></intf_type>
          <intf_role><xsl:value-of select="@role"/></intf_role>
          <std_version><xsl:value-of select="@version"/></std_version>
@@ -258,21 +271,20 @@
      <schema>
       <xsl:call-template name="id"/>
       <schema_index><xsl:value-of select="count(preceding-sibling::schema)+1" /></schema_index>
-      <xsl:apply-templates />
+      <xsl:apply-templates select="node() except table" />
     </schema>  
    </xsl:template>
     <xsl:template match="table">
     <table>
        <xsl:call-template name="id"/>
-       <schema_index><xsl:value-of select="count(../preceding-sibling::schema)+1"/></schema_index>
        <table_index><xsl:value-of select="count(preceding::table[ancestor::ri:Resource/identifier=current()/ancestor::ri:Resource/identifier])+1"/></table_index>
+       <schema_index><xsl:value-of select="count(../preceding-sibling::schema)+1"/></schema_index>
        <xsl:apply-templates select="node() except foreignKey" />
     </table>
     </xsl:template>
     <xsl:template match="column">
     <column>
        <xsl:call-template name="id"/>
-       <schema_index><xsl:value-of select="count(../preceding-sibling::schema)+1"/></schema_index>
        <table_index><xsl:value-of select="count(preceding::table[ancestor::ri:Resource/identifier=current()/ancestor::ri:Resource/identifier])+1"/></table_index>
        <xsl:apply-templates select="name" />
        <xsl:call-template name="bool"><xsl:with-param name="att">std</xsl:with-param></xsl:call-template>

@@ -67,36 +67,36 @@ public class Interface implements Serializable,PKIndex {
     @Basic(optional = false)
     @Column(name = "cap_index", nullable = false)
     @XmlElement(name = "cap_index")
-    private short capIndex;
-    @Column(name = "intf_type", length = 256)
+    private Short capIndex;
+    @Column(name = "intf_type")
     @XmlElement(name = "intf_type")
     private String intfType;
-    @Column(name = "intf_role", length = 256)
+    @Column(name = "intf_role")
     @XmlElement(name = "intf_role")
     private String intfRole;
-    @Column(name = "std_version", length = 256)
+    @Column(name = "std_version")
     @XmlElement(name = "std_version")
     private String stdVersion;
-    @Column(name = "query_type", length = 256)
+    @Column(name = "query_type")
     @XmlElement(name = "query_type")
     private String queryType;
-    @Column(name = "result_type", length = 256)
+    @Column(name = "result_type")
     @XmlElement(name = "result_type")
     private String resultType;
-    @Column(name = "wsdl_url", length = 256)
+    @Column(name = "wsdl_url")
     @XmlElement(name = "wsdlURL")
     private String wsdlUrl;
     @Basic(optional = false)
-    @Column(name = "url_use", nullable = false, length = 256)
+    @Column(name = "url_use", nullable = false)
     @XmlElement(name = "url_use")
     private String urlUse;
     @Basic(optional = false)
-    @Column(name = "access_url", nullable = false, length = 256)
+    @Column(name = "access_url", nullable = false)
     @XmlElement(name = "access_url")
     private String accessUrl;
  
     @Basic(optional = true)
-    @Column(name = "mirror_url", nullable = true, length = 256)
+    @Column(name = "mirror_url", nullable = true)
     @XmlElement(name = "mirror_url")
     private String mirrorUrl;
     
@@ -244,7 +244,7 @@ public class Interface implements Serializable,PKIndex {
     /**
      * @return the capIndex
      */
-    public short getCapIndex() {
+    public Short getCapIndex() {
         return capIndex;
     }
 

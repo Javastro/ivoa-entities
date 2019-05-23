@@ -60,30 +60,30 @@ public class IntfParam implements Serializable {
     @EmbeddedId
     @XmlPath(".")
     protected IntfParamPK intfParamPK;
-    @Column(name="description",length = 256)
+    @Column(name="description",length=1024)
     private String description;
-    @Column(name="ucd",length = 256)
+    @Column(name="ucd")
     private String ucd;
-    @Column(name="unit",length = 256)
+    @Column(name="unit")
     private String unit;
-    @Column(name="utype",length = 256)
+    @Column(name="utype")
     private String utype;
     @Basic(optional = false)
-    @Column(name="datatype",nullable = false, length = 256)
+    @Column(name="datatype",nullable = false)
     private String datatype;
-    @Column(name = "extended_schema", length = 256)
+    @Column(name = "extended_schema")
     @javax.xml.bind.annotation.XmlElement(name = "extended_schema")
     private String extendedSchema;
-    @Column(name = "extended_type", length = 256)
+    @Column(name = "extended_type")
     @XmlElement(name = "extended_type")
     private String extendedType;
-    @Column(name = "arraysize", length = 256)
+    @Column(name = "arraysize")
     @XmlElement(name = "arraysize")
     private String arraysize;
-    @Column(name = "delim", length = 256)
+    @Column(name = "delim")
     @XmlElement(name = "delim")
     private String delim;
-    @Column(name="param_use",length = 256)
+    @Column(name="param_use")
     @XmlElement(name="use")
     private String param_use;
     @Basic(optional = false)

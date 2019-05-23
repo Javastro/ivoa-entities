@@ -32,14 +32,14 @@ import javax.xml.bind.annotation.XmlType;
 @Embeddable
 public class ResRolePK implements Serializable {
     @Basic(optional = false)
-    @Column(name="ivoid",nullable = false, length = 256)
+    @Column(name="ivoid",nullable = false)
     private String ivoid;
     @Basic(optional = false)
-    @Column(name = "role_ivoid", nullable = false, length = 256)
+    @Column(name = "role_ivoid", nullable = false)
     @XmlElement(name = "role_ivoid")
     private String roleIvoid;
     @Basic(optional = false)
-    @Column(name = "base_utype", nullable = false, length = 256)
+    @Column(name = "base_utype", nullable = false)
     @XmlElement(name = "base_role")
     private String baseRole;
 

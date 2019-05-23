@@ -58,18 +58,18 @@ public class AltIdentifier implements Serializable {
         this.altidPK = new AltIdentifierPK();
     }
 
-    public AltIdentifier(String Subject) {
+    public AltIdentifier(String id) {
         this.altidPK = new AltIdentifierPK();
-        this.altidPK.setAltIdentifier(Subject);
+        this.altidPK.setAltIdentifier(id);
     }
 
     public Resource getResource() {
         return resource;
     }
     
-    public void setAltId(String subject)
+    public void setAltId(String id)
     {
-        this.altidPK.setAltIdentifier(subject);
+        this.altidPK.setAltIdentifier(id);
     }
 
     /**

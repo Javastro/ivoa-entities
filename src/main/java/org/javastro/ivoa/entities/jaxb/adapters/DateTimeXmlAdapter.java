@@ -39,7 +39,9 @@ public class DateTimeXmlAdapter extends XmlAdapter<String, LocalDateTime> {
     @Override
     public LocalDateTime unmarshal(String date) throws Exception {
         if(date != null){
-        return LocalDateTime.parse(date,formatter);
+            
+        final LocalDateTime dt = LocalDateTime.parse(date,formatter);
+        return dt;
         }
         else {
             return null;

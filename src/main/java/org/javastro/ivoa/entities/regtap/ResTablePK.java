@@ -35,12 +35,8 @@ public class ResTablePK implements Serializable {
      */
     private static final long serialVersionUID = 2157877338889390524L;
     @Basic(optional = false)
-    @Column(name="ivoid",nullable = false, length = 256)
+    @Column(name="ivoid",nullable = false)
     private String ivoid;
-    @Basic(optional = false)
-    @Column(name = "schema_index", nullable = false)
-    @XmlElement(name = "schema_index")
-    private short schemaIndex;
     @Basic(optional = false)
     @Column(name = "table_index", nullable = false)
     @XmlElement(name = "table_index")
@@ -49,9 +45,8 @@ public class ResTablePK implements Serializable {
     public ResTablePK() {
     }
 
-    public ResTablePK(String ivoid, short schemaIndex, short tableIndex) {
+    public ResTablePK(String ivoid, short tableIndex) {
         this.ivoid = ivoid;
-        this.schemaIndex = schemaIndex;
         this.tableIndex = tableIndex;
     }
 
@@ -63,13 +58,6 @@ public class ResTablePK implements Serializable {
         this.ivoid = ivoid;
     }
 
-    public short getSchemaIndex() {
-        return schemaIndex;
-    }
-
-    public void setSchemaIndex(short schemaIndex) {
-        this.schemaIndex = schemaIndex;
-    }
 
     public short getTableIndex() {
         return tableIndex;
@@ -83,7 +71,6 @@ public class ResTablePK implements Serializable {
     public int hashCode() {
         int hash = 0;
         hash += (ivoid != null ? ivoid.hashCode() : 0);
-        hash += (int) schemaIndex;
         hash += (int) tableIndex;
         return hash;
     }
@@ -98,9 +85,6 @@ public class ResTablePK implements Serializable {
         if ((this.ivoid == null && other.ivoid != null) || (this.ivoid != null && !this.ivoid.equals(other.ivoid))) {
             return false;
         }
-        if (this.schemaIndex != other.schemaIndex) {
-            return false;
-        }
         if (this.tableIndex != other.tableIndex) {
             return false;
         }
@@ -109,7 +93,7 @@ public class ResTablePK implements Serializable {
 
     @Override
     public String toString() {
-        return "net.ivoa.regtap.ResTablePK[ ivoid=" + ivoid + ", schemaIndex=" + schemaIndex + ", tableIndex=" + tableIndex + " ]";
+        return "net.ivoa.regtap.ResTablePK[ ivoid=" + ivoid   + ", tableIndex=" + tableIndex + " ]";
     }
 
 }

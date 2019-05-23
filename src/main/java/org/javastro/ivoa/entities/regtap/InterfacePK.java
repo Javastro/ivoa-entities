@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlType;
 @Embeddable
 public class InterfacePK implements Serializable {
     @Basic(optional = false)
-    @Column(name="ivoid",nullable = false, length = 256)
+    @Column(name="ivoid",nullable = false)
     private String ivoid;
     @Basic(optional = false)
     @Column(name = "intf_index", nullable = false)

@@ -67,8 +67,8 @@ public class RegTapTranslator {
         Source request = new DOMSource(doc);
         DOMResult response = new DOMResult();
         rextapxform.transform(request, response);
-        
-        IvoaJAXBUtils.printXML(response.getNode(), new PrintWriter(System.out));
+       
+//        IvoaJAXBUtils.printXML(response.getNode(), new PrintWriter(System.out));
         return IvoaJAXBUtils.unmarshall((Document) response.getNode(),org.javastro.ivoa.entities.regtap.RegTAP.class,false);
 
        

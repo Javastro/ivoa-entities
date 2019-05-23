@@ -72,13 +72,13 @@ public class ResourceJpaController implements Serializable {
             Resource persistentResource = em.find(Resource.class, resource.getIvoid());
             persistentResource.getIvoid();
 
-            for (Validation validationListNewValidationToAttach : resource.getValidationList()) {
-                if (em.find(validationListNewValidationToAttach.getClass(), validationListNewValidationToAttach.getValidationPK())
-                        == null)
-                {
-                    em.persist(validationListNewValidationToAttach);
-                }
-            }
+//            for (Validation validationListNewValidationToAttach : resource.getValidationList()) {
+//                if (em.find(validationListNewValidationToAttach.getClass(), validationListNewValidationToAttach.getValidationPK())
+//                        == null)
+//                {
+//                    em.persist(validationListNewValidationToAttach);
+//                }
+//            }
             for (Subject subjectListNewSubjectToAttach : resource.getSubjectList()) {
                 if (em.find(subjectListNewSubjectToAttach.getClass(), subjectListNewSubjectToAttach.getSubjectPK())
                         == null)
@@ -93,16 +93,23 @@ public class ResourceJpaController implements Serializable {
                     em.persist(newAltIDToAttach);
                 }
             }
-           for (ResDetail resDetailListNewResDetailToAttach : resource.getResDetailList()) {
-                if (em.find(resDetailListNewResDetailToAttach.getClass(), resDetailListNewResDetailToAttach.getIvoid())
+//           for (ResDetail resDetailListNewResDetailToAttach : resource.getResDetailList()) {
+//                if (em.find(resDetailListNewResDetailToAttach.getClass(), resDetailListNewResDetailToAttach.getIvoid())
+//                        == null)
+//                {
+//                    em.persist(resDetailListNewResDetailToAttach);
+//                }
+//            }
+            for (ResSchema resSchemaListNewResSchemaToAttach : resource.getResSchemaList()) {
+                if (em.find(resSchemaListNewResSchemaToAttach.getClass(), resSchemaListNewResSchemaToAttach.getResSchemaPK())
                         == null)
                 {
-                    em.persist(resDetailListNewResDetailToAttach);
+                    em.persist(resSchemaListNewResSchemaToAttach);
                 }
             }
-            for (ResSchema resSchemaListNewResSchemaToAttach : resource.getResSchemaList()) {
-                for (ResTable table : resSchemaListNewResSchemaToAttach.getResTableList()) {
-                    for (TableColumn col : table.getTableColumnList()) {
+            
+           for (ResTable table : resource.getResTableList()) {
+                 for (TableColumn col : table.getTableColumnList()) {
                         if(em.find(col.getClass(), col.getTableColumnPK()) == null)
                         {
                             em.persist(col);
@@ -113,12 +120,7 @@ public class ResourceJpaController implements Serializable {
                     }
                     
                 }
-                if (em.find(resSchemaListNewResSchemaToAttach.getClass(), resSchemaListNewResSchemaToAttach.getResSchemaPK())
-                        == null)
-                {
-                    em.persist(resSchemaListNewResSchemaToAttach);
-                }
-            }
+
             for (Date dateListNewDateToAttach : resource.getDateList()) {
                 if (em.find(dateListNewDateToAttach.getClass(), dateListNewDateToAttach.getDatePK())
                         == null)
@@ -126,13 +128,13 @@ public class ResourceJpaController implements Serializable {
                     em.persist(dateListNewDateToAttach);
                 }
             }
-            for (Relationship relationshipListNewRelationshipToAttach : resource.getRelationshipList()) {
-                if (em.find(relationshipListNewRelationshipToAttach.getClass(), relationshipListNewRelationshipToAttach.getRelationshipPK())
-                        == null)
-                {
-                    em.persist(relationshipListNewRelationshipToAttach);
-                }
-            }
+//            for (Relationship relationshipListNewRelationshipToAttach : resource.getRelationshipList()) {
+//                if (em.find(relationshipListNewRelationshipToAttach.getClass(), relationshipListNewRelationshipToAttach.getRelationshipPK())
+//                        == null)
+//                {
+//                    em.persist(relationshipListNewRelationshipToAttach);
+//                }
+//            }
             for (ResRole resRoleListNewResRoleToAttach : resource.getResRoleList()) {
                 if (em.find(resRoleListNewResRoleToAttach.getClass(), resRoleListNewResRoleToAttach.getResRolePK())
                         == null)

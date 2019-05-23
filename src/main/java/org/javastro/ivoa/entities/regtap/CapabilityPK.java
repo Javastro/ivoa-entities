@@ -31,8 +31,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Embeddable
 public class CapabilityPK implements Serializable {
+    /** serialVersionUID.
+     */
+    private static final long serialVersionUID = -3746821140158873791L;
     @Basic(optional = false)
-    @Column(name="ivoid",nullable = false, length = 256)
+    @Column(name="ivoid",nullable = false)
     private String ivoid;
     @Column(name = "cap_index", nullable = false)
     @XmlElement(name = "cap_index")

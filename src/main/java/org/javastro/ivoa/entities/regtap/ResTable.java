@@ -49,7 +49,7 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
 @NamedQueries({
     @NamedQuery(name = "ResTable.findAll", query = "SELECT r FROM ResTable r"),
     @NamedQuery(name = "ResTable.findByIvoid", query = "SELECT r FROM ResTable r WHERE r.resTablePK.ivoid = :ivoid"),
-    @NamedQuery(name = "ResTable.findBySchemaIndex", query = "SELECT r FROM ResTable r WHERE r.resTablePK.schemaIndex = :schemaIndex"),
+    @NamedQuery(name = "ResTable.findBySchemaIndex", query = "SELECT r FROM ResTable r WHERE r.schemaIndex = :schemaIndex"),
     @NamedQuery(name = "ResTable.findByTableIndex", query = "SELECT r FROM ResTable r WHERE r.resTablePK.tableIndex = :tableIndex"),
     @NamedQuery(name = "ResTable.findByTableName", query = "SELECT r FROM ResTable r WHERE r.name = :tableName"),
     @NamedQuery(name = "ResTable.findByTableTitle", query = "SELECT r FROM ResTable r WHERE r.title = :tableTitle"),
@@ -61,26 +61,31 @@ public class ResTable implements Serializable, PKIndex {
     @EmbeddedId
     @XmlPath(".")
     protected ResTablePK resTablePK;
-    
+ 
     @Basic(optional = false)
-    @Column(name = "table_name", nullable = false, length = 256)
+    @Column(name = "schema_index", nullable = true)
+    @XmlElement(name = "schema_index")
+    private Short schemaIndex;
+
+    @Basic(optional = false)
+    @Column(name = "table_name", nullable = false)
     @XmlElement(name = "name")
     private String name;
     
-    @Column(name = "table_title", length = 256)
+    @Column(name = "table_title")
     @XmlElement(name = "title")
     private String title;
     
-    @Column(name = "table_description", length = 256)
+    @Column(name = "table_description",length=1024)
     @XmlElement(name = "description")
     private String description;
     
-    @Column(name = "table_utype", length = 256)
+    @Column(name = "table_utype")
     @XmlElement(name = "utype")
     private String utype;
 
-    @Basic(optional = false)
-    @Column(name = "table_type", nullable = false, length = 256)
+    @Basic(optional = true)
+    @Column(name = "table_type", nullable = true)
     @XmlElement(name = "type")
     private String type;
 
@@ -90,8 +95,8 @@ public class ResTable implements Serializable, PKIndex {
  
     @XmlTransient
     @ManyToOne(optional = false)
-    @JoinColumns({@JoinColumn(name = "ivoid", nullable = false, insertable = false, updatable = false, referencedColumnName = "ivoid"),@JoinColumn(name = "schema_index", referencedColumnName = "schema_index", insertable = false, updatable = false, unique = true, nullable = false)})
-    private ResSchema schema;
+    @JoinColumns({@JoinColumn(name = "ivoid", nullable = false, insertable = false, updatable = false, referencedColumnName = "ivoid")})
+    private Resource resource;
 
     ResTable() {
         this.resTablePK = new ResTablePK();
@@ -114,12 +119,20 @@ public class ResTable implements Serializable, PKIndex {
         this.type = tableType;
     }
 
-    public ResTable(String ivoid, short schemaIndex, short tableIndex) {
-        this.resTablePK = new ResTablePK(ivoid, schemaIndex, tableIndex);
+    public ResTable(String ivoid, Short schemaIndex, short tableIndex) {
+        this.resTablePK = new ResTablePK(ivoid, tableIndex);
+        this.schemaIndex = schemaIndex;
     }
 
     public ResTablePK getResTablePK() {
         return resTablePK;
+    }
+    public short getSchemaIndex() {
+        return schemaIndex;
+    }
+
+    public void setSchemaIndex(short schemaIndex) {
+        this.schemaIndex = schemaIndex;
     }
 
     public void setResTablePK(ResTablePK resTablePK) {
@@ -171,22 +184,18 @@ public class ResTable implements Serializable, PKIndex {
         return tableColumnList;
     }
 
-    public void setTableColumnList(List<TableColumn> tableColumnList) {
-        this.tableColumnList = tableColumnList;
-    }
 
-
-    public ResSchema getSchema() {
-        return schema;
+    public Resource getResource() {
+        return resource;
     }
 
     public void addToSchema(ResSchema schema) {
-        this.schema = schema;
-        if (schema.getResTableList().indexOf(this) == -1) {
-            schema.getResTableList().addAndSetIndex(this);
+        this.resource = schema.getResource();
+        if (resource.getResTableList().indexOf(this) == -1) {
+            resource.getResTableList().addAndSetIndex(this);
         }
         this.resTablePK.setIvoid(schema.getResSchemaPK().getIvoid());
-        this.resTablePK.setSchemaIndex(schema.getIndex());
+        this.schemaIndex = schema.getIndex();
         
     }
 

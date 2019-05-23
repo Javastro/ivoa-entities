@@ -36,7 +36,7 @@ public class TestPersistenceManager extends AbstractPersistenceManager {
 //        props.put(PersistenceUnitProperties.CACHE_SHARED_, "false");
         
      // Configure logging. FINE ensures all SQL is shown
-        props.put(PersistenceUnitProperties.LOGGING_LEVEL, "FINE");
+        props.put(PersistenceUnitProperties.LOGGING_LEVEL, "FINEST");
          
         // Ensure that no server-platform is configured
         props.put(PersistenceUnitProperties.TARGET_SERVER, TargetServer.None);

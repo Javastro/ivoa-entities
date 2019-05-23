@@ -17,6 +17,7 @@ import java.io.Serializable;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -24,6 +25,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -36,8 +38,7 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
  *
  * @author Paul Harrison <paul.harrison@manchester.ac.uk> 04-Feb-2013
  */
-@Entity
-@Table(name="validation")
+@Embeddable
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
@@ -46,62 +47,36 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
     @NamedQuery(name = "Validation.findByValidatedBy", query = "SELECT v FROM Validation v WHERE v.validatedBy = :validatedBy"),
     @NamedQuery(name = "Validation.findByLevel", query = "SELECT v FROM Validation v WHERE v.level = :level"),
     @NamedQuery(name = "Validation.findByCapIndex", query = "SELECT v FROM Validation v WHERE v.validationPK.capIndex = :capIndex")})
-public class Validation implements Serializable, PKIndex {
+public class Validation implements Serializable {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    @XmlPath(".")
-    protected ValidationPK validationPK;
+    @Transient
+    private String ivoid;
+    @Basic(optional = true)
+    @Column(name = "cap_index", nullable = true)
+    @XmlElement(name = "cap_index", required = false, nillable = true)
+    private Short capIndex;
     @Basic(optional = false)
-    @Column(name = "validated_by", nullable = false, length = 256)
+    @Column(name = "validated_by", nullable = false)
     @XmlElement(name = "validated_by")
     private String validatedBy;
     @Basic(optional = false)
     @Column(name="level",nullable = false)
     private short level;
     @XmlTransient
-    @JoinColumn(name = "ivoid", referencedColumnName = "ivoid", nullable = false, insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @Transient
     private Resource resource;
 
     public Validation() {
-        this.validationPK = new ValidationPK();
     }
 
-    public Validation(ValidationPK validationPK) {
-        this.validationPK = validationPK;
-    }
-
-    public Validation(ValidationPK validationPK, String validatedBy, short level) {
-        this.validationPK = validationPK;
+     /**
+     * @param capIndex
+     * @param validatedBy
+     * @param level
+     */
+    public Validation(short capIndex, String validatedBy, short level) {
+        this.capIndex = capIndex;
         this.validatedBy = validatedBy;
-        this.level = level;
-    }
-
-    public Validation(String ivoid, short capIndex) {
-        this.validationPK = new ValidationPK(ivoid, capIndex);
-    }
-
-    public ValidationPK getValidationPK() {
-        return validationPK;
-    }
-
-    public void setValidationPK(ValidationPK validationPK) {
-        this.validationPK = validationPK;
-    }
-
-    public String getValidatedBy() {
-        return validatedBy;
-    }
-
-    public void setValidatedBy(String validatedBy) {
-        this.validatedBy = validatedBy;
-    }
-
-    public short getLevel() {
-        return level;
-    }
-
-    public void setLevel(short level) {
         this.level = level;
     }
 
@@ -111,8 +86,7 @@ public class Validation implements Serializable, PKIndex {
 
     public void addToResource(Resource resource) {
         this.resource = resource;
-        this.validationPK.setIvoid(resource.getIvoid());
-        this.validationPK.setCapIndex((short) -1);
+        this.ivoid = (resource.getIvoid());
        if ( resource.getValidationList().indexOf(this)== -1)
         {
             resource.getValidationList().add(this);
@@ -124,53 +98,102 @@ public class Validation implements Serializable, PKIndex {
      */
     public void addToCapability(Capability capability) {
         this.resource = capability.getResource();
-        this.validationPK.setIvoid(resource.getIvoid());
+        this.ivoid = (resource.getIvoid());
+        this.capIndex = capability.getIndex();
         if ( resource.getValidationList().indexOf(this)== -1)
         {
-            resource.getValidationList().addAndSetIndex(this);
+            resource.getValidationList().add(this);
         }
     }
 
+    /**
+     * @return the capIndex
+     */
+    public Short getCapIndex() {
+        return capIndex;
+    }
+
+    /**
+     * @param capIndex the capIndex to set
+     */
+    public void setCapIndex(Short capIndex) {
+        this.capIndex = capIndex;
+    }
+
+    /**
+     * @return the validatedBy
+     */
+    public String getValidatedBy() {
+        return validatedBy;
+    }
+
+    /**
+     * @param validatedBy the validatedBy to set
+     */
+    public void setValidatedBy(String validatedBy) {
+        this.validatedBy = validatedBy;
+    }
+
+    /**
+     * @return the level
+     */
+    public short getLevel() {
+        return level;
+    }
+
+    /**
+     * @param level the level to set
+     */
+    public void setLevel(short level) {
+        this.level = level;
+    }
+
+    /**
+     * {@inheritDoc}
+     * overrides @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (validationPK != null ? validationPK.hashCode() : 0);
-        return hash;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((capIndex==null)? 0 : capIndex.hashCode());
+        result = prime * result + ((ivoid == null) ? 0 : ivoid.hashCode());
+        result = prime * result + level;
+        result = prime * result
+                + ((validatedBy == null) ? 0 : validatedBy.hashCode());
+        return result;
     }
 
+    /**
+     * {@inheritDoc}
+     * overrides @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Validation)) {
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
             return false;
-        }
-        Validation other = (Validation) object;
-        if ((this.validationPK == null && other.validationPK != null) || (this.validationPK != null && !this.validationPK.equals(other.validationPK))) {
+        if (!(obj instanceof Validation))
             return false;
-        }
+        Validation other = (Validation) obj;
+        if (capIndex != other.capIndex)
+            return false;
+        if (ivoid == null) {
+            if (other.ivoid != null)
+                return false;
+        } else if (!ivoid.equals(other.ivoid))
+            return false;
+        if (level != other.level)
+            return false;
+        if (validatedBy == null) {
+            if (other.validatedBy != null)
+                return false;
+        } else if (!validatedBy.equals(other.validatedBy))
+            return false;
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "net.ivoa.regtap.Validation[ validationPK=" + validationPK + " ]";
-    }
-
-    /* (non-Javadoc)
-     * @see net.ivoa.regtap.PKIndex#getIndex()
-     */
-    @Override
-    public short getIndex() {
-       return getValidationPK().getCapIndex();
-    }
-
-    /* (non-Javadoc)
-     * @see net.ivoa.regtap.PKIndex#setPKIndex(short)
-     */
-    @Override
-    public void setPKIndex(short idx) {
-        getValidationPK().setCapIndex(idx);
-    }
 
  
 }

@@ -25,7 +25,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.eclipse.persistence.jaxb.JAXBContext;
 
 /**
- * Generate schema from the JAXB models .
+ * Generate schema from the JAXB models.
  * 
  * Not a test, but included here because do not want in main api, as only whilst
  * developing initial model.

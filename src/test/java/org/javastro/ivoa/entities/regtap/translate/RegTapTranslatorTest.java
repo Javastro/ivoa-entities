@@ -9,23 +9,18 @@
 
 package org.javastro.ivoa.entities.regtap.translate;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
-import java.io.IOException;
-
-import javax.xml.bind.JAXBException;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
+import java.io.InputStream;
 
 import org.javastro.ivoa.entities.jaxb.IvoaJAXBUtils;
 import org.javastro.ivoa.entities.regtap.BaseTestPersistence;
-import org.javastro.ivoa.entities.resource.Resource;
-import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
+import org.javastro.ivoa.entities.regtap.ResourceJpaController;
+import org.javastro.ivoa.entities.regtap.exceptions.PreexistingEntityException;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 /**
  * Tests the regtap translator.
@@ -34,11 +29,15 @@ import org.xml.sax.SAXException;
  */
 public class RegTapTranslatorTest extends BaseTestPersistence {
 
+    private static ResourceJpaController rjc;
+
     /**
      * @throws java.lang.Exception
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
+        rjc = new ResourceJpaController(emf);
+        assertNotNull(rjc);
     }
 
     /**
@@ -48,7 +47,7 @@ public class RegTapTranslatorTest extends BaseTestPersistence {
     public static void tearDownAfterClass() throws Exception {
     }
 
-    private VOResources res;
+    private org.javastro.ivoa.entities.resource.registry.iface.VOResources res;
     private RegTapTranslator trans;
 
     /**
@@ -57,14 +56,22 @@ public class RegTapTranslatorTest extends BaseTestPersistence {
     @Before
     public void setUp() throws Exception {
         
-      res = IvoaJAXBUtils.unmarshall(RegTapTranslator.class.getResourceAsStream("/VOResource.xml"), VOResources.class);
+      final InputStream resourceStream = RegTapTranslator.class.getResourceAsStream("/VOResource.xml");
+      res = IvoaJAXBUtils.unmarshall(resourceStream, org.javastro.ivoa.entities.resource.registry.iface.VOResources.class);
+      assertNotNull(res);
       trans = new RegTapTranslator();
+      assertNotNull(trans);
     }
 
     @Test
-    public void test() throws JAXBException, IOException, SAXException, ParserConfigurationException, TransformerException {
+    public void test() throws PreexistingEntityException, Exception {
            org.javastro.ivoa.entities.regtap.RegTAP rt = trans.translate(res);
            assertNotNull(rt);
+           for (org.javastro.ivoa.entities.regtap.Resource r : rt.resources  ) {
+               rjc.create(r);
+            
+        }
+           
         
     }
 

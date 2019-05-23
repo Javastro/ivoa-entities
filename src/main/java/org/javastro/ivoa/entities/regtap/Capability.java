@@ -55,16 +55,16 @@ public class Capability implements Serializable, PKIndex {
     @EmbeddedId
     @XmlPath(".")
     protected CapabilityPK capabilityPK;
-    @Column(name = "cap_name", length = 256)
+    @Column(name = "cap_name")
     @XmlElement(name = "cap_name")
     private String name;
-    @Column(name = "cap_type", length = 256)
+    @Column(name = "cap_type")
     @XmlElement(name = "cap_type")
     private String type;
-    @Column(name = "cap_description", length = 256)
+    @Column(name = "cap_description",length=1024)
     @XmlElement(name = "cap_description")
     private String capDescription;
-    @Column(name = "standard_id", length = 256)
+    @Column(name = "standard_id")
     @XmlElement(name = "standard_id")
     private String standardId;
     
@@ -192,4 +192,5 @@ public class Capability implements Serializable, PKIndex {
         this.capabilityPK.setCapIndex(idx);
     }
 
+    
 }
