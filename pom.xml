@@ -6,12 +6,12 @@
    <modelVersion>4.0.0</modelVersion>
    <artifactId>ivoa-entities</artifactId>
    <name>ivoa-entities</name>
-   <version>0.1-SNAPSHOT</version>
+   <version>0.9</version>
    <description>JAXB annotated objects for IVOA schema related mainly to the registry</description>
    <parent>
       <artifactId>javastro-mavenbase</artifactId>
       <groupId>org.javastro</groupId>
-      <version>0.3</version>
+      <version>0.3.1</version>
       <relativePath>../mavenbase/</relativePath>
    </parent>
    <packaging>jar</packaging>
