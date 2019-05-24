@@ -22,10 +22,10 @@ RegTAP
 There is additionally an model for RegTAP instances - the table structure of RegTAP does not lend itself naturally to JPA mapping because of the lack of primary keys for many of the sub-tables, however the mapping is included primarily to facilitate a principled way of transforming VOResource instances into RegTAP, and as such might be 
 viewed as an pure implementation of the RegTAP standard only (currently aiming for version 1.1 compliance) The core of this transformation logic is coded with a [XSLT 2.0 translation](src/main/resources/convertToRegTap.xsl).
 
-The [javadoc overview file](src/main/java/overview.html) contains some more detail on using the library. The overall structure of the RegTAP JPA classes is shown below
+The [javadoc overview file](http://htmlpreview.github.io/?https://raw.githubusercontent.com/Javastro/ivoa-entities/master/src/main/java/overview.html) contains some more detail on using the library. The overall structure of the RegTAP JPA classes is shown below
 
-![RegTap JPA Structure](./regtapjap.svg)
-<img src="./regtapjap.svg">
+![RegTap JPA Structure](./regtapjpa.svg)
+<img src="./regtapjpa.svg">
 
 Security
 --------
