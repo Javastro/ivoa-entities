@@ -25,7 +25,7 @@ viewed as an pure implementation of the RegTAP standard only (currently aiming f
 The [javadoc overview file](http://htmlpreview.github.io/?https://raw.githubusercontent.com/Javastro/ivoa-entities/master/src/main/java/overview.html) contains some more detail on using the library. The overall structure of the RegTAP JPA classes is shown below
 
 ![RegTap JPA Structure](./regtapjpa.svg)
-<img src="./regtapjpa.svg">
+
 
 Security
 --------
