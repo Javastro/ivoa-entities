@@ -232,7 +232,7 @@
                         <include>SSA-v1.2.xsd</include>
                         <include>xlink.xsd</include>                       
                         <include>vo-dml-v1.0.xsd</include>
-                        <include>stc-v1.30.xsd</include>
+                        <include>STC-v1.30.xsd</include>
                         <!-- <include>SLAP-v1.1.xsd</include> not in the autogenerate as enums cause conflicts with SSA -->
                         
                      </schemaIncludes>

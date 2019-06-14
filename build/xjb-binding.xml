@@ -69,7 +69,7 @@
    </jxb:bindings>
    
     
- <jxb:bindings schemaLocation="../target/dependency/schema/stc-v1.30.xsd"
+ <jxb:bindings schemaLocation="../target/dependency/schema/STC-v1.30.xsd"
    >
       <jxb:schemaBindings >
          <jxb:package
