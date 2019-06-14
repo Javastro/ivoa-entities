@@ -19,7 +19,7 @@
        <dependency> 
          <groupId>org.javastro</groupId>
          <artifactId>ivoa-schema</artifactId> 
-         <version>0.9</version> 
+         <version>0.9.1</version> 
       </dependency>
       <dependency>
          <groupId>org.glassfish.jaxb</groupId>
