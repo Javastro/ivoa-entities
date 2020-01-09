@@ -45,7 +45,7 @@
    
    
 
-   <jxb:bindings schemaLocation="../target/dependency/schema/VODataService-v1.1.xsd"
+   <jxb:bindings schemaLocation="../target/dependency/schema/VODataService-v1.2.xsd"
    >
       <jxb:schemaBindings>
          <jxb:package name="org.javastro.ivoa.entities.resource.dataservice">

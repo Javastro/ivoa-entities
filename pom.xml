@@ -6,20 +6,20 @@
    <modelVersion>4.0.0</modelVersion>
    <artifactId>ivoa-entities</artifactId>
    <name>ivoa-entities</name>
-   <version>0.9.1-SNAPSHOT</version>
+   <version>0.9.2-SNAPSHOT</version>
    <description>JAXB annotated objects for IVOA schema related mainly to the registry</description>
    <parent>
       <artifactId>javastro-mavenbase</artifactId>
       <groupId>org.javastro</groupId>
-      <version>0.3.3</version>
+      <version>0.3.4</version>
       <relativePath>../mavenbase/</relativePath>
    </parent>
    <packaging>jar</packaging>
    <dependencies>
        <dependency> 
          <groupId>org.javastro</groupId>
-         <artifactId>ivoa-schema</artifactId> 
-         <version>0.9.1</version> 
+         <artifactId>ivoa-schema</artifactId>
+         <version>${ivoa-schema.version}</version>
       </dependency>
       <dependency>
          <groupId>org.glassfish.jaxb</groupId>
@@ -216,7 +216,7 @@
                      </args>
                      <schemaIncludes>
                         <include>VOResource-v1.1.xsd</include>
-                        <include>VODataService-v1.1.xsd</include>
+                        <include>VODataService-v1.2.xsd</include>
                         <include>ConeSearch-v1.0.xsd</include>
                         <include>SIA-v1.1.xsd</include>
                         <include>VOApplication-1.0.xsd</include>
