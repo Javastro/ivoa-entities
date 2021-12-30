@@ -12,29 +12,28 @@
 
 package org.javastro.ivoa.entities.regtap.translate;
 
+import static org.javastro.ivoa.entities.jaxb.Utils.marshall;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 
-import org.javastro.ivoa.entities.jaxb.IvoaJAXBUtils;
-import org.javastro.ivoa.entities.resource.Resource;
 import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
+import org.javastro.ivoa.jaxb.IvoaJAXBUtils;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
+
 
 /**
  * Translate a VOResource to  RegTAP XML representation.
@@ -63,7 +62,7 @@ public class RegTapTranslator {
 
         
         
-        Document doc = IvoaJAXBUtils.marshall(res);
+        Document doc = marshall(res);
         Source request = new DOMSource(doc);
         DOMResult response = new DOMResult();
         rextapxform.transform(request, response);

@@ -13,10 +13,10 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.InputStream;
 
-import org.javastro.ivoa.entities.jaxb.IvoaJAXBUtils;
 import org.javastro.ivoa.entities.regtap.BaseTestPersistence;
 import org.javastro.ivoa.entities.regtap.ResourceJpaController;
 import org.javastro.ivoa.entities.regtap.exceptions.PreexistingEntityException;
+import org.javastro.ivoa.jaxb.IvoaJAXBUtils;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;

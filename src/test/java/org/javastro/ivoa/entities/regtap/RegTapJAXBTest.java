@@ -9,6 +9,8 @@
 
 package org.javastro.ivoa.entities.regtap;
 
+import static org.javastro.ivoa.entities.jaxb.Utils.marshall;
+
 import static org.junit.Assert.*;
 
 import java.io.PrintWriter;
@@ -16,7 +18,7 @@ import java.io.PrintWriter;
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.TransformerException;
 
-import org.javastro.ivoa.entities.jaxb.IvoaJAXBUtils;
+import org.javastro.ivoa.jaxb.IvoaJAXBUtils;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -56,7 +58,7 @@ public class RegTapJAXBTest {
        RegTAP rt = new RegTAP();
        Resource r = new Resource("ivo://test", "restype", new java.util.Date(), new java.util.Date(), "status", "shortname", "restitle", "descriotion", "http://www.jb.man.ac.uk");
        rt.resources.add(r);
-       Document doc = IvoaJAXBUtils.marshall(rt);
+       Document doc = marshall(rt);
        IvoaJAXBUtils.printXML(doc, new PrintWriter(System.out));
     }
 

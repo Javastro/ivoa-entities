@@ -12,41 +12,25 @@
 
 package org.javastro.ivoa.entities.jaxb;
 
+import static org.javastro.ivoa.entities.jaxb.Utils.marshall;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.URL;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.helpers.DefaultValidationEventHandler;
-import javax.xml.namespace.QName;
-import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 
-import org.javastro.ivoa.schema.Namespaces;
-import org.javastro.ivoa.schema.SchemaMap;
-import org.javastro.ivoa.entities.jaxb.IvoaJAXBContextFactory;
-import org.javastro.ivoa.entities.jpa.ResourceJpaController;
-import org.javastro.ivoa.entities.jpa.exceptions.PreexistingEntityException;
 import org.javastro.ivoa.entities.resource.Resource;
 import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
 import org.javastro.ivoa.entities.vosi.tables.Tableset;
+import org.javastro.ivoa.jaxb.IvoaJAXBUtils;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.w3c.dom.Document;
-import org.w3c.dom.ls.LSInput;
-import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.SAXException;
 
 public class JaxbTest {
@@ -67,10 +51,8 @@ public class JaxbTest {
                 .getResourceAsStream("/VOResource.xml")),VOResources.class, true);
         System.out.println(vr.getResources().get(0).getIdentifier());
 
-        Document doc = IvoaJAXBUtils.marshall(vr);
+        Document doc = marshall(vr);
         IvoaJAXBUtils.printXML(doc, new PrintWriter(System.out));
- 
-       
         
     }
     

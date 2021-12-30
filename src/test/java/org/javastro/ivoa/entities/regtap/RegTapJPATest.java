@@ -24,9 +24,9 @@ import javax.xml.bind.helpers.DefaultValidationEventHandler;
 import javax.xml.namespace.QName;
 import javax.xml.validation.Schema;
 
-import org.javastro.ivoa.entities.jaxb.IvoaJAXBContextFactory;
-import org.javastro.ivoa.entities.jaxb.IvoaJAXBUtils;
 import org.javastro.ivoa.entities.regtap.exceptions.PreexistingEntityException;
+import org.javastro.ivoa.jaxb.IvoaJAXBContextFactory;
+import org.javastro.ivoa.jaxb.IvoaJAXBUtils;
 import org.javastro.ivoa.schema.Namespaces;
 import org.junit.After;
 import org.junit.Before;

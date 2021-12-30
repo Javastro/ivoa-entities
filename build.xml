@@ -16,7 +16,7 @@
 			
 			<schema dir="target/schema/schema/" includes="">
 				<include name="VOResource-v1.1.xsd" />
-				<include name="VODataService-v1.1.xsd" />
+				<include name="VODataService-v1.2.xsd" />
 				<include name="ConeSearch-v1.0.xsd" />
 				<include name="SIA-v1.0.xsd" />
 				<include name="VOApplication-1.0.xsd" />

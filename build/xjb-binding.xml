@@ -13,7 +13,7 @@
            <xjc:simple/>
            
            <xjc:javaType name="java.time.LocalDateTime" xmlType="xs:dateTime"
-                adapter="org.javastro.ivoa.entities.jaxb.adapters.DateTimeXmlAdapter" />
+                adapter="org.javastro.ivoa.jaxb.adapters.DateTimeXmlAdapter" />
                 
            
     </jxb:globalBindings>
