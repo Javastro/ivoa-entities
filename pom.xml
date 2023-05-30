@@ -5,19 +5,21 @@
 >
    <modelVersion>4.0.0</modelVersion>
    <artifactId>ivoa-entities</artifactId>
+   <groupId>org.javastro.ivoa</groupId>
    <name>ivoa-entities</name>
-   <version>0.9.3</version>
-   <description>JAXB annotated objects for IVOA schema related mainly to the registry</description>
+   <version>0.9.4</version>
+   
+   <description>JAXB annotated objects for IVOA schema related mainly to registry </description>
    <parent>
       <artifactId>javastro-mavenbase</artifactId>
       <groupId>org.javastro</groupId>
-      <version>0.4.0</version>
+      <version>0.5.0</version>
       <relativePath/>
    </parent>
    <packaging>jar</packaging>
    <dependencies>
        <dependency> 
-         <groupId>org.javastro</groupId>
+         <groupId>org.javastro.ivoa</groupId>
          <artifactId>ivoa-schema</artifactId>
       </dependency>
        <dependency> 
@@ -73,10 +75,15 @@
          <groupId>org.jvnet.jaxb2_commons</groupId>
          <artifactId>jaxb2-basics-runtime</artifactId>
       </dependency>
+     
       <dependency>
          <groupId>org.apache.derby</groupId>
          <artifactId>derby</artifactId>
          <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>com.fasterxml.jackson.core</groupId>
+         <artifactId>jackson-databind</artifactId>
       </dependency>
    </dependencies>
    <build>
@@ -105,7 +112,7 @@
                   <configuration>
                      <artifactItems>
                         <artifactItem>
-                           <groupId>org.javastro</groupId>
+                           <groupId>org.javastro.ivoa</groupId>
                            <artifactId>ivoa-schema</artifactId>
                            <version>${ivoa.schema.version}</version>
                            <type>jar</type>
@@ -118,17 +125,14 @@
          </plugin>
          <plugin>
             <groupId>org.jvnet.jaxb2.maven2</groupId>
-            <artifactId>maven-jaxb2-plugin</artifactId>
+            <artifactId>maven-jaxb23-plugin</artifactId>
             <configuration>
                <strict>false</strict>
-               <debugMode>true</debugMode>
                <verbose>true</verbose>
                <extension>true</extension>
                <forceRegenerate>false</forceRegenerate>
                <episode>true</episode>
-               <locator>true</locator>
-               <specVersion>2.2</specVersion>
-               <target>2.2</target>
+               <specVersion>2.3</specVersion>
                <bindingDirectory>${basedir}/build</bindingDirectory>
                <generateDirectory>${project.build.directory}/generated-sources/xjc</generateDirectory>
                <schemaDirectory>${project.build.directory}/dependency/schema/</schemaDirectory>
@@ -136,9 +140,6 @@
                <markGenerated>true</markGenerated>
                <noFileHeader>true</noFileHeader>
                
-               <vmArgs>
-                  <vmArg>-Djavax.xml.accessExternalSchema=file</vmArg>
-               </vmArgs>
             </configuration>
             <executions>
                <execution>
@@ -153,7 +154,7 @@
                         <arg>-Xxew</arg>
                         <arg>-Xxew:plural</arg>
                         <arg>-Xxew:control</arg>
-                        <arg>${basedir}/build/xew-control.txt</arg> <!-- this possibly causes problems --> 
+                        <arg>${basedir}/build/xew-control.txt</arg>  
                         <arg>-Xxew:summary</arg>
                         <arg>xewmanipulations.log</arg>
    
@@ -240,7 +241,7 @@
             <dependencies>
             </dependencies>
          </plugin>
-         <plugin>
+<!--  not sure of generality of this -       <plugin>
             <groupId>de.empulse.eclipselink</groupId>
             <artifactId>staticweave-maven-plugin</artifactId>
             <version>1.0.0</version>
@@ -262,7 +263,7 @@
                   <version>${eclipselink.version}</version>
                </dependency>
             </dependencies>
-         </plugin>
+         </plugin> -->
       </plugins>
       <pluginManagement>
          <plugins>

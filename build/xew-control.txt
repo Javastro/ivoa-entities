@@ -1,2 +1,2 @@
-org.javastro.ivoa.entities.uws.impl.JobImpl.JobInfoImpl=exclude
+org.javastro.ivoa.entities.uws.Job.JobInfo=exclude
 /org\.javastro\.ivoa\.entities\.vosi\.tables\.*/=exclude

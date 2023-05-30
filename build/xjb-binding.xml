@@ -261,6 +261,7 @@
        </jxb:schemaBindings>
       <jxb:bindings>
        <namespace:prefix name="uws" /> 
+       
       </jxb:bindings>
    </jxb:bindings>
 
