@@ -15,24 +15,24 @@ package org.javastro.ivoa.entities.regtap;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 
-import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 /**
  *
@@ -41,15 +41,10 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
 @Embeddable
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@NamedQueries({
-    @NamedQuery(name = "Validation.findAll", query = "SELECT v FROM Validation v"),
-    @NamedQuery(name = "Validation.findByIvoid", query = "SELECT v FROM Validation v WHERE v.validationPK.ivoid = :ivoid"),
-    @NamedQuery(name = "Validation.findByValidatedBy", query = "SELECT v FROM Validation v WHERE v.validatedBy = :validatedBy"),
-    @NamedQuery(name = "Validation.findByLevel", query = "SELECT v FROM Validation v WHERE v.level = :level"),
-    @NamedQuery(name = "Validation.findByCapIndex", query = "SELECT v FROM Validation v WHERE v.validationPK.capIndex = :capIndex")})
 public class Validation implements Serializable {
     private static final long serialVersionUID = 1L;
     @Transient
+    @XmlAttribute
     private String ivoid;
     @Basic(optional = true)
     @Column(name = "cap_index", nullable = true)

@@ -2,7 +2,7 @@
 
 package org.javastro.ivoa.entities.jaxb.hacks;
 
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**

@@ -13,161 +13,64 @@
  */ 
 package org.javastro.ivoa.entities.regtap;
 
-import java.io.Serializable;
 import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import javax.xml.bind.annotation.XmlTransient;
 
 import org.javastro.ivoa.entities.regtap.exceptions.IllegalOrphanException;
 import org.javastro.ivoa.entities.regtap.exceptions.NonexistentEntityException;
 import org.javastro.ivoa.entities.regtap.exceptions.PreexistingEntityException;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 /**
  * A data access object for {@link Resource} that handles relationships between child objects.
  * @author Paul Harrison <paul.harrison@manchester.ac.uk> 04-Feb-2013
  */
 @XmlTransient
-public class ResourceJpaController implements Serializable {
+public class ResourceJpaController  {
 
-
+   private final EntityManagerFactory emf ;
+    final EntityManager em ;
     public ResourceJpaController(EntityManagerFactory emf) {
         this.emf = emf;
+        this.em=emf.createEntityManager();
     }
-    private EntityManagerFactory emf = null;
-
-    public EntityManager createEntityManager() {
-        return emf.createEntityManager();
+   
+    public void close()
+    {
+       
+        em.close();
     }
 
     public void create(Resource resource) throws PreexistingEntityException, Exception {
-        EntityManager em = null;
+        ;
         try {
-            em = createEntityManager();
             em.getTransaction().begin();
             em.persist(resource); // just rely on the cascade semantics to do the related elements
             em.getTransaction().commit();
         } catch (Exception ex) {
+            em.getTransaction().rollback();
             if (findResource(resource.getIvoid()) != null) {
                 throw new PreexistingEntityException("Resource " + resource + " already exists.", ex);
             }
             throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
     }
 
     public void edit(Resource resource) throws IllegalOrphanException, NonexistentEntityException, Exception {
-        EntityManager em = null;
         try {
-            em = createEntityManager();
+           
             em.getTransaction().begin();
-            Resource persistentResource = em.find(Resource.class, resource.getIvoid());
-            persistentResource.getIvoid();
-
-//            for (Validation validationListNewValidationToAttach : resource.getValidationList()) {
-//                if (em.find(validationListNewValidationToAttach.getClass(), validationListNewValidationToAttach.getValidationPK())
-//                        == null)
-//                {
-//                    em.persist(validationListNewValidationToAttach);
-//                }
-//            }
-            for (Subject subjectListNewSubjectToAttach : resource.getSubjectList()) {
-                if (em.find(subjectListNewSubjectToAttach.getClass(), subjectListNewSubjectToAttach.getSubjectPK())
-                        == null)
-                {
-                    em.persist(subjectListNewSubjectToAttach);
-                }
-            }
-            for (AltIdentifier newAltIDToAttach : resource.getAltIdentifier()) {
-                if (em.find(newAltIDToAttach.getClass(), newAltIDToAttach.getAltidPK())
-                        == null)
-                {
-                    em.persist(newAltIDToAttach);
-                }
-            }
-//           for (ResDetail resDetailListNewResDetailToAttach : resource.getResDetailList()) {
-//                if (em.find(resDetailListNewResDetailToAttach.getClass(), resDetailListNewResDetailToAttach.getIvoid())
-//                        == null)
-//                {
-//                    em.persist(resDetailListNewResDetailToAttach);
-//                }
-//            }
-            for (ResSchema resSchemaListNewResSchemaToAttach : resource.getResSchemaList()) {
-                if (em.find(resSchemaListNewResSchemaToAttach.getClass(), resSchemaListNewResSchemaToAttach.getResSchemaPK())
-                        == null)
-                {
-                    em.persist(resSchemaListNewResSchemaToAttach);
-                }
-            }
-            
-           for (ResTable table : resource.getResTableList()) {
-                 for (TableColumn col : table.getTableColumnList()) {
-                        if(em.find(col.getClass(), col.getTableColumnPK()) == null)
-                        {
-                            em.persist(col);
-                        }
-                    }
-                    if (em.find(table.getClass(), table.getResTablePK()) == null) {
-                        em.persist(table);
-                    }
-                    
-                }
-
-            for (Date dateListNewDateToAttach : resource.getDateList()) {
-                if (em.find(dateListNewDateToAttach.getClass(), dateListNewDateToAttach.getDatePK())
-                        == null)
-                {
-                    em.persist(dateListNewDateToAttach);
-                }
-            }
-//            for (Relationship relationshipListNewRelationshipToAttach : resource.getRelationshipList()) {
-//                if (em.find(relationshipListNewRelationshipToAttach.getClass(), relationshipListNewRelationshipToAttach.getRelationshipPK())
-//                        == null)
-//                {
-//                    em.persist(relationshipListNewRelationshipToAttach);
-//                }
-//            }
-            for (ResRole resRoleListNewResRoleToAttach : resource.getResRoleList()) {
-                if (em.find(resRoleListNewResRoleToAttach.getClass(), resRoleListNewResRoleToAttach.getResRolePK())
-                        == null)
-                {
-                    em.persist(resRoleListNewResRoleToAttach);
-                }
-            }
-     
-            //add new capabilities
-            for (Capability capabilityListNewCapabilityToAttach : resource.getCapabilityList()) {
-                for (Interface  iface : capabilityListNewCapabilityToAttach.getInterfaceList()) {
-                    for (IntfParam param : iface.getIntfParamList()) {
-                        if (em.find(param.getClass(), param.getIntfParamPK()) == null)
-                        {
-                            em.persist(param);
-                        }
-                    }
-                    if (em.find(iface.getClass(), iface.getInterfacePK()) == null) {
-                        em.persist(iface);
-                    }
-                }
-                if( em.find(capabilityListNewCapabilityToAttach.getClass(), capabilityListNewCapabilityToAttach.getCapabilityPK())
-                        == null)
-                {
-                    em.persist(capabilityListNewCapabilityToAttach);
-                }
-            }
-
             resource = em.merge(resource);
-
-
             em.getTransaction().commit();
         } catch (Exception ex) {
+            em.getTransaction().rollback();
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 String id = resource.getIvoid();
@@ -176,17 +79,11 @@ public class ResourceJpaController implements Serializable {
                 }
             }
             throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
     }
 
     public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException {
-        EntityManager em = null;
-        try {
-            em = createEntityManager();
+        
             em.getTransaction().begin();
             Resource resource;
             try {
@@ -197,11 +94,7 @@ public class ResourceJpaController implements Serializable {
             }
             em.remove(resource);
             em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        
     }
 
     public List<Resource> findResourceEntities() {
@@ -213,8 +106,7 @@ public class ResourceJpaController implements Serializable {
     }
 
     private List<Resource> findResourceEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = createEntityManager();
-        try {
+       
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Resource.class));
             Query q = em.createQuery(cq);
@@ -223,31 +115,23 @@ public class ResourceJpaController implements Serializable {
                 q.setFirstResult(firstResult);
             }
             return q.getResultList();
-        } finally {
-            em.close();
-        }
+       
     }
 
     public Resource findResource(String id) {
-        EntityManager em = createEntityManager();
-        try {
+       
             return em.find(Resource.class, id);
-        } finally {
-            em.close();
-        }
+       
     }
 
     public int getResourceCount() {
-        EntityManager em = createEntityManager();
-        try {
+       
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Resource> rt = cq.from(Resource.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
-        } finally {
-            em.close();
-        }
+        
     }
 
 }

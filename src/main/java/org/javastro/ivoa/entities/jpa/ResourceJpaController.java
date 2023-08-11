@@ -13,7 +13,7 @@
  */
 package org.javastro.ivoa.entities.jpa;
 
-import javax.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManagerFactory;
 
 import org.javastro.ivoa.entities.resource.Resource;
 import org.javastro.ivoa.jpa.EntityMetadata;

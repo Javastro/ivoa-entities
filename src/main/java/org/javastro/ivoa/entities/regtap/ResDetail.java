@@ -15,25 +15,25 @@ package org.javastro.ivoa.entities.regtap;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 
-import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 /**
  *
@@ -42,18 +42,13 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
 @Embeddable
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@NamedQueries({
-    @NamedQuery(name = "ResDetail.findAll", query = "SELECT r FROM ResDetail r"),
-    @NamedQuery(name = "ResDetail.findByIvoid", query = "SELECT r FROM ResDetail r WHERE r.ivoid = :ivoid"),
-    @NamedQuery(name = "ResDetail.findByCapIndex", query = "SELECT r FROM ResDetail r WHERE r.capIndex = :capIndex"),
-    @NamedQuery(name = "ResDetail.findByDetailUtype", query = "SELECT r FROM ResDetail r WHERE r.detailUtype = :detailUtype"),
-    @NamedQuery(name = "ResDetail.findByDetailValue", query = "SELECT r FROM ResDetail r WHERE r.detailValue = :detailValue")})
 public class ResDetail implements Serializable {
     @Transient //but keep for the XML
+    @XmlAttribute
     private String ivoid;
     @Basic(optional = true)
     @Column(name = "cap_index", nullable = true)
-    @XmlElement(name = "cap_index", nillable = true)
+    @XmlAttribute(name = "cap_index", required = false)
     private Short capIndex;
     @Basic(optional = false)
     @Column(name = "detail_utype", nullable = false)

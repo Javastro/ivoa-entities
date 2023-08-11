@@ -14,25 +14,26 @@
 package org.javastro.ivoa.entities.regtap;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 
-import org.eclipse.persistence.oxm.annotations.XmlPath;
+//import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 /**
  *
@@ -53,7 +54,7 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
 public class ResSchema implements Serializable, PKIndex {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    @XmlPath(".")
+    @XmlElement
     protected ResSchemaPK resSchemaPK;
     @Column(name = "schema_name")
     @XmlElement(name = "name")
@@ -126,7 +127,7 @@ public class ResSchema implements Serializable, PKIndex {
         this.utype = utype;
     }
 
-    public PKIndexList<ResTable> getResTableList() {
+    public List<ResTable> getResTableList() {
        return resource.getResTableList();
     }
 
@@ -136,10 +137,7 @@ public class ResSchema implements Serializable, PKIndex {
 
     public void addToResource(Resource resource) {
         this.resource = resource;
-        if (resource.getResSchemaList().indexOf(this) == -1) {
-            resource.getResSchemaList().addAndSetIndex(this);
-        }
-        this.resSchemaPK.setIvoid(resource.getIvoid());
+        PKIndexUtils.addWithIndex(this, resource, resource.getResSchemaList());
     }
 
     @Override
@@ -181,6 +179,16 @@ public class ResSchema implements Serializable, PKIndex {
     @Override
     public void setPKIndex(short idx) {
         this.resSchemaPK.setSchemaIndex(idx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * overrides @see org.javastro.ivoa.entities.regtap.PKIndex#setIvoid(java.lang.String)
+     */
+    @Override
+    public void setIvoid(String i) {
+        this.resSchemaPK.setIvoid(i);
+        
     }
 
 }

@@ -15,13 +15,14 @@ package org.javastro.ivoa.entities.regtap;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 /**
  *
@@ -30,17 +31,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @Embeddable
-public class ResRolePK implements Serializable {
+public class ResRolePK {
     @Basic(optional = false)
     @Column(name="ivoid",nullable = false)
+    @XmlAttribute
     private String ivoid;
     @Basic(optional = false)
     @Column(name = "role_ivoid", nullable = false)
-    @XmlElement(name = "role_ivoid")
+    @XmlAttribute(name = "role_ivoid")
     private String roleIvoid;
     @Basic(optional = false)
     @Column(name = "base_utype", nullable = false)
-    @XmlElement(name = "base_role")
+    @XmlAttribute(name = "base_role")
     private String baseRole;
 
     public ResRolePK() {

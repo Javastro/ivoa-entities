@@ -22,6 +22,8 @@ interface PKIndex {
     public short getIndex();
     
     public void setPKIndex(short idx);
+    
+    public void setIvoid(String i);
 }
 
 

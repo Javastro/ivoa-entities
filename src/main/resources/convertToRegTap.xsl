@@ -115,8 +115,10 @@
    </xsl:template>
    <xsl:template match="date"><!-- FIXME still need to think about the exact date formatting -->
    <date>
+       <xsl:element name="datePK">
       <xsl:call-template name="id"/>
-      <value_role><xsl:value-of select="@role"/></value_role>
+           <xsl:attribute name="value_role" select="@role"/>
+       </xsl:element>
       <date_value>
         <xsl:choose>
           <xsl:when test="string-length(.) lt 12">
@@ -131,10 +133,12 @@
    </date>
    </xsl:template>
    <xsl:template match="altIdentifier">
-     <alt_identifier>
+       <alt_identifier>
+         <altidPK>
           <xsl:call-template name="id"/>
-          <id><xsl:value-of select ="."/></id>
-     </alt_identifier>
+          <xsl:attribute name="altid" select ="."/>
+         </altidPK>
+       </alt_identifier>
    </xsl:template>
    <xsl:template match="regionOfRegard">
    <region_of_regard>
@@ -159,11 +163,11 @@
    
     <xsl:template match="curation/contact|curation/creator">
     <role>
+      <xsl:element name="resRolePK">
       <xsl:call-template name="id"/>
-       <role_ivoid>
-         <xsl:value-of select="name/@ivo-id"/>
-       </role_ivoid>
-       <base_role><xsl:value-of select ="local-name()"/></base_role>
+       <xsl:attribute name="role_ivoid" select="name/@ivo-id"/>
+       <xsl:attribute name="base_role" select ="local-name()"/>
+      </xsl:element>
        <role_name>
          <xsl:value-of select="name"/>
        </role_name>
@@ -172,11 +176,11 @@
     </xsl:template>
     <xsl:template match="curation/publisher|curation/contributor">
      <role>
-      <xsl:call-template name="id"/>
-       <role_ivoid>
-         <xsl:value-of select="@ivo-id"/>
-       </role_ivoid>
-       <base_role><xsl:value-of select ="local-name()"/></base_role>
+         <xsl:element name="resRolePK">
+             <xsl:call-template name="id"/>
+             <xsl:attribute name="role_ivoid" select="@ivo-id"/>
+             <xsl:attribute name="base_role" select ="local-name()"/>
+         </xsl:element>
        <role_name>
          <xsl:value-of select="."/>
        </role_name>
@@ -186,15 +190,20 @@
     
      <xsl:template match="subject">
        <subject>
+           <xsl:element name="subjectPK">
          <xsl:call-template name="id"/>
-          <subject><xsl:value-of select ="."/></subject>
+               <xsl:attribute name="subject" select="."/>
+           </xsl:element>
+
        </subject>
      </xsl:template>
     
     <xsl:template match="capability">
     <capability>
+        <capabilityPK>
      <xsl:call-template name="id"/>
-     <xsl:call-template name="capidx"/>     
+     <xsl:call-template name="capidx"/>
+        </capabilityPK>
      <cap_type><xsl:value-of select="@xsi:type"/></cap_type>
      <cap_description><xsl:value-of select="description"/></cap_description>
      <standard_id><xsl:value-of select="@standardID"/></standard_id>
@@ -204,9 +213,11 @@
     
    <xsl:template match="interface">
       <interface>
+          <xsl:element name="interfacePK">
          <xsl:call-template name="id"/>
-         <intf_index><xsl:value-of select="count(preceding::interface[ancestor::ri:Resource/identifier=current()/ancestor::ri:Resource/identifier])+1"/></intf_index>
-         <xsl:call-template name="capidx"/>     
+          <xsl:attribute name="intf_index" select="count(preceding::interface[ancestor::ri:Resource/identifier=current()/ancestor::ri:Resource/identifier])+1"/>
+          </xsl:element>
+          <xsl:element name="cap_index"><xsl:value-of select="count(parent::capability/preceding-sibling::capability)+1"/></xsl:element>
          <intf_type><xsl:value-of select="@xsi:type"/></intf_type>
          <intf_role><xsl:value-of select="@role"/></intf_role>
          <std_version><xsl:value-of select="@version"/></std_version>
@@ -227,9 +238,12 @@
    </xsl:template>
     <xsl:template match="param">
       <param>
+          <xsl:element name="intfParamPK">
           <xsl:call-template name="id"/>
-          <intf_index><xsl:value-of select="count(preceding::interface[ancestor::ri:Resource/identifier=current()/ancestor::ri:Resource/identifier])+1"/></intf_index>
-          <xsl:apply-templates select="node()" />
+          <xsl:attribute name="intf_index" select="count(preceding::interface[ancestor::ri:Resource/identifier=current()/ancestor::ri:Resource/identifier])+1"/>
+          <xsl:attribute name="name" select="name"/>
+          </xsl:element>
+          <xsl:apply-templates select="node() except name" />
           <xsl:apply-templates select="@*" />
           
       </param>
@@ -247,8 +261,15 @@
    <xsl:template match="validationLevel">
       <validation>
        <xsl:call-template name="id"/>
-       <xsl:call-template name="capidx"/>
-      <validated_by><xsl:value-of select="@validatedBy"/></validated_by>
+          <xsl:choose>
+              <xsl:when test="ancestor-or-self::capability">
+                  <cap_index><xsl:value-of select="count(parent::capability/preceding-sibling::capability)+1"/></cap_index>
+              </xsl:when>
+              <xsl:otherwise>
+                  <xsl:element name="cap_index"><xsl:attribute name="nil" namespace="http://www.w3.org/2001/XMLSchema-instance">true</xsl:attribute></xsl:element>
+              </xsl:otherwise>
+          </xsl:choose>
+          <validated_by><xsl:value-of select="@validatedBy"/></validated_by>
       <level><xsl:value-of select="."/></level>
       
       </validation>
@@ -269,8 +290,10 @@
     
    <xsl:template match="schema">
      <schema>
+      <xsl:element name="resSchemaPK">
       <xsl:call-template name="id"/>
-      <schema_index><xsl:value-of select="count(preceding-sibling::schema)+1" /></schema_index>
+      <xsl:attribute name="schema_index" select="count(preceding-sibling::schema)+1" />
+      </xsl:element>
       <xsl:apply-templates select="node() except table" />
     </schema>  
    </xsl:template>
@@ -306,16 +329,13 @@
     
    <!--  -->
    <xsl:template name="id">
-      <ivoid><xsl:value-of select="ancestor::ri:Resource/identifier"/></ivoid>
+       <xsl:attribute name="ivoid" select="ancestor::ri:Resource/identifier"/>
    </xsl:template>
-    <xsl:template name="capidx"> 
+    <xsl:template name="capidx">
     <xsl:choose>
       <xsl:when test="ancestor-or-self::capability">
-        <cap_index><xsl:value-of select="count(parent::capability/preceding-sibling::capability)+1"/></cap_index>
+          <xsl:attribute name="cap_index" select="count(parent::capability/preceding-sibling::capability)+1"/>
       </xsl:when>
-      <xsl:otherwise>
-        <xsl:element name="cap_index"><xsl:attribute name="nil" namespace="http://www.w3.org/2001/XMLSchema-instance">true</xsl:attribute></xsl:element>
-      </xsl:otherwise>
    </xsl:choose>
     
    </xsl:template>

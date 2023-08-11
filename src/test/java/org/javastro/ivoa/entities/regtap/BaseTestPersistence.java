@@ -13,10 +13,13 @@
 package org.javastro.ivoa.entities.regtap;
 
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import javax.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManagerFactory;
 
+import org.hibernate.Session;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
@@ -32,7 +35,7 @@ import org.junit.BeforeClass;
 public class BaseTestPersistence {
 
     protected static EntityManagerFactory emf;
-    
+    protected static TestPersistenceManager testPersistenceManager;
  
     /**
      * @throws java.lang.Exception
@@ -40,7 +43,8 @@ public class BaseTestPersistence {
     @BeforeClass
     public static void setUpBeforeClassBase() throws Exception {
         
-        emf = new TestPersistenceManager().createEmf();
+        testPersistenceManager = new TestPersistenceManager();
+        emf = testPersistenceManager.createEmf();
        
        
     }
@@ -58,8 +62,28 @@ public class BaseTestPersistence {
      */
     @Before
     public void setUpBase() throws Exception {
+       
     }
-
+    
+    
+   @After
+    public void tearDownBase() throws Exception {
+    }
+    
+      /**
+     * Write the contents of the database to a file.
+     * @param em the entity manager for the database.
+     * @param filename The name of the file to write the DDL to.
+     */
+    protected void dumpDbData(jakarta.persistence.EntityManager em, String filename) {
+        //IMPL hibernate specific way of getting connection... generally dirty, see  https://stackoverflow.com/questions/3493495/getting-database-connection-in-pure-jpa-setup
+            Session sess = em.unwrap(Session.class);
+            sess.doWork(conn -> {
+                PreparedStatement ps = conn.prepareStatement("SCRIPT TO ?"); // this is H2db specific
+                ps.setString(1, filename);
+                ps.execute();
+            });
+    }
     
     protected static void dropDatabase()
     {

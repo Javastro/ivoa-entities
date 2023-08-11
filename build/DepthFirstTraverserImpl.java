@@ -9,7 +9,7 @@
 package org.javastro.ivoa.jaxb.visitor;
 
 import javax.annotation.Generated;
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import org.javastro.ivoa.entities.resource.AccessURL;
 import org.javastro.ivoa.entities.resource.Capability;
 import org.javastro.ivoa.entities.resource.Contact;

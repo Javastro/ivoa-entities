@@ -15,24 +15,23 @@ package org.javastro.ivoa.entities.regtap;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
-
-import org.eclipse.persistence.oxm.annotations.XmlPath;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlType;
 
 /**
  * RegTAP relationship.
@@ -41,14 +40,10 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
 @Embeddable
 @XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
-@NamedQueries({
-    @NamedQuery(name = "Relationship.findAll", query = "SELECT r FROM Relationship r"),
-    @NamedQuery(name = "Relationship.findByRelationshipType", query = "SELECT r FROM Relationship r WHERE r.relationshipType = :relationshipType"),
-    @NamedQuery(name = "Relationship.findByRelatedId", query = "SELECT r FROM Relationship r WHERE r.relatedId = :relatedId"),
-    @NamedQuery(name = "Relationship.findByRelatedName", query = "SELECT r FROM Relationship r WHERE r.relatedName = :relatedName")})
 public class Relationship implements Serializable {
     private static final long serialVersionUID = 1L;
     @Transient //IMPL perhaps get rid of this - however useful in the intermediate XML representation
+    @XmlAttribute
     private String ivoid;
     @Basic(optional = false)
     @Column(name = "relationship_type", nullable = false)

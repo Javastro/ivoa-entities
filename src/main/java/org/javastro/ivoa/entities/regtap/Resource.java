@@ -14,33 +14,35 @@
 package org.javastro.ivoa.entities.regtap;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import org.hibernate.annotations.CollectionType;
 
+import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlType;
 /**
  *
  * @author Paul Harrison <paul.harrison@manchester.ac.uk> 04-Feb-2013
@@ -75,7 +77,7 @@ import javax.xml.bind.annotation.XmlType;
     @NamedQuery(name = "Resource.findByWaveband", query = "SELECT r FROM Resource r WHERE r.waveband = :waveband"),
     @NamedQuery(name = "Resource.findByRights", query = "SELECT r FROM Resource r WHERE r.rights = :rights")
     })
-public class Resource implements Serializable {
+public class Resource implements Identifier, Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -139,9 +141,9 @@ public class Resource implements Serializable {
     @XmlElement(name="res_version")
     private String version;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "region_of_regard", precision = 22)
+    @Column(name = "region_of_regard")
     @XmlElement(name = "region_of_regard")
-    private Double regionOfRegard;
+    private double regionOfRegard;
     @Column(name="waveband")
     private String waveband;
     @Column(name="rights")
@@ -149,7 +151,6 @@ public class Resource implements Serializable {
     @Column(name="rights_uri")
     @XmlElement(name="rights_uri")
     private String rightsURI;
-    //IMPL would be nice (more efficient) to make the fetchtype LAZY - but does not appear easy/possible
     @XmlElement(type=Validation.class, name="validation")
     @XmlElementWrapper(name="validationList")
     @ElementCollection
@@ -170,7 +171,7 @@ public class Resource implements Serializable {
     @XmlElement(type=ResSchema.class, name="schema")
     @XmlElementWrapper(name="schemata")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "resource", targetEntity=ResSchema.class, fetch= FetchType.EAGER, orphanRemoval=true)
-    private PKIndexList<ResSchema> resSchemaList;
+    private List<ResSchema> resSchemaList;
     
     @XmlElement(type=org.javastro.ivoa.entities.regtap.Date.class, name="date")
     @XmlElementWrapper(name="dates")
@@ -190,13 +191,13 @@ public class Resource implements Serializable {
     
     @XmlElement(type=Capability.class, name="capability")
     @XmlElementWrapper(name="capabilities")
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "resource", targetEntity=Capability.class, fetch= FetchType.EAGER, orphanRemoval=true)
-    private PKIndexList<Capability> capabilityList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "resource",  targetEntity=Capability.class, fetch= FetchType.EAGER, orphanRemoval=true)
+    private List<Capability> capabilityList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "resource", targetEntity=ResTable.class, fetch= FetchType.EAGER, orphanRemoval=true)
     @XmlElementWrapper(name="tables")
     @XmlElement(name = "table")
-    private PKIndexList<ResTable> resTableList;
+    private List<ResTable> resTableList;
 
     
     public Resource() {
@@ -230,6 +231,10 @@ public class Resource implements Serializable {
      * @return the altIdentifier
      */
     public List<AltIdentifier> getAltIdentifier() {
+        if(altIdentifier == null)
+        {
+            altIdentifier = new ArrayList<>();
+        }
         return altIdentifier;
     }
 
@@ -337,11 +342,11 @@ public class Resource implements Serializable {
         this.version = version;
     }
 
-    public Double getRegionOfRegard() {
+    public double getRegionOfRegard() {
         return regionOfRegard;
     }
 
-    public void setRegionOfRegard(Double regionOfRegard) {
+    public void setRegionOfRegard(double regionOfRegard) {
         this.regionOfRegard = regionOfRegard;
     }
 
@@ -383,8 +388,8 @@ public class Resource implements Serializable {
 
  
     @XmlTransient
-    public PKIndexList<ResSchema> getResSchemaList() {
-        if(resSchemaList == null ) resSchemaList = new PKIndexList<ResSchema>();
+    public List<ResSchema> getResSchemaList() {
+        if(resSchemaList == null ) resSchemaList = new ArrayList<ResSchema>();
         return resSchemaList;
     }
 
@@ -412,15 +417,15 @@ public class Resource implements Serializable {
 
  
     @XmlTransient
-    public PKIndexList<Capability> getCapabilityList() {
+    public List<Capability> getCapabilityList() {
         if(capabilityList == null){
-            capabilityList = new PKIndexList<Capability>();
+            capabilityList = new ArrayList<Capability>();
         }
         return capabilityList;
     }
     @XmlTransient
-    public PKIndexList<ResTable> getResTableList() {
-        if (resTableList == null) resTableList = new PKIndexList<ResTable>();
+    public List<ResTable> getResTableList() {
+        if (resTableList == null) resTableList = new ArrayList<ResTable>();
         return resTableList;
     }
 
@@ -463,5 +468,12 @@ public class Resource implements Serializable {
     public void setRightsURI(String rightsURI) {
         this.rightsURI = rightsURI;
     }
-
+    /**
+     * TODO - this is a lit of values...
+     * @param c
+     */
+    public void setCreator(String c)
+    {
+        this.creator = c;
+    }
 }

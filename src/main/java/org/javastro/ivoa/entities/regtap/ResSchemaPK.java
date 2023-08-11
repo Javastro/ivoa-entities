@@ -15,13 +15,14 @@ package org.javastro.ivoa.entities.regtap;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 /**
  *
@@ -30,16 +31,15 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @Embeddable
-public class ResSchemaPK implements Serializable {
-    /** serialVersionUID.
-     */
-    private static final long serialVersionUID = -1472454756028696002L;
+public class ResSchemaPK  {
+   
     @Basic(optional = false)
     @Column(name="ivoid",nullable = false)
+    @XmlAttribute(required = true)
     private String ivoid;
     @Basic(optional = false)
     @Column(name = "schema_index", nullable = false)
-    @XmlElement(name = "schema_index")
+    @XmlAttribute(name = "schema_index")
     private short schemaIndex;
 
     public ResSchemaPK() {

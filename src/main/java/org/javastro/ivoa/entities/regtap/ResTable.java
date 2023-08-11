@@ -17,26 +17,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 
-import org.eclipse.persistence.oxm.annotations.XmlPath;
+//import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 /**
  *
@@ -59,7 +59,7 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
 public class ResTable implements Serializable, PKIndex {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    @XmlPath(".")
+    @XmlElement
     protected ResTablePK resTablePK;
  
     @Basic(optional = false)
@@ -98,7 +98,7 @@ public class ResTable implements Serializable, PKIndex {
     @JoinColumns({@JoinColumn(name = "ivoid", nullable = false, insertable = false, updatable = false, referencedColumnName = "ivoid")})
     private Resource resource;
 
-    ResTable() {
+    public ResTable() {
         this.resTablePK = new ResTablePK();
     }
     
@@ -192,7 +192,7 @@ public class ResTable implements Serializable, PKIndex {
     public void addToSchema(ResSchema schema) {
         this.resource = schema.getResource();
         if (resource.getResTableList().indexOf(this) == -1) {
-            resource.getResTableList().addAndSetIndex(this);
+            resource.getResTableList().add(this);
         }
         this.resTablePK.setIvoid(schema.getResSchemaPK().getIvoid());
         this.schemaIndex = schema.getIndex();
@@ -238,6 +238,16 @@ public class ResTable implements Serializable, PKIndex {
     @Override
     public void setPKIndex(short idx) {
         this.resTablePK.setTableIndex(idx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * overrides @see org.javastro.ivoa.entities.regtap.PKIndex#setIvoid(java.lang.String)
+     */
+    @Override
+    public void setIvoid(String i) {
+        this.resTablePK.setIvoid(i);
+        
     }
 
 }

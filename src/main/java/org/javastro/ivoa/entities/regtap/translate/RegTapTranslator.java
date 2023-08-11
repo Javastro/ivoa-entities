@@ -15,11 +15,13 @@ package org.javastro.ivoa.entities.regtap.translate;
 import static org.javastro.ivoa.entities.jaxb.Utils.marshall;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
@@ -66,8 +68,8 @@ public class RegTapTranslator {
         Source request = new DOMSource(doc);
         DOMResult response = new DOMResult();
         rextapxform.transform(request, response);
-       
-//        IvoaJAXBUtils.printXML(response.getNode(), new PrintWriter(System.out));
+        
+        IvoaJAXBUtils.printXML(response.getNode(), new PrintWriter(new File("test.xml")));
         return IvoaJAXBUtils.unmarshall((Document) response.getNode(),org.javastro.ivoa.entities.regtap.RegTAP.class,false);
 
        

@@ -7,13 +7,13 @@
    <artifactId>ivoa-entities</artifactId>
    <groupId>org.javastro.ivoa</groupId>
    <name>ivoa-entities</name>
-   <version>0.9.4</version>
+   <version>0.9.5</version>
    
-   <description>JAXB annotated objects for IVOA schema related mainly to registry </description>
+   <description>JAXB annotated objects for IVOA schema related mainly to registry</description>
    <parent>
       <artifactId>javastro-mavenbase</artifactId>
       <groupId>org.javastro</groupId>
-      <version>0.5.0</version>
+      <version>0.6.0</version>
       <relativePath/>
    </parent>
    <packaging>jar</packaging>
@@ -35,28 +35,16 @@
          <groupId>org.glassfish.jaxb</groupId>
          <artifactId>jaxb-runtime</artifactId>
       </dependency>
-      <!-- eclipselink -->
       <dependency>
-         <groupId>javax.annotation</groupId>
-         <artifactId>jsr250-api</artifactId>
-         <version>1.0</version>
-         <scope>provided</scope>
-      </dependency>
+         <groupId>org.hibernate.orm</groupId>
+         <artifactId>hibernate-core</artifactId>
+      </dependency>      
       <dependency>
-         <groupId>javax.transaction</groupId>
-         <artifactId>jta</artifactId>
-         <version>1.1</version>
-         <scope>runtime</scope>
+         <groupId>jakarta.annotation</groupId>
+         <artifactId>jakarta.annotation-api</artifactId>
       </dependency>
-      <dependency>
-         <groupId>org.eclipse.persistence</groupId>
-         <artifactId>org.eclipse.persistence.jpa</artifactId>
-      </dependency>
-       <dependency>
-         <groupId>org.eclipse.persistence</groupId>
-         <artifactId>org.eclipse.persistence.moxy</artifactId>
-      </dependency>
-      <!--provided scope needed for compile annotation processing done so 
+
+     <!--provided scope needed for compile annotation processing done so 
          that it does not get included in shaded jar - the annotation processing is 
          not done properly by eclipse - needs to be done manually outside with a maven 
          run -->
@@ -72,14 +60,20 @@
          <artifactId>Saxon-HE</artifactId>
       </dependency>
       <dependency>
-         <groupId>org.jvnet.jaxb2_commons</groupId>
-         <artifactId>jaxb2-basics-runtime</artifactId>
+         <groupId>org.patrodyne.jvnet</groupId>
+         <artifactId>hisrc-basicjaxb-runtime</artifactId>
+         <version>2.1.0</version>
       </dependency>
      
       <dependency>
          <groupId>org.apache.derby</groupId>
          <artifactId>derby</artifactId>
          <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>com.h2database</groupId>
+         <artifactId>h2</artifactId>
+         <version>2.2.220</version>
       </dependency>
       <dependency>
          <groupId>com.fasterxml.jackson.core</groupId>
@@ -114,7 +108,6 @@
                         <artifactItem>
                            <groupId>org.javastro.ivoa</groupId>
                            <artifactId>ivoa-schema</artifactId>
-                           <version>${ivoa.schema.version}</version>
                            <type>jar</type>
                         </artifactItem>
                      </artifactItems>
@@ -124,8 +117,9 @@
             </executions>
          </plugin>
          <plugin>
-            <groupId>org.jvnet.jaxb2.maven2</groupId>
-            <artifactId>maven-jaxb23-plugin</artifactId>
+             <groupId>org.patrodyne.jvnet</groupId> <!-- this is a fork of the original https://github.com/highsource/jaxb-tools - might go back to that when jakarta enabled -->
+               <artifactId>hisrc-higherjaxb-maven-plugin</artifactId>
+               <version>2.1.0</version>
             <configuration>
                <strict>false</strict>
                <verbose>true</verbose>
@@ -139,7 +133,23 @@
                <packageLevelAnnotations>true</packageLevelAnnotations>
                <markGenerated>true</markGenerated>
                <noFileHeader>true</noFileHeader>
-               
+                <plugins>
+                      <plugin>
+                        <groupId>com.github.jaxb-xew-plugin</groupId>
+                        <artifactId>jaxb-xew-plugin</artifactId>
+                        <version>2.1</version>
+                     </plugin>
+                     <plugin>
+                        <groupId>org.patrodyne.jvnet</groupId>
+                        <artifactId>hisrc-basicjaxb-plugins</artifactId>
+                        <version>2.1.0</version>
+                     </plugin>
+                     <plugin>
+                        <groupId>org.jvnet.jaxb2_commons</groupId>
+                        <artifactId>jaxb2-namespace-prefix</artifactId>
+                        <version>2.0</version>
+                     </plugin>
+                 </plugins>
             </configuration>
             <executions>
                <execution>
@@ -159,21 +169,21 @@
                         <arg>xewmanipulations.log</arg>
    
 
-                        <arg>-Xvalue-constructor</arg>
+
                         <arg>-XsimpleEquals</arg>
                         <arg>-XsimpleHashCode</arg>
-                        <arg>-XtoString</arg>                        
-<!--   massfords                      <arg>-Xvisitor</arg> -->
-<!--                         <arg>-Xvisitor-package:org.javastro.ivoa.jaxb.visitor</arg> -->
-<!--                         <arg>-Xvisitor-includeType</arg> -->
-<!--                         <arg>-Xvisitor-noClasses</arg>  the traverser class messes up with the Date Converter annotation  -->
-<!--                         <arg>-Xcopyable</arg> -->
+                        <arg>-XtoString</arg>  
+                                              
+
                         <arg>-Xmergeable</arg>
                         <arg>-XenumValue</arg>
-                        
+<!-- org.jvnet.jaxb2_commons:jaxb2-namespace-prefix-->                        
                         <arg>-Xnamespace-prefix</arg>
- 
-                        <arg>-Xclone</arg>
+<!-- org.jvnet.jaxb2_commons:jaxb2-value-constructor -->
+<!--                        <arg>-Xvalue-constructor</arg> -->
+                        
+<!-- net.codesup.util:jaxb2-rich-contract-plugin
+                       <arg>-Xclone</arg>
                             <arg>-cloneThrows=y</arg>
                         <arg>-Xcopy</arg>
                             <arg>-partial=y</arg>
@@ -205,7 +215,7 @@
                             <arg>-allowSet=n</arg>
                             <arg>-visitMethodName=visit</arg>
                             
-                        
+                        -->
                         
 <!--                         <arg>-Xjaxbindex</arg> this does not do nice stuff! -->
                      
@@ -241,6 +251,27 @@
             <dependencies>
             </dependencies>
          </plugin>
+
+         <!--         <plugin>
+                         <groupId>org.apache.maven.plugins</groupId>
+                         <artifactId>maven-antrun-plugin</artifactId>
+                         <executions>
+                             <execution>
+                                 <phase>generate-sources</phase>
+                                 <configuration>
+                                     <target>
+                                         <replace dir="target/generated-sources" value="jakarta.xml.bind">
+                                             <include name="**/*.java"/>
+                                             <replacetoken>javax.xml.bind</replacetoken>
+                                         </replace>
+                                     </target>
+                                 </configuration>
+                                 <goals>
+                                     <goal>run</goal>
+                                 </goals>
+                             </execution>
+                         </executions>
+                     </plugin>-->
 <!--  not sure of generality of this -       <plugin>
             <groupId>de.empulse.eclipselink</groupId>
             <artifactId>staticweave-maven-plugin</artifactId>

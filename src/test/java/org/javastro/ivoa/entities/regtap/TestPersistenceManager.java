@@ -9,8 +9,6 @@
 
 package org.javastro.ivoa.entities.regtap;
 
-import org.eclipse.persistence.config.PersistenceUnitProperties;
-import org.eclipse.persistence.config.TargetServer;
 
 /**
  *  .
@@ -26,20 +24,13 @@ public class TestPersistenceManager extends AbstractPersistenceManager {
     @Override
     void setupConnectionProperties() {
         //
-
-        props.put(PersistenceUnitProperties.JDBC_URL, "jdbc:derby:memory:ivoatestdb;create=true");//IMPL only one db for every PU perhaps dangerous
-//        props.put(PersistenceUnitProperties.JDBC_URL, "jdbc:derby:ivoatestdb;create=true;traceFile=derbytrace.out;traceLevel=-1;traceDirectory=/tmp");
-        props.put(PersistenceUnitProperties.JDBC_DRIVER, "org.apache.derby.jdbc.EmbeddedDriver");
-        props.put(PersistenceUnitProperties.TARGET_DATABASE, "org.eclipse.persistence.platform.database.DerbyPlatform");
-        props.put(PersistenceUnitProperties.DDL_GENERATION_MODE, PersistenceUnitProperties.DDL_BOTH_GENERATION);
-        props.put(PersistenceUnitProperties.DDL_GENERATION, PersistenceUnitProperties.DROP_AND_CREATE);
-//        props.put(PersistenceUnitProperties.CACHE_SHARED_, "false");
+    props.put("jakarta.persistence.jdbc.url", "jdbc:h2:mem:regtap;DB_CLOSE_DELAY=-1");
+        props.put("jakarta.persistence.jdbc.driver", "org.h2.Driver");
+        props.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        props.put("hibernate.hbm2ddl.schema-generation.script.append", "false");
+//        props.put("jakarta.persistence.jdbc.url", "jdbc:derby:memory:ivoatestdb;create=true");//IMPL only one db for every PU perhaps dangerous
+//        props.put("jakarta.persistence.jdbc.driver", "org.apache.derby.jdbc.EmbeddedDriver");
         
-     // Configure logging. FINE ensures all SQL is shown
-        props.put(PersistenceUnitProperties.LOGGING_LEVEL, "FINEST");
-         
-        // Ensure that no server-platform is configured
-        props.put(PersistenceUnitProperties.TARGET_SERVER, TargetServer.None);
         
     }
 

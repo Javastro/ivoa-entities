@@ -15,19 +15,23 @@ package org.javastro.ivoa.entities.regtap;
 
 import java.io.Serializable;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlList;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlType;
 
-import org.eclipse.persistence.oxm.annotations.XmlPath;
+//import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 /**
  *
@@ -35,8 +39,8 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
  */
 @Entity
 @Table(name="alt_identifier")
-@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType
 @NamedQueries({
     @NamedQuery(name = "AltIdentifier.findAll", query = "SELECT s FROM AltIdentifier s"),
     @NamedQuery(name = "AltIdentifier.findByIvoid", query = "SELECT s FROM AltIdentifier s WHERE s.altidPK.ivoid = :ivoid"),
@@ -44,7 +48,7 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
 public class AltIdentifier implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    @XmlPath(".")
+    @XmlElement
     protected AltIdentifierPK altidPK;
     @XmlTransient
     @JoinColumn(name = "ivoid", referencedColumnName = "ivoid", nullable = false, insertable = false, updatable = false)

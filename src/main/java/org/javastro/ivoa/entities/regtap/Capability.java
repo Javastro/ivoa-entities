@@ -14,25 +14,29 @@
 package org.javastro.ivoa.entities.regtap;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import org.hibernate.annotations.CollectionType;
 
-import org.eclipse.persistence.oxm.annotations.XmlPath;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlType;
+
+//import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 /**
  *
@@ -50,10 +54,10 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
     @NamedQuery(name = "Capability.findByCapType", query = "SELECT c FROM Capability c WHERE c.type = :capType"),
     @NamedQuery(name = "Capability.findByCapDescription", query = "SELECT c FROM Capability c WHERE c.capDescription = :capDescription"),
     @NamedQuery(name = "Capability.findByStandardId", query = "SELECT c FROM Capability c WHERE c.standardId = :standardId")})
-public class Capability implements Serializable, PKIndex {
+public class Capability implements Serializable, PKIndex, Identifier {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    @XmlPath(".")
+    @XmlElement
     protected CapabilityPK capabilityPK;
     @Column(name = "cap_name")
     @XmlElement(name = "cap_name")
@@ -70,7 +74,7 @@ public class Capability implements Serializable, PKIndex {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "capability", targetEntity=Interface.class, fetch= FetchType.EAGER, orphanRemoval=true)
     @XmlElement(name = "interface")
-    private PKIndexList<Interface> interfaceList;
+    private List<Interface> interfaceList;
 
     @XmlTransient
     @JoinColumn(name = "ivoid", referencedColumnName = "ivoid", nullable = false, insertable = false, updatable = false )
@@ -129,12 +133,12 @@ public class Capability implements Serializable, PKIndex {
         this.standardId = standardId;
     }
 
-    public PKIndexList<Interface> getInterfaceList() {
-        if(interfaceList == null) interfaceList = new PKIndexList<Interface>();
+    public List<Interface> getInterfaceList() {
+        if(interfaceList == null) interfaceList = new ArrayList<Interface>();
         return interfaceList;
     }
 
-    public void setInterfaceList(PKIndexList<Interface> interfaceList) {
+    public void setInterfaceList(List<Interface> interfaceList) {
         this.interfaceList = interfaceList;
     }
 
@@ -144,11 +148,7 @@ public class Capability implements Serializable, PKIndex {
 
     public void addToResource(Resource resource) {
         this.resource = resource;
-        if ( resource.getCapabilityList().indexOf(this)== -1)
-        {
-            resource.getCapabilityList().addAndSetIndex(this);
-        }
-        this.capabilityPK.setIvoid(resource.getIvoid());
+        PKIndexUtils.addWithIndex(this, resource, resource.getCapabilityList());
    }
 
     @Override
@@ -190,6 +190,25 @@ public class Capability implements Serializable, PKIndex {
     @Override
     public void setPKIndex(short idx) {
         this.capabilityPK.setCapIndex(idx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * overrides @see org.javastro.ivoa.entities.regtap.PKIndex#setIvoid(java.lang.String)
+     */
+    @Override
+    public void setIvoid(String i) {
+        this.capabilityPK.setIvoid(i);
+        
+    }
+
+    /**
+     * {@inheritDoc}
+     * overrides @see org.javastro.ivoa.entities.regtap.Identifier#getIvoid()
+     */
+    @Override
+    public String getIvoid() {
+       return this.getCapabilityPK().getIvoid();
     }
 
     

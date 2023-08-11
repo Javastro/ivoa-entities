@@ -17,26 +17,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlType;
 
-import org.eclipse.persistence.oxm.annotations.XmlPath;
+//import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 /**
  *
@@ -59,15 +59,16 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
     @NamedQuery(name = "Interface.findByWsdlUrl", query = "SELECT i FROM Interface i WHERE i.wsdlUrl = :wsdlUrl"),
     @NamedQuery(name = "Interface.findByUrlUse", query = "SELECT i FROM Interface i WHERE i.urlUse = :urlUse"),
     @NamedQuery(name = "Interface.findByAccessUrl", query = "SELECT i FROM Interface i WHERE i.accessUrl = :accessUrl")})
-public class Interface implements Serializable,PKIndex {
+public class Interface implements Serializable,PKIndex, Identifier
+{
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    @XmlPath(".")
+    @XmlElement
     protected InterfacePK interfacePK;
     @Basic(optional = false)
     @Column(name = "cap_index", nullable = false)
     @XmlElement(name = "cap_index")
-    private Short capIndex;
+    private Short capIndex;     //TODO need to work out if the correct foreign key working into this and ivoid
     @Column(name = "intf_type")
     @XmlElement(name = "intf_type")
     private String intfType;
@@ -233,12 +234,11 @@ public class Interface implements Serializable,PKIndex {
 
     public void addToCapability(Capability capability) {
         this.capability = capability;
-        if( capability.getInterfaceList().indexOf(this) == -1)
-        {
-            capability.getInterfaceList().addAndSetIndex(this);
-        }
+        
+        PKIndexUtils.addWithIndex(this, capability, capability.getInterfaceList());
+    
         this.setCapIndex(capability.getIndex());
-        this.interfacePK.setIvoid(capability.getCapabilityPK().getIvoid());
+        
     }
 
     /**
@@ -294,6 +294,26 @@ public class Interface implements Serializable,PKIndex {
     @Override
     public void setPKIndex(short idx) {
         this.interfacePK.setIntfIndex(idx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * overrides @see org.javastro.ivoa.entities.regtap.PKIndex#setIvoid(java.lang.String)
+     */
+    @Override
+    public void setIvoid(String i) {
+        interfacePK.setIvoid(i);
+        
+    }
+
+    /**
+     * {@inheritDoc}
+     * overrides @see org.javastro.ivoa.entities.regtap.Identifier#getIvoid()
+     */
+    @Override
+    public String getIvoid() {
+        
+       return interfacePK.getIvoid();
     }
 
 }

@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 import java.io.PrintWriter;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 import javax.xml.transform.TransformerException;
 
 import org.javastro.ivoa.jaxb.IvoaJAXBUtils;

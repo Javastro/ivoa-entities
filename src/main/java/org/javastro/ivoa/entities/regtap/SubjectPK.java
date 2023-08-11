@@ -15,12 +15,13 @@ package org.javastro.ivoa.entities.regtap;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 /**
  *
@@ -32,9 +33,11 @@ import javax.xml.bind.annotation.XmlType;
 public class SubjectPK implements Serializable {
     @Basic(optional = false)
     @Column(name="ivoid", nullable = false)
+    @XmlAttribute
     private String ivoid;
     @Basic(optional = false)
     @Column(name="subject",nullable = false)
+    @XmlAttribute
     private String subject;
 
     public SubjectPK() {
