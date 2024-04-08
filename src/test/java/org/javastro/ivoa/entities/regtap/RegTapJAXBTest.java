@@ -18,7 +18,7 @@ import java.io.PrintWriter;
 import jakarta.xml.bind.JAXBException;
 import javax.xml.transform.TransformerException;
 
-import org.javastro.ivoa.jaxb.IvoaJAXBUtils;
+import org.javastro.ivoa.entities.IvoaJAXBUtils;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;

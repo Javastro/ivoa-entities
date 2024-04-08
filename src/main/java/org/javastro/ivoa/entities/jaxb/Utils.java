@@ -17,9 +17,9 @@ import javax.xml.namespace.QName;
 import javax.xml.transform.TransformerException;
 import javax.xml.validation.Schema;
 
+import org.javastro.ivoa.entities.IvoaJAXBUtils;
 import org.javastro.ivoa.entities.regtap.RegTAP;
 import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
-import org.javastro.ivoa.jaxb.IvoaJAXBUtils;
 import org.javastro.ivoa.schema.Namespaces;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;

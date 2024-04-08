@@ -23,10 +23,10 @@ import java.io.PrintWriter;
 import jakarta.xml.bind.JAXBException;
 import javax.xml.transform.TransformerException;
 
+import org.javastro.ivoa.entities.IvoaJAXBUtils;
 import org.javastro.ivoa.entities.resource.Resource;
 import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
 import org.javastro.ivoa.entities.vosi.tables.Tableset;
-import org.javastro.ivoa.jaxb.IvoaJAXBUtils;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

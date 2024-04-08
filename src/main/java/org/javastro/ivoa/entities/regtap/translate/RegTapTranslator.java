@@ -31,8 +31,8 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 
+import org.javastro.ivoa.entities.IvoaJAXBUtils;
 import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
-import org.javastro.ivoa.jaxb.IvoaJAXBUtils;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 

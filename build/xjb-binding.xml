@@ -1,11 +1,10 @@
-<jxb:bindings version="2.1" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+<jxb:bindings version="3.0" xmlns:jxb="https://jakarta.ee/xml/ns/jaxb"
    xmlns:xs="http://www.w3.org/2001/XMLSchema"
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
-   xmlns:namespace="http://jaxb2-commons.dev.java.net/namespace-prefix"   
+   xmlns:namespace="http://jaxb2-commons.dev.java.net/basic/namespace-prefix"   
    xmlns:orm="http://java.sun.com/xml/ns/persistence/orm"
-   xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
-   http://jaxb2-commons.dev.java.net/namespace-prefix ./prefix-namespace-schema.xsd"
+   
 >
     <jxb:globalBindings generateValueClass="true" generateElementProperty="false" 
     fixedAttributeAsConstantProperty="true" mapSimpleTypeDef="false" generateMixedExtensions="true"> <!-- generateElementProperty=false means that nillable not supported - mainly for stc  -->

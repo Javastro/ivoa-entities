@@ -7,13 +7,13 @@
    <artifactId>ivoa-entities</artifactId>
    <groupId>org.javastro.ivoa</groupId>
    <name>ivoa-entities</name>
-   <version>0.9.5</version>
+   <version>0.9.6</version>
    
    <description>JAXB annotated objects for IVOA schema related mainly to registry</description>
    <parent>
       <artifactId>javastro-mavenbase</artifactId>
       <groupId>org.javastro</groupId>
-      <version>0.6.0</version>
+      <version>0.6.2</version>
       <relativePath/>
    </parent>
    <packaging>jar</packaging>
@@ -60,9 +60,9 @@
          <artifactId>Saxon-HE</artifactId>
       </dependency>
       <dependency>
-         <groupId>org.patrodyne.jvnet</groupId>
-         <artifactId>hisrc-basicjaxb-runtime</artifactId>
-         <version>2.1.0</version>
+         <groupId>org.jvnet.jaxb</groupId>
+         <artifactId>jaxb-plugins-runtime</artifactId>
+         <version>4.0.3</version>
       </dependency>
      
       <dependency>
@@ -117,16 +117,15 @@
             </executions>
          </plugin>
          <plugin>
-             <groupId>org.patrodyne.jvnet</groupId> <!-- this is a fork of the original https://github.com/highsource/jaxb-tools - might go back to that when jakarta enabled -->
-               <artifactId>hisrc-higherjaxb-maven-plugin</artifactId>
-               <version>2.1.0</version>
-            <configuration>
+             <groupId>org.jvnet.jaxb</groupId> <!-- this is a fork of the original https://github.com/highsource/jaxb-tools - go back now!! -->
+               <artifactId>jaxb-maven-plugin</artifactId>
+               <configuration>
                <strict>false</strict>
                <verbose>true</verbose>
                <extension>true</extension>
                <forceRegenerate>false</forceRegenerate>
                <episode>true</episode>
-               <specVersion>2.3</specVersion>
+               <specVersion>3.0</specVersion>
                <bindingDirectory>${basedir}/build</bindingDirectory>
                <generateDirectory>${project.build.directory}/generated-sources/xjc</generateDirectory>
                <schemaDirectory>${project.build.directory}/dependency/schema/</schemaDirectory>
@@ -140,14 +139,9 @@
                         <version>2.1</version>
                      </plugin>
                      <plugin>
-                        <groupId>org.patrodyne.jvnet</groupId>
-                        <artifactId>hisrc-basicjaxb-plugins</artifactId>
-                        <version>2.1.0</version>
-                     </plugin>
-                     <plugin>
-                        <groupId>org.jvnet.jaxb2_commons</groupId>
-                        <artifactId>jaxb2-namespace-prefix</artifactId>
-                        <version>2.0</version>
+                        <groupId>org.jvnet.jaxb</groupId>
+                        <artifactId>jaxb-plugins</artifactId>
+                        <version>4.0.3</version>
                      </plugin>
                  </plugins>
             </configuration>
@@ -177,8 +171,8 @@
 
                         <arg>-Xmergeable</arg>
                         <arg>-XenumValue</arg>
-<!-- org.jvnet.jaxb2_commons:jaxb2-namespace-prefix-->                        
                         <arg>-Xnamespace-prefix</arg>
+<!-- org.jvnet.jaxb2_commons:jaxb2-namespace-prefix-->                        
 <!-- org.jvnet.jaxb2_commons:jaxb2-value-constructor -->
 <!--                        <arg>-Xvalue-constructor</arg> -->
                         

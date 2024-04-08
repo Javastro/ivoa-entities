@@ -19,8 +19,8 @@ import java.util.Map;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.javastro.ivoa.entities.IvoaJAXBUtils;
 import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
-import org.javastro.ivoa.jaxb.IvoaJAXBUtils;
 import org.javastro.ivoa.jaxb.SchemaNamer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
