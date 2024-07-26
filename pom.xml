@@ -166,13 +166,18 @@
 
                         <arg>-XsimpleEquals</arg>
                         <arg>-XsimpleHashCode</arg>
-                        <arg>-XtoString</arg>  
-                                              
-
+                        <arg>-XtoString</arg>
+                        <arg>-Xfluent-api</arg>  
+                        <arg>-Xjaxbindex</arg>
+                        <arg>-Xdefault-value</arg>
+                                            
                         <arg>-Xmergeable</arg>
                         <arg>-XenumValue</arg>
                         <arg>-Xnamespace-prefix</arg>
-<!-- org.jvnet.jaxb2_commons:jaxb2-namespace-prefix-->                        
+                        <arg>-Xvalue-constructor</arg>
+
+
+<!-- org.jvnet.jaxb2_commons:jaxb2-namespace-prefix-->
 <!-- org.jvnet.jaxb2_commons:jaxb2-value-constructor -->
 <!--                        <arg>-Xvalue-constructor</arg> -->
                         
