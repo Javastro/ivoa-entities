@@ -2,7 +2,7 @@
    xmlns:xs="http://www.w3.org/2001/XMLSchema"
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
-   xmlns:namespace="http://jaxb2-commons.dev.java.net/basic/namespace-prefix"   
+   xmlns:namespace="urn:jaxb.jvnet.org:plugin:namespace-prefix"   
    xmlns:orm="http://java.sun.com/xml/ns/persistence/orm"
    
 >

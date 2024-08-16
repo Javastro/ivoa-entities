@@ -1,2 +1,4 @@
 org.javastro.ivoa.entities.uws.Job.JobInfo=exclude
 /org\.javastro\.ivoa\.entities\.vosi\.tables\.*/=exclude
+org.javastro.ivoa.entities.uws.Parameters=keep
+org.javastro.ivoa.entities.uws.Results=keep

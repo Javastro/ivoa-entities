@@ -7,7 +7,7 @@
    <artifactId>ivoa-entities</artifactId>
    <groupId>org.javastro.ivoa</groupId>
    <name>ivoa-entities</name>
-   <version>0.9.6</version>
+   <version>0.9.7</version>
    
    <description>JAXB annotated objects for IVOA schema related mainly to registry</description>
    <parent>
@@ -64,7 +64,13 @@
          <artifactId>jaxb-plugins-runtime</artifactId>
          <version>4.0.3</version>
       </dependency>
-     
+  <!-- https://mvnrepository.com/artifact/net.codesup.util/jaxb-rich-contract-runtime -->
+<dependency>
+    <groupId>net.codesup.util</groupId>
+    <artifactId>jaxb-rich-contract-runtime</artifactId>
+    <version>4.2.0.0</version>
+</dependency>
+   
       <dependency>
          <groupId>org.apache.derby</groupId>
          <artifactId>derby</artifactId>
@@ -133,15 +139,20 @@
                <markGenerated>true</markGenerated>
                <noFileHeader>true</noFileHeader>
                 <plugins>
-                      <plugin>
+                    <!--  <plugin>
                         <groupId>com.github.jaxb-xew-plugin</groupId>
                         <artifactId>jaxb-xew-plugin</artifactId>
                         <version>2.1</version>
-                     </plugin>
-                     <plugin>
+                     </plugin> -->
+                      <plugin>
+                            <groupId>net.codesup.util</groupId>
+                            <artifactId>jaxb-rich-contract-plugin</artifactId>
+                            <version>4.2.0.0</version>
+                        </plugin>
+                    <plugin>
                         <groupId>org.jvnet.jaxb</groupId>
                         <artifactId>jaxb-plugins</artifactId>
-                        <version>4.0.3</version>
+                        <version>4.0.8</version>
                      </plugin>
                  </plugins>
             </configuration>
@@ -155,19 +166,19 @@
                   <inherited>true</inherited>
                   <configuration>
                      <args>
-                        <arg>-Xxew</arg>
+ <!--                       <arg>-Xxew</arg>
                         <arg>-Xxew:plural</arg>
                         <arg>-Xxew:control</arg>
                         <arg>${basedir}/build/xew-control.txt</arg>  
                         <arg>-Xxew:summary</arg>
-                        <arg>xewmanipulations.log</arg>
+                        <arg>xewmanipulations.log</arg> -->
    
 
 
                         <arg>-XsimpleEquals</arg>
                         <arg>-XsimpleHashCode</arg>
                         <arg>-XtoString</arg>
-                        <arg>-Xfluent-api</arg>  
+
                         <arg>-Xjaxbindex</arg>
                         <arg>-Xdefault-value</arg>
                                             
@@ -175,49 +186,61 @@
                         <arg>-XenumValue</arg>
                         <arg>-Xnamespace-prefix</arg>
                         <arg>-Xvalue-constructor</arg>
+<!--                        <arg>-Xfluent-api</arg>  -->
 
 
-<!-- org.jvnet.jaxb2_commons:jaxb2-namespace-prefix-->
-<!-- org.jvnet.jaxb2_commons:jaxb2-value-constructor -->
-<!--                        <arg>-Xvalue-constructor</arg> -->
-                        
-<!-- net.codesup.util:jaxb2-rich-contract-plugin
-                       <arg>-Xclone</arg>
-                            <arg>-cloneThrows=y</arg>
+                        <!-- ** rich contract plugin ** -->
+                      <!-- cannot use with immurable <arg>-Xconstrained-properties</arg>
+                            <arg>-constrained-properties.constrained=y</arg>
+                            <arg>-constrained-properties.bound=y</arg>
+                            <arg>-constrained-properties.setterThrows=n</arg>
+                            <arg>-constrained-properties.generateTools=y</arg> -->
+                        <arg>-Xclone</arg>
+                            <arg>-clone.cloneThrows=y</arg>
                         <arg>-Xcopy</arg>
-                            <arg>-partial=y</arg>
-                            <arg>-generateTools=y</arg>
-                            <arg>-constructor=n</arg>
-                            <arg>-narrow=n</arg>
-                            <arg>-selectorClassName=Selector</arg>
-                            <arg>-rootSelectorClassName=Select</arg>
+                            <arg>-copy.partial=y</arg>
+                            <arg>-copy.generateTools=n</arg>
+                            <arg>-copy.constructor=n</arg>
+                            <arg>-copy.narrow=n</arg>
+                            <arg>-copy.selectorClassName=Selector</arg>
+                            <arg>-copy.rootSelectorClassName=Select</arg>
+                       <!-- <arg>-Xgroup-contract</arg>
+                            <arg>-group-contract.declareSetters=y</arg>
+                            <arg>-group-contract.declareBuilderInterface=y</arg>
+                            <arg>-group-contract.supportInterfaceNameSuffix=Lifecycle</arg>
+                            <arg>-group-contract.upstreamEpisodeFile=META-INF/jaxb-interfaces.episode</arg>
+                            <arg>-group-contract.downstreamEpisodeFile=META-INF/jaxb-interfaces.episode</arg> -->
+<!--                        <arg>-Ximmutable</arg>
+                            <arg>-immutable.fake=n</arg>-->
+<!--                            <arg>-immutable.overrideCollectionClass=null</arg> this needs to be set to a collection type if wanted-->
+<!--                            <arg>-immutable.constructorAccess=public</arg>-->
+                        <arg>-Xmodifier</arg>
+                            <arg>-modifier.modifierClassName=Modifier</arg>
+                            <arg>-modifier.modifierMethodName=modifier</arg>
                         <arg>-Xfluent-builder</arg>
-                            <arg>-rootSelectorClassName=Select</arg>
-                            <arg>-newBuilderMethodName=builder</arg>
-                            <arg>-newCopyBuilderMethodName=newCopyBuilder</arg>
-                            <arg>-copyToMethodName=copyTo</arg>
-                            <arg>-builderFieldSuffix=_Builder</arg>
-                            <arg>-generateTools=y</arg>
-                            <arg>-narrow=n</arg>
-                            <arg>-copyPartial=y</arg>
-                            <arg>-selectorClassName=Selector</arg>
-                            <arg>-builderClassName=Builder</arg>
-                            <arg>-builderInterfaceName=BuildSupport</arg>
-                            <arg>-copyAlways=n</arg>
-                            <arg>-buildMethodName=build</arg>
-                            <arg>-endMethodName=end</arg>
+                            <arg>-fluent-builder.rootSelectorClassName=Select</arg>
+                            <arg>-fluent-builder.newBuilderMethodName=builder</arg>
+                            <arg>-fluent-builder.newCopyBuilderMethodName=newCopyBuilder</arg>
+                            <arg>-fluent-builder.copyToMethodName=copyTo</arg>
+                            <arg>-fluent-builder.builderFieldSuffix=_Builder</arg>
+                            <arg>-fluent-builder.generateTools=n</arg>
+                            <arg>-fluent-builder.narrow=n</arg>
+                            <arg>-fluent-builder.copyPartial=y</arg>
+                            <arg>-fluent-builder.selectorClassName=Selector</arg>
+                            <arg>-fluent-builder.builderClassName=Builder</arg>
+                            <arg>-fluent-builder.builderInterfaceName=BuildSupport</arg>
+                            <arg>-fluent-builder.copyAlways=n</arg>
+                            <arg>-fluent-builder.buildMethodName=build</arg>
+                            <arg>-fluent-builder.endMethodName=end</arg>
+                            <arg>-fluent-builder.generateJavadocFromAnnotations=n</arg>
                         <arg>-Xmeta</arg>
-                            <arg>-generateTools=y</arg>
-                            <arg>-extended=y</arg>
-                            <arg>-camelCase=n</arg>
-                            <arg>-metaClassName=PropInfo</arg>
-                            <arg>-allowSet=n</arg>
-                            <arg>-visitMethodName=visit</arg>
-                            
-                        -->
-                        
-<!--                         <arg>-Xjaxbindex</arg> this does not do nice stuff! -->
-                     
+                            <arg>-meta.generateTools=n</arg>
+                            <arg>-meta.extended=y</arg>
+                            <arg>-meta.camelCase=n</arg>
+                            <arg>-meta.metaClassName=PropInfo</arg>
+                            <arg>-meta.allowSet=y</arg>
+                            <arg>-meta.visitMethodName=visit</arg>
+
                      </args>
                      <schemaIncludes>
                         <include>VOResource-v1.1.xsd</include>

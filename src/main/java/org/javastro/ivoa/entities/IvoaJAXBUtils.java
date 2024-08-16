@@ -66,6 +66,7 @@ import org.xml.sax.XMLReader;
  * 
  * @author Paul Harrison (paul.harrison@manchester.ac.uk) 10 Jun 2008
  * @since VOTech Stage 7
+ * TODO need to rationalize with @see org.javastro.ivoa.entities.jaxb.Utils
  */
 public class IvoaJAXBUtils {
 
@@ -126,9 +127,9 @@ public class IvoaJAXBUtils {
                 .newInstance();
         dbf.setNamespaceAware(true);
 
-
-        LSResourceResolver resourceResolver = new XMLValidator.SchemaResolver();
-        sf.setResourceResolver(resourceResolver);
+//IMPL not needed now using xmlresolver?
+//        LSResourceResolver resourceResolver = new XMLValidator.SchemaResolver();
+//        sf.setResourceResolver(resourceResolver);
 
     }
 
@@ -275,7 +276,7 @@ public class IvoaJAXBUtils {
     public static Schema findSchema(String namespace)
             throws IOException, SAXException {
         //always load multiple schema
-        Schema schema = sf.newSchema(SchemaMap.getRegistrySchema());
+        Schema schema = sf.newSchema(SchemaMap.getRegistrySchemaAsSources());
         return schema;
     }
 
