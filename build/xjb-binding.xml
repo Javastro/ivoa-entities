@@ -44,7 +44,7 @@
    
    
 
-   <jxb:bindings schemaLocation="../target/dependency/schema/VODataService-v1.2.xsd"
+   <jxb:bindings schemaLocation="../target/dependency/schema/VODataService-v1.3.xsd"
    >
       <jxb:schemaBindings>
          <jxb:package name="org.javastro.ivoa.entities.resource.dataservice">
@@ -82,6 +82,10 @@
          <jxb:javaType name="org.javastro.ivoa.entities.jaxb.hacks.RelocatableOriginType"/>
         
       </jxb:bindings>
+       <jxb:bindings>
+          <namespace:prefix name="stc" />
+      </jxb:bindings>
+      
       
    </jxb:bindings>
    
@@ -242,12 +246,23 @@
          <jxb:package name="org.javastro.ivoa.entities.resource.registry.iface">
             <jxb:javadoc><![CDATA[<body>Registry interface classes</body>]]>
             </jxb:javadoc>
+   
          </jxb:package>
+ <!--       <jxb:nameXmlTransform>
+      <jxb:elementName suffix="Instance"/>
+    </jxb:nameXmlTransform>-->
        </jxb:schemaBindings>
-              <jxb:bindings>
-      </jxb:bindings>
        
+              
+                <jxb:bindings  node="//xs:element[@name='Resource']">
+         <jxb:class name="ResourceInstance"></jxb:class> 
+      </jxb:bindings> 
+     
+       <jxb:bindings>
+          <namespace:prefix name="ri" />
+      </jxb:bindings>
    </jxb:bindings> 
+   
   <jxb:bindings schemaLocation="../target/dependency/schema/UWS-1.1.xsd"
  
    >

@@ -7,7 +7,7 @@
    <artifactId>ivoa-entities</artifactId>
    <groupId>org.javastro.ivoa</groupId>
    <name>ivoa-entities</name>
-   <version>0.9.8</version>
+   <version>0.9.10</version>
    
    <description>JAXB annotated objects for IVOA schema related mainly to registry</description>
    <parent>
@@ -21,6 +21,7 @@
        <dependency> 
          <groupId>org.javastro.ivoa</groupId>
          <artifactId>ivoa-schema</artifactId>
+         <version>0.9.9</version>
       </dependency>
        <dependency> 
          <groupId>org.javastro</groupId>
@@ -244,7 +245,7 @@
                      </args>
                      <schemaIncludes>
                         <include>VOResource-v1.1.xsd</include>
-                        <include>VODataService-v1.2.xsd</include>
+                        <include>VODataService-v1.3.xsd</include>
                         <include>ConeSearch-v1.0.xsd</include>
                         <include>SIA-v1.1.xsd</include>
                         <include>VOApplication-1.0.xsd</include>

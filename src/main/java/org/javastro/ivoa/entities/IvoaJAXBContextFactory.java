@@ -39,6 +39,7 @@ public class IvoaJAXBContextFactory {
             + ":org.javastro.ivoa.entities.resource.cone"
             + ":org.javastro.ivoa.entities.resource.sia"
             + ":org.javastro.ivoa.entities.resource.standard"
+            + ":org.javastro.ivoa.entities.resource.registry.oaipmh"
 	  		);
 	return jc;
 
