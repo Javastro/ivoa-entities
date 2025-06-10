@@ -18,15 +18,12 @@ import javax.xml.transform.TransformerException;
 import javax.xml.validation.Schema;
 
 import org.javastro.ivoa.entities.IvoaJAXBUtils;
-import org.javastro.ivoa.entities.regtap.RegTAP;
 import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
 import org.javastro.ivoa.schema.Namespaces;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import org.javastro.ivoa.entities.regtap.RegTAP;
 import org.javastro.ivoa.entities.resource.Resource;
-import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
 
 /**
  *  .
@@ -51,24 +48,7 @@ public class Utils {
                 desc), IvoaJAXBUtils.identityTransformer, schema);
     }
 
-    /**
-     * @param rt
-     * @throws TransformerException 
-     * @throws JAXBException 
-     */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    public static Document marshall(RegTAP rt) throws JAXBException, TransformerException {
-        Schema schema = null;// do not attempt to validate at the moment, as
-        // there is often not a single schema that suffices
-        // for Resources...(e.g. multiple capabilities)
-        // findSchema(desc.getClass());
-        return IvoaJAXBUtils.marshall(new JAXBElement(new QName(
-                Namespaces.REGTAP.getNamespace(), "regtap"), RegTAP.class,
-                rt), IvoaJAXBUtils.identityTransformer, schema);
-
-    }
-
-
+  
 
     public static Document marshall(VOResources desc)
             throws JAXBException,

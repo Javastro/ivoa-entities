@@ -21,26 +21,6 @@ In addition there are some static utility methods within {@link org.javastro.ivo
 </pre>
 
 
-<h2>RegTAP</h2>
-
-<p>There are additionally a set of hand written classes for converting the VOResource XML instances into RegTAP representation and for persisting these objects via JPA </p>
-<p>The RegTAP classes for  persisting to a relational database are in the {@link org.javastro.ivoa.entities.regtap} package. There is a {@link org.javastro.ivoa.jpa.ResourceJpaController} for storing and fetching {@link org.javastro.ivoa.entities.regtap.Resource} objects, and
-    {@link org.javastro.ivoa.entities.regtap.translate.RegTapTranslator} for converting from XML to RegTAP, so that the reading of the XML to storing in the database can be achied with
-</p>
-<pre>
-
-    InputStream resourceStream = RegTapTranslator.class.getResourceAsStream("/VOResource.xml");
-    res = IvoaJAXBUtils.unmarshall(resourceStream, org.javastro.ivoa.entities.resource.registry.iface.VOResources.class);
-    org.javastro.ivoa.entities.regtap.RegTAP rt = new RegTapTranslator().translate(res);
-    ResourceJpaController rjc = ResourceJpaController(emf);
-    for (org.javastro.ivoa.entities.regtap.Resource r : rt.resources  ) {
-        rjc.create(r);
-    }
-
-
-
-</pre>
-
 
 @author Paul Harrison (pah@jb.man.ac.uk)
 </body>
