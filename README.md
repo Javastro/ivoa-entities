@@ -3,6 +3,8 @@ IVOA JAXB Annotated Objects
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.javastro.ivoa/ivoa-entities?Label=ivoa-entities)](https://search.maven.org/artifact/org.javastro.ivoa/ivoa-entities/)
 
+[![Java CI with Maven](https://github.com/Javastro/ivoa-entities/actions/workflows/maven.yml/badge.svg)](https://github.com/Javastro/ivoa-entities/actions/workflows/maven.yml)
+
 The aim of this project is to gather together object representations of the 
 [IVOA schema](http://www.ivoa.net/xml/) with a particular emphasis on the Registry
 
