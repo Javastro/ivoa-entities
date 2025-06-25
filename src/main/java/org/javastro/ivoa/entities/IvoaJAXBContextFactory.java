@@ -29,8 +29,7 @@ public class IvoaJAXBContextFactory {
     {
 	if(jc == null) 
 	  jc = JAXBContext.newInstance(
-	          "org.javastro.ivoa.entities.regtap:" + // this will use different context factory too
-            
+
 	  		  "org.javastro.ivoa.entities.resource"
             + ":org.javastro.ivoa.entities.resource.dataservice"
             + ":org.javastro.ivoa.entities.resource.registry"
