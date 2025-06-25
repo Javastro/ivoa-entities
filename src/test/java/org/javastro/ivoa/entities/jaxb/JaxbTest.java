@@ -13,7 +13,7 @@
 package org.javastro.ivoa.entities.jaxb;
 
 import static org.javastro.ivoa.entities.jaxb.Utils.marshall;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,22 +27,15 @@ import org.javastro.ivoa.entities.IvoaJAXBUtils;
 import org.javastro.ivoa.entities.resource.Resource;
 import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
 import org.javastro.ivoa.entities.vosi.tables.Tableset;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.javastro.ivoa.schema.Namespaces;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 public class JaxbTest {
 
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
 
     @Test
     public void testReadXML() throws JAXBException, IOException, SAXException, TransformerException{
@@ -60,7 +53,7 @@ public class JaxbTest {
         @Test
     public void testReadRegistry() throws JAXBException, IOException, SAXException{
         VOResources rs = readResources("/registry.xml");
-        assertEquals("identifier", "ivo://test/registry",rs.getResources().get(0).getIdentifier());
+        assertEquals( "ivo://test/registry",rs.getResources().get(0).getIdentifier(),"identifier");
     }
  
     /**
@@ -73,7 +66,7 @@ public class JaxbTest {
         private VOResources readResources(String r) throws JAXBException, IOException, SAXException {
            final InputStream res = getClass()
                     .getResourceAsStream(r);
-           assertNotNull("resource not found "+r, res);
+           assertNotNull( res,"resource not found "+r);
         return IvoaJAXBUtils.unmarshall(new InputStreamReader(res),VOResources.class, true);
             
         }
@@ -81,13 +74,13 @@ public class JaxbTest {
     @Test
     public void testReadApplication() throws JAXBException, IOException, SAXException{
         VOResources rs = readResources("/application.xml");
-        assertEquals("identifier", "ivo://cds.fr/applications/aladin",rs.getResources().get(0).getIdentifier());
+        assertEquals( "ivo://cds.fr/applications/aladin",rs.getResources().get(0).getIdentifier());
     }
      
     @Test
     public void testReadConeSearch() throws JAXBException, IOException, SAXException{
         Resource rs = readResource("/conesearch.xml");
-        assertEquals("identifier" , "ivo://adil.ncsa/vocone", rs.getIdentifier());
+        assertEquals("ivo://adil.ncsa/vocone", rs.getIdentifier());
     }
     /**
      * @param string
@@ -99,7 +92,7 @@ public class JaxbTest {
     private Resource readResource(String r) throws JAXBException, IOException, SAXException {
             final InputStream res = getClass()
                     .getResourceAsStream(r);
-           assertNotNull("resource not found "+r, res);
+           assertNotNull( res,"resource not found "+r);
         return IvoaJAXBUtils.unmarshall(new InputStreamReader(res),Resource.class, true);
         
     }
@@ -107,32 +100,32 @@ public class JaxbTest {
     @Test
     public void testReadOrganization() throws JAXBException, IOException, SAXException{
         Resource rs = readResource("/organization.xml");
-        assertEquals("identifier" , "ivo://ivoa.net/IVOA", rs.getIdentifier());
+        assertEquals( "ivo://ivoa.net/IVOA", rs.getIdentifier());
     }
     @Test
     public void testReadSia() throws JAXBException, IOException, SAXException{
         Resource rs = readResource("/sia.xml");
-        assertEquals("identifier" , "ivo://adil.ncsa/sia", rs.getIdentifier());
+        assertEquals(  "ivo://adil.ncsa/sia", rs.getIdentifier());
     }
     @Test
     public void testReadStc() throws JAXBException, IOException, SAXException{
         Resource rs = readResource("/siaStc.xml");
-        assertEquals("identifier" , "ivo://nasa.heasarc/swiftmastr", rs.getIdentifier());
+        assertEquals( "ivo://nasa.heasarc/swiftmastr", rs.getIdentifier());
     }
     public void testReadStd() throws JAXBException, IOException, SAXException{
         Resource rs = readResource("/siastd.xml");
-        assertEquals("identifier" , "ivo://ivoa.net/std/SIA", rs.getIdentifier());
+        assertEquals( "ivo://ivoa.net/std/SIA", rs.getIdentifier());
     }
     @Test
     public void testReadStd2() throws JAXBException, IOException, SAXException{
         Resource rs = readResource("/vospacestd.xml");
-        assertEquals("identifier" , "ivo://ivoa.net/vospace/core", rs.getIdentifier());
+        assertEquals( "ivo://ivoa.net/vospace/core", rs.getIdentifier());
     }
       
     @Test
     public void testReadVOSITablesm() throws JAXBException, IOException, SAXException{
         Tableset rs = readVosiTableSet("/vosi-tables-min.xml");
-        assertEquals("number of tables in second schema" , 4, rs.getSchemas().get(1).getTables().size());
+        assertEquals(4, rs.getSchemas().get(1).getTables().size(),"number of tables in second schema" );
     }
     /**
      * @param string
@@ -144,7 +137,7 @@ public class JaxbTest {
     private Tableset readVosiTableSet(String r) throws JAXBException, IOException, SAXException {
             final InputStream res = getClass()
                     .getResourceAsStream(r);
-           assertNotNull("resource not found "+r, res);
+           assertNotNull( res,"resource not found "+r);
         return IvoaJAXBUtils.unmarshall(new InputStreamReader(res),Tableset.class, true);
        
     }
@@ -152,12 +145,12 @@ public class JaxbTest {
     @Test
     public void testReadVOSITablesf() throws JAXBException, IOException, SAXException{
         Tableset rs = readVosiTableSet("/vosi-tables-full.xml");
-        assertEquals("number of tables in first schema" , 2, rs.getSchemas().get(0).getTables().size());
+        assertEquals( 2, rs.getSchemas().get(0).getTables().size(),"number of tables in first schema" );
     }
     @Test
     public void testReadVOSITablesRegTap() throws JAXBException, IOException, SAXException{
         Tableset rs = readVosiTableSet("/vosi-tables-regtap.xml");
-        assertEquals("number of tables in regtap schema" , 20, rs.getSchemas().get(0).getTables().size());
+        assertEquals( 20, rs.getSchemas().get(0).getTables().size(),"number of tables in regtap schema" );
     }
 
 //    @Test
