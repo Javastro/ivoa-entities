@@ -13,7 +13,7 @@
    <parent>
       <artifactId>javastro-mavenbase</artifactId>
       <groupId>org.javastro</groupId>
-      <version>0.6.4</version>
+      <version>2025.2</version>
       <relativePath/>
    </parent>
    <packaging>jar</packaging>
@@ -21,8 +21,7 @@
        <dependency> 
          <groupId>org.javastro.ivoa</groupId>
          <artifactId>ivoa-schema</artifactId>
-         <version>0.9.9</version>
-      </dependency>
+         </dependency>
        <dependency> 
          <groupId>org.javastro</groupId>
          <artifactId>jaxbjpa-utils</artifactId>
@@ -245,7 +244,7 @@
                      </args>
                      <schemaIncludes>
                         <include>VOResource-v1.1.xsd</include>
-                        <include>VODataService-v1.3.xsd</include>
+                        <include>VODataService-v1.2.xsd</include>
                         <include>ConeSearch-v1.0.xsd</include>
                         <include>SIA-v1.1.xsd</include>
                         <include>VOApplication-1.0.xsd</include>
