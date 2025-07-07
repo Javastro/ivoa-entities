@@ -15,7 +15,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 
 import org.javastro.ivoa.entities.IvoaJAXBContextFactory;
 import org.javastro.ivoa.entities.IvoaJAXBUtils;
@@ -62,7 +65,7 @@ class OAIPMHTest {
     @Test
     void test() throws JAXBException, IOException, SAXException {
         OAIPMH resp = new OAIPMH();
-        LocalDateTime now = LocalDateTime.now();
+        ZonedDateTime now = Instant.now().atZone(ZoneOffset.UTC);
         resp.setResponseDate(now);
         RequestType rt = RequestType.builder().withMetadataPrefix("ivo_resouce").withIdentifier("ivo://adil.ncsa/sia").withMetadataPrefix("ivo_resource").withVerb(VerbType.LIST_RECORDS).build();
         resp.setRequest(rt);

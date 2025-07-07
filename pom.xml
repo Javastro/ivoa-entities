@@ -7,7 +7,7 @@
    <artifactId>ivoa-entities</artifactId>
    <groupId>org.javastro.ivoa</groupId>
    <name>ivoa-entities</name>
-   <version>0.9.10</version>
+   <version>0.9.11</version>
    
    <description>JAXB annotated objects for IVOA schema related mainly to registry</description>
    <parent>
@@ -25,6 +25,7 @@
        <dependency> 
          <groupId>org.javastro</groupId>
          <artifactId>jaxbjpa-utils</artifactId>
+         <version>0.2.5</version>
       </dependency>
       <dependency>
          <groupId>org.glassfish.jaxb</groupId>

@@ -11,8 +11,8 @@
   <!--         <xjc:treatRestrictionLikeNewType/>  treat restrictions like new class -->
            <xjc:simple/>
            
-           <xjc:javaType name="java.time.LocalDateTime" xmlType="xs:dateTime"
-                adapter="org.javastro.ivoa.jaxb.adapters.DateTimeXmlAdapter" />
+           <xjc:javaType name="java.time.ZonedDateTime" xmlType="xs:dateTime"
+                adapter="org.javastro.ivoa.jaxb.adapters.ZonedDateTimeXmlAdapter" />
                 
            
     </jxb:globalBindings>
