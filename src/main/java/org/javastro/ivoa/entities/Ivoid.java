@@ -26,16 +26,23 @@ public class Ivoid {
     final URI value;
     
     /**
-     * @throws URISyntaxException 
+     * Create a new Ivoid.
      * 
      */
     public Ivoid(String val) throws URISyntaxException {
-        value = new URI(val);
+
+          value = new URI(val);
+
+       if (!value.getScheme().equals("ivo")) {
+          throw new URISyntaxException(val,"Invalid value for Ivoid scheme: " + value.getScheme());
+       }
+
     }
-    
+
+   @Override
+   public String toString() {
+      return value.toString();
+   }
 }
 
 
-/*
- * $Log$
- */
