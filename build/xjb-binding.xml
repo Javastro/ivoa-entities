@@ -99,7 +99,7 @@
          </jxb:package>
        </jxb:schemaBindings>
        <jxb:bindings>
-       <namespace:prefix name="vrr" /> 
+       <namespace:prefix name="vg" />
       </jxb:bindings>
    </jxb:bindings>
    
@@ -168,7 +168,7 @@
          </jxb:package>
        </jxb:schemaBindings>
        <jxb:bindings>
- <namespace:prefix name="std" />
+ <namespace:prefix name="vstd" />
       </jxb:bindings>
        
    </jxb:bindings>
@@ -299,22 +299,52 @@
    </jxb:bindings>
     
    
-  <jxb:bindings schemaLocation="../target/dependency/schema/OAI-PMH.xsd"  
+  <jxb:bindings schemaLocation="../target/dependency/schema/oai_dc.xsd"
    >
       <jxb:schemaBindings>
          <jxb:package
-            name="org.javastro.ivoa.entities.resource.registry.oaipmh">
-            <jxb:javadoc><![CDATA[<body>Base OAI-PMH schema objects</body>]]>
+            name="org.javastro.ivoa.entities.resource.registry.dublincore">
+            <jxb:javadoc><![CDATA[<body>Base OAI-PMH Dublin Core schema objects</body>]]>
             </jxb:javadoc>
          </jxb:package>
-         
+
       </jxb:schemaBindings>
          <jxb:bindings>
-         <namespace:prefix name="oai" />
+         <namespace:prefix name="oai_dc" />
       </jxb:bindings>
-      
-   </jxb:bindings> 
-  <jxb:bindings schemaLocation="../target/dependency/schema/xlink.xsd"  
+
+   </jxb:bindings>
+    <jxb:bindings schemaLocation="../target/dependency/schema/simpledc20021212.xsd"
+    >
+        <jxb:schemaBindings>
+            <jxb:package
+                    name="org.javastro.ivoa.entities.resource.registry.dublincore.simple">
+                <jxb:javadoc><![CDATA[<body>Base OAI-PMH Dublin Core schema objects (simple)</body>]]>
+                </jxb:javadoc>
+            </jxb:package>
+
+        </jxb:schemaBindings>
+        <jxb:bindings>
+            <namespace:prefix name="dc" />
+        </jxb:bindings>
+
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="../target/dependency/schema/OAI-PMH.xsd"
+    >
+        <jxb:schemaBindings>
+            <jxb:package
+                    name="org.javastro.ivoa.entities.resource.registry.oaipmh">
+                <jxb:javadoc><![CDATA[<body>Base OAI-PMH schema objects</body>]]>
+                </jxb:javadoc>
+            </jxb:package>
+
+        </jxb:schemaBindings>
+        <jxb:bindings>
+            <namespace:prefix name="oai" />
+        </jxb:bindings>
+
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="../target/dependency/schema/xlink.xsd"
    >
       <jxb:schemaBindings>
          <jxb:package
