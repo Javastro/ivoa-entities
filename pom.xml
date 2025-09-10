@@ -4,25 +4,27 @@
    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
 >
    <modelVersion>4.0.0</modelVersion>
-   <artifactId>ivoa-entities</artifactId>
+    <parent>
+        <artifactId>javastro-mavenbase</artifactId>
+        <groupId>org.javastro</groupId>
+        <version>2025.4</version>
+        <relativePath/>
+    </parent>
+    <artifactId>ivoa-entities</artifactId>
    <groupId>org.javastro.ivoa</groupId>
    <name>ivoa-entities</name>
-   <version>0.9.11</version>
+   <version>0.9.12</version>
    
    <description>JAXB annotated objects for IVOA schema related mainly to registry</description>
-   <parent>
-      <artifactId>javastro-mavenbase</artifactId>
-      <groupId>org.javastro</groupId>
-      <version>2025.2</version>
-      <relativePath/>
-   </parent>
+
    <packaging>jar</packaging>
    <dependencies>
        <dependency> 
          <groupId>org.javastro.ivoa</groupId>
          <artifactId>ivoa-schema</artifactId>
+         <version>0.9.10</version>
          </dependency>
-       <dependency> 
+       <dependency>
          <groupId>org.javastro</groupId>
          <artifactId>jaxbjpa-utils</artifactId>
          <version>0.2.5</version>
@@ -65,13 +67,20 @@
          <artifactId>jaxb-plugins-runtime</artifactId>
          <version>4.0.3</version>
       </dependency>
-  <!-- https://mvnrepository.com/artifact/net.codesup.util/jaxb-rich-contract-runtime -->
+       <dependency>
+           <groupId>ch.qos.logback</groupId>
+           <artifactId>logback-classic</artifactId>
+           <scope>test</scope>
+       </dependency>
+
+       <!-- https://mvnrepository.com/artifact/net.codesup.util/jaxb-rich-contract-runtime
+-->
 <dependency>
     <groupId>net.codesup.util</groupId>
     <artifactId>jaxb-rich-contract-runtime</artifactId>
-    <version>4.2.0.0</version>
+    <version>4.2.1.2</version>
 </dependency>
-   
+
       <dependency>
          <groupId>org.apache.derby</groupId>
          <artifactId>derby</artifactId>
@@ -148,7 +157,7 @@
                       <plugin>
                             <groupId>net.codesup.util</groupId>
                             <artifactId>jaxb-rich-contract-plugin</artifactId>
-                            <version>4.2.0.0</version>
+                            <version>4.2.1.2</version>
                         </plugin>
                     <plugin>
                         <groupId>org.jvnet.jaxb</groupId>
@@ -224,7 +233,6 @@
                             <arg>-fluent-builder.newCopyBuilderMethodName=newCopyBuilder</arg>
                             <arg>-fluent-builder.copyToMethodName=copyTo</arg>
                             <arg>-fluent-builder.builderFieldSuffix=_Builder</arg>
-                            <arg>-fluent-builder.generateTools=n</arg>
                             <arg>-fluent-builder.narrow=n</arg>
                             <arg>-fluent-builder.copyPartial=y</arg>
                             <arg>-fluent-builder.selectorClassName=Selector</arg>
@@ -234,7 +242,8 @@
                             <arg>-fluent-builder.buildMethodName=build</arg>
                             <arg>-fluent-builder.endMethodName=end</arg>
                             <arg>-fluent-builder.generateJavadocFromAnnotations=n</arg>
-                        <arg>-Xmeta</arg>
+                            <arg>-fluent-builder.generateTools=n</arg> <!-- some weird classloader issues if not - even though am putting in runtime dependencies -->
+                         <arg>-Xmeta</arg>
                             <arg>-meta.generateTools=n</arg>
                             <arg>-meta.extended=y</arg>
                             <arg>-meta.camelCase=n</arg>
@@ -254,6 +263,8 @@
                         <include>VOSICapabilities-v1.0.xsd</include>
                         <include>VOSITables-v1.1.xsd</include>
                         <include>OAI-PMH.xsd</include>
+                         <include>oai_dc.xsd</include>
+                         <include>simpledc20021212.xsd</include>
                         <include>UWS-1.1.xsd</include>
                         <include>RegistryInterface-v1.0.xsd</include>
                         <include>VORegistry-v1.0.xsd</include>
@@ -274,6 +285,19 @@
             <dependencies>
             </dependencies>
          </plugin>
+          <plugin>
+              <groupId>io.smallrye</groupId>
+              <artifactId>jandex-maven-plugin</artifactId>
+              <version>3.2.7</version>
+              <executions>
+                  <execution>
+                      <id>make-index</id>
+                      <goals>
+                          <goal>jandex</goal>
+                      </goals>
+                  </execution>
+              </executions>
+          </plugin>
 
          <!--         <plugin>
                          <groupId>org.apache.maven.plugins</groupId>

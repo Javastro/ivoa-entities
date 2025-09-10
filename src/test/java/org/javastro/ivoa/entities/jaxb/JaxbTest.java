@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 
 import jakarta.xml.bind.JAXBException;
 import javax.xml.transform.TransformerException;
@@ -45,7 +46,7 @@ public class JaxbTest {
         System.out.println(vr.getResources().get(0).getIdentifier());
 
         Document doc = marshall(vr);
-        IvoaJAXBUtils.printXML(doc, new PrintWriter(System.out));
+       // IvoaJAXBUtils.printXML(doc, new PrintWriter(System.out));
         
     }
     
@@ -67,6 +68,7 @@ public class JaxbTest {
            final InputStream res = getClass()
                     .getResourceAsStream(r);
            assertNotNull( res,"resource not found "+r);
+            System.out.println(r+" "+ LocalDateTime.now());
         return IvoaJAXBUtils.unmarshall(new InputStreamReader(res),VOResources.class, true);
             
         }
@@ -83,7 +85,7 @@ public class JaxbTest {
         assertEquals("ivo://adil.ncsa/vocone", rs.getIdentifier());
     }
     /**
-     * @param string
+     * @param r
      * @return
      * @throws SAXException 
      * @throws IOException 
@@ -93,6 +95,7 @@ public class JaxbTest {
             final InputStream res = getClass()
                     .getResourceAsStream(r);
            assertNotNull( res,"resource not found "+r);
+           System.out.println(r+" "+ LocalDateTime.now());
         return IvoaJAXBUtils.unmarshall(new InputStreamReader(res),Resource.class, true);
         
     }
@@ -138,6 +141,7 @@ public class JaxbTest {
             final InputStream res = getClass()
                     .getResourceAsStream(r);
            assertNotNull( res,"resource not found "+r);
+           System.out.println(r+" "+ LocalDateTime.now());
         return IvoaJAXBUtils.unmarshall(new InputStreamReader(res),Tableset.class, true);
        
     }
