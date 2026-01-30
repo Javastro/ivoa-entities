@@ -13,7 +13,7 @@
     <artifactId>ivoa-entities</artifactId>
    <groupId>org.javastro.ivoa</groupId>
    <name>ivoa-entities</name>
-   <version>0.9.12</version>
+   <version>0.9.13</version>
    
    <description>JAXB annotated objects for IVOA schema related mainly to registry</description>
 
@@ -22,7 +22,7 @@
        <dependency> 
          <groupId>org.javastro.ivoa</groupId>
          <artifactId>ivoa-schema</artifactId>
-         <version>0.9.10</version>
+         <version>0.9.12</version>
          </dependency>
        <dependency>
          <groupId>org.javastro</groupId>
