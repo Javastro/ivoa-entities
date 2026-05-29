@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
 import jakarta.xml.bind.JAXBException;
@@ -28,8 +27,6 @@ import org.javastro.ivoa.entities.IvoaJAXBUtils;
 import org.javastro.ivoa.entities.resource.Resource;
 import org.javastro.ivoa.entities.resource.registry.iface.VOResources;
 import org.javastro.ivoa.entities.vosi.tables.Tableset;
-import org.javastro.ivoa.schema.Namespaces;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;

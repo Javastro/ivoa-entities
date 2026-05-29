@@ -159,7 +159,7 @@
    </jxb:bindings>
    
    <jxb:bindings schemaLocation="../target/dependency/schema/StandardsRegExt-1.0.xsd"
-    
+
    >
       <jxb:schemaBindings>
          <jxb:package name="org.javastro.ivoa.entities.resource.standard">
@@ -170,8 +170,22 @@
        <jxb:bindings>
  <namespace:prefix name="vstd" />
       </jxb:bindings>
-       
+
    </jxb:bindings>
+    <jxb:bindings schemaLocation="../target/dependency/schema/DocRegExt-v1.0.xsd"
+
+    >
+        <jxb:schemaBindings>
+            <jxb:package name="org.javastro.ivoa.entities.resource.doc">
+                <jxb:javadoc><![CDATA[<body>VO Standard</body>]]>
+                </jxb:javadoc>
+            </jxb:package>
+        </jxb:schemaBindings>
+        <jxb:bindings>
+            <namespace:prefix name="doc" />
+        </jxb:bindings>
+
+    </jxb:bindings>
     <jxb:bindings schemaLocation="../target/dependency/schema/TAPRegExt-v1.0.xsd"
   
    >
@@ -303,7 +317,7 @@
    >
       <jxb:schemaBindings>
          <jxb:package
-            name="org.javastro.ivoa.entities.resource.registry.dublincore">
+            name="org.javastro.ivoa.entities.oai.dublincore">
             <jxb:javadoc><![CDATA[<body>Base OAI-PMH Dublin Core schema objects</body>]]>
             </jxb:javadoc>
          </jxb:package>
@@ -318,7 +332,7 @@
     >
         <jxb:schemaBindings>
             <jxb:package
-                    name="org.javastro.ivoa.entities.resource.registry.dublincore.simple">
+                    name="org.javastro.ivoa.entities.oai.dublincore.simple">
                 <jxb:javadoc><![CDATA[<body>Base OAI-PMH Dublin Core schema objects (simple)</body>]]>
                 </jxb:javadoc>
             </jxb:package>
@@ -333,7 +347,7 @@
     >
         <jxb:schemaBindings>
             <jxb:package
-                    name="org.javastro.ivoa.entities.resource.registry.oaipmh">
+                    name="org.javastro.ivoa.entities.oai.oaipmh">
                 <jxb:javadoc><![CDATA[<body>Base OAI-PMH schema objects</body>]]>
                 </jxb:javadoc>
             </jxb:package>

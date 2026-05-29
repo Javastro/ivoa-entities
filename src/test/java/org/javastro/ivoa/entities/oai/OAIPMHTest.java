@@ -7,7 +7,7 @@
  * You may obtain a copy of the License in file LICENSE
  */ 
 
-package org.javastro.ivoa.entities.resource.registry.oaipmh;
+package org.javastro.ivoa.entities.oai;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,6 +22,7 @@ import java.time.ZonedDateTime;
 
 import org.javastro.ivoa.entities.IvoaJAXBContextFactory;
 import org.javastro.ivoa.entities.IvoaJAXBUtils;
+import org.javastro.ivoa.entities.oai.oaipmh.*;
 import org.javastro.ivoa.entities.resource.Resource;
 import org.javastro.ivoa.entities.resource.dataservice.CatalogService;
 import org.javastro.ivoa.entities.resource.registry.iface.ResourceInstance;
