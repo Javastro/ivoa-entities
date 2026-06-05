@@ -58,10 +58,10 @@
       <!-- <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId> -->
       <!-- <scope>provided</scope> -->
       <!-- </dependency> -->
-      <dependency>
-         <groupId>net.sf.saxon</groupId>
-         <artifactId>Saxon-HE</artifactId>
-      </dependency>
+<!--      <dependency>-->
+<!--         <groupId>net.sf.saxon</groupId>-->
+<!--         <artifactId>Saxon-HE</artifactId>-->
+<!--      </dependency>-->
       <dependency>
          <groupId>org.jvnet.jaxb</groupId>
          <artifactId>jaxb-plugins-runtime</artifactId>
@@ -132,11 +132,34 @@
                </execution>
             </executions>
          </plugin>
-         <plugin>
+<!-- this          <plugin>
+              <groupId>com.google.code.maven-replacer-plugin</groupId>
+              <artifactId>replacer</artifactId>
+              <version>1.5.3</version>
+              <executions>
+                  <execution>
+                      <phase>initialize</phase>
+                      <goals>
+                          <goal>replace</goal>
+                      </goals>
+                  </execution>
+              </executions>
+              <configuration>
+                  <file>target/dependency/schema/OAI-PMH.xsd</file>
+                  <replacements>
+                      <replacement>
+                          <token>oai:metadataType</token>
+                          <value>string</value>
+                      </replacement>
+                  </replacements>
+              </configuration>
+          </plugin>
+          -->
+          <plugin>
              <groupId>org.jvnet.jaxb</groupId> <!-- this is a fork of the original https://github.com/highsource/jaxb-tools - go back now!! -->
                <artifactId>jaxb-maven-plugin</artifactId>
                <configuration>
-               <strict>false</strict>
+               <strict>true</strict>
                <verbose>true</verbose>
                <extension>true</extension>
                <forceRegenerate>false</forceRegenerate>
@@ -148,6 +171,7 @@
                <packageLevelAnnotations>true</packageLevelAnnotations>
                <markGenerated>true</markGenerated>
                <noFileHeader>true</noFileHeader>
+                   <contentForWildcard>true</contentForWildcard>
                 <plugins>
                     <!--  <plugin>
                         <groupId>com.github.jaxb-xew-plugin</groupId>
